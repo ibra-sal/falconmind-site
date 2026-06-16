@@ -220,8 +220,43 @@
   /* COUNTER */
   .counter { font-variant-numeric: tabular-nums; }
 
+  /* MOBILE BOTTOM NAV */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 999;
+    background: var(--green);
+    border-top: 1px solid rgba(245,240,232,0.15);
+    padding: 0 0 env(safe-area-inset-bottom);
+  }
+  .mobile-nav-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 56px;
+  }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    flex: 1;
+  }
+  .mobile-nav-item:active { background: rgba(245,240,232,0.1); }
+  .mobile-nav-item.active .mni-dot { background: var(--cream); }
+  .mobile-nav-item.active .mni-label { color: var(--cream); }
+  .mni-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(245,240,232,0.35); transition: background 0.2s; }
+  .mni-label { font-size: 10px; font-weight: 500; color: rgba(245,240,232,0.5); letter-spacing: 0.02em; font-family: 'Inter', sans-serif; transition: color 0.2s; }
+
   /* MOBILE */
   @media (max-width: 768px) {
+    .mobile-nav { display: block; }
+    body { padding-bottom: 56px; }
     /* NAV — logo + login only */
     nav { padding: 0 1.25rem; height: 56px; }
     .nav-link { display: none; }
@@ -1139,6 +1174,52 @@
 
     renderSciTable();
   })();
+</script>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <div class="mobile-nav-item active" onclick="mobileNav('hero')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Home</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('military')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Military</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('library')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Assessments</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('workflow')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">How It Works</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('science')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Science</span>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function mobileNav(id) {
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  }
+
+  // Highlight active section on scroll
+  const mniSections = ['hero','military','library','workflow','science'];
+  const mniItems = document.querySelectorAll('.mobile-nav-item');
+  const mniObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = mniSections.indexOf(e.target.id);
+        if (idx >= 0) {
+          mniItems.forEach((el, i) => el.classList.toggle('active', i === idx));
+        }
+      }
+    });
+  }, { threshold: 0.4 });
+  mniSections.forEach(id => { const el = document.getElementById(id); if (el) mniObserver.observe(el); });
 </script>
 </body>
 </html>
