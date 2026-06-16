@@ -282,8 +282,9 @@
     .cap-card { padding: 1.25rem; }
     .cap-desc { font-size: 12px; }
 
-    /* WORKFLOW — hide on mobile, too long */
-    #workflow { display: none; }
+    /* WORKFLOW — single column on mobile */
+    #workflow { padding: 3.5rem 1.25rem !important; }
+    #workflow > div > div[style*="grid"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
 
     /* CLOSING */
     #closing { padding: 3.5rem 1.25rem; }
