@@ -1064,15 +1064,14 @@
     document.body.style.overflow = '';
   }
 
-  const MOBILE_LIMIT = 6;
+  const CARD_LIMIT = 12;
   let libShowAll = false;
 
   function renderLib(filter, showAll) {
     if (showAll !== undefined) libShowAll = showAll;
     const grid = document.getElementById('libGrid');
     const all = filter === 'all' ? assessments : assessments.filter(a => a.domain === filter);
-    const isMobile = window.innerWidth <= 768;
-    const visible = (isMobile && !libShowAll) ? all.slice(0, MOBILE_LIMIT) : all;
+    const visible = libShowAll ? all : all.slice(0, CARD_LIMIT);
     document.getElementById('libCount').textContent = all.length;
 
     grid.innerHTML = visible.map(a => `
@@ -1086,9 +1085,8 @@
         </div>
       </div>`).join('');
 
-    // Show "View all X" button on mobile if more cards exist
     const btn = document.getElementById('libShowAllBtn');
-    if (isMobile && !libShowAll && all.length > MOBILE_LIMIT) {
+    if (!libShowAll && all.length > CARD_LIMIT) {
       btn.style.display = 'block';
       btn.textContent = `View all ${all.length} assessments`;
       btn.onclick = () => renderLib(filter, true);
@@ -1113,29 +1111,27 @@
 
   renderLib('all', false);
 
-  // SCIENCE TABLE — mobile row limit
+  // SCIENCE TABLE — collapse on all screen sizes
   (function() {
-    const SCI_MOBILE_LIMIT = 6;
+    const SCI_LIMIT = 8;
     const SCI_TOTAL = 23;
     const tbody = document.querySelector('.sci-table tbody');
     if (!tbody) return;
     const allRows = Array.from(tbody.querySelectorAll('tr'));
 
-    // inject show-all button after the table wrap
     const wrap = document.querySelector('.sci-table-wrap');
     const btn = document.createElement('button');
     btn.id = 'sciShowAllBtn';
-    btn.style.cssText = 'display:none;width:100%;margin-top:0;background:var(--green);color:var(--cream);border:none;padding:12px 28px;border-radius:0 0 10px 10px;font-size:14px;font-weight:500;cursor:pointer;font-family:Inter,sans-serif;border-top:1px solid rgba(245,240,232,0.15);';
+    btn.style.cssText = 'display:none;width:100%;background:var(--green);color:var(--cream);border:none;padding:12px 28px;border-radius:0 0 10px 10px;font-size:14px;font-weight:500;cursor:pointer;font-family:Inter,sans-serif;border-top:1px solid rgba(245,240,232,0.15);';
     wrap.after(btn);
 
     let sciShowAll = false;
 
     function renderSciTable() {
-      const mobile = window.innerWidth <= 768;
       allRows.forEach((r, i) => {
-        r.style.display = (mobile && !sciShowAll && i >= SCI_MOBILE_LIMIT) ? 'none' : '';
+        r.style.display = (!sciShowAll && i >= SCI_LIMIT) ? 'none' : '';
       });
-      if (mobile && !sciShowAll && allRows.length > SCI_MOBILE_LIMIT) {
+      if (!sciShowAll) {
         btn.style.display = 'block';
         btn.textContent = `View all ${SCI_TOTAL} assessments`;
         btn.onclick = () => { sciShowAll = true; renderSciTable(); };
@@ -1145,7 +1141,6 @@
     }
 
     renderSciTable();
-    window.addEventListener('resize', renderSciTable);
   })();
 </script>
 </body>
