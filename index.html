@@ -191,74 +191,79 @@
   /* COUNTER */
   .counter { font-variant-numeric: tabular-nums; }
 
-  /* MOBILE RESPONSIVE */
+  /* MOBILE */
   @media (max-width: 768px) {
-    /* NAV */
+    /* NAV — logo + login only */
     nav { padding: 0 1.25rem; height: 56px; }
     .nav-link { display: none; }
     .nav-links { gap: 0.75rem; }
-    .nav-cta { padding: 8px 16px; font-size: 12px; }
+    .nav-cta { padding: 8px 18px; font-size: 13px; }
 
     /* SECTIONS */
-    section { padding: 3.5rem 1.25rem; }
-    .section-title { font-size: 32px; }
-    .section-sub { font-size: 15px; }
+    section { padding: 3rem 1.25rem; }
+    .section-title { font-size: 30px; line-height: 1.15; }
+    .section-sub { font-size: 14px; }
 
-    /* HERO */
-    #hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 5rem 1.25rem 2.5rem; }
-    .hero-title { font-size: 36px; margin-bottom: 1.25rem; }
-    .hero-right { height: 260px; }
-    .hero-stats { grid-template-columns: 1fr 1fr; }
-    .hero-stat { padding: 1rem; }
-    .hero-stat-num { font-size: 36px; }
-    .hero-stat-label { font-size: 12px; }
-    .hero-stat-desc { font-size: 11px; }
+    /* HERO — image full screen, text overlay */
+    #hero { display: block; min-height: 100svh; position: relative; }
+    .hero-left { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem 1.25rem 2.5rem; background: linear-gradient(to top, rgba(20,36,20,0.88) 0%, rgba(20,36,20,0.3) 60%, transparent 100%); }
+    .hero-right { position: absolute; inset: 0; height: 100%; }
+    .hero-right > div { height: 100%; }
+    .tag.confidential { display: none; }
+    .hero-title { font-size: 30px; color: var(--cream); margin-bottom: 1.5rem; line-height: 1.15; }
+    .hero-stats { grid-template-columns: 1fr 1fr; border-color: rgba(245,240,232,0.2); border-radius: 10px; }
+    .hero-stat { padding: 0.875rem; border-color: rgba(245,240,232,0.15); background: rgba(245,240,232,0.08); backdrop-filter: blur(8px); }
+    .hero-stat-num { font-size: 32px; color: var(--cream); }
+    .hero-stat-label { font-size: 11px; color: rgba(245,240,232,0.9); }
+    .hero-stat-desc { display: none; }
 
-    /* PLATFORM */
-    .platform-grid { grid-template-columns: 1fr; gap: 10px; }
+    /* PLATFORM — hide on mobile, too long */
+    #platform { display: none; }
 
     /* MILITARY TABS */
-    .pop-tabs { width: 100%; border-radius: 6px; }
-    .pop-tab { padding: 10px 8px; font-size: 11px; flex: 1; text-align: center; }
-    .pop-content.active { grid-template-columns: 1fr; gap: 1.5rem; }
-    .pop-number { font-size: 48px; }
-    .pop-title { font-size: 26px; }
-    .pop-desc { font-size: 14px; }
+    .pop-tabs { width: 100%; }
+    .pop-tab { padding: 10px 6px; font-size: 11px; flex: 1; text-align: center; }
+    .pop-content.active { grid-template-columns: 1fr; gap: 1.25rem; }
+    .pop-number { display: none; }
+    .pop-title { font-size: 24px; }
+    .pop-desc { font-size: 13px; }
+    .pop-outcomes { gap: 8px; }
 
-    /* ASSESSMENT LIBRARY */
+    /* ASSESSMENT LIBRARY — show category buttons + 6 cards max */
+    #library { background: var(--cream-dark); }
     .lib-filters { gap: 6px; }
     .lib-filter { padding: 6px 12px; font-size: 12px; }
     .lib-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
 
-    /* SCIENCE */
-    .science-layout { grid-template-columns: 1fr; gap: 2rem; }
-    .inst-grid { grid-template-columns: 1fr; }
+    /* SCIENCE — hide institution grid, keep proof */
+    .science-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+    .science-right { display: none; }
 
     /* AI COMPARISON */
-    .compare-grid { grid-template-columns: 1fr; gap: 12px; }
+    .compare-grid { grid-template-columns: 1fr; gap: 10px; }
+    .compare-card { padding: 1.25rem; }
 
-    /* CAPABILITIES */
-    .cap-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    /* CAPABILITIES — 2 col */
+    .cap-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .cap-card { padding: 1.25rem; }
+    .cap-desc { font-size: 12px; }
+
+    /* WORKFLOW — hide on mobile, too long */
+    #workflow { display: none; }
 
     /* CLOSING */
-    #closing { padding: 4rem 1.25rem; }
-    #closing .section-title { font-size: 34px; }
-    .closing-stats { flex-direction: column; width: 100%; }
-    .closing-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; }
-    .closing-stat:last-child { border-bottom: none; }
+    #closing { padding: 3.5rem 1.25rem; }
+    #closing .section-title { font-size: 28px; }
+    #closing .section-sub { font-size: 14px; }
+    .closing-stats { flex-direction: row; flex-wrap: wrap; width: 100%; border-radius: 8px; }
+    .closing-stat { flex: 1; min-width: 45%; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem; }
+    .closing-stat:nth-child(even) { border-right: none; }
+    .closing-stat:nth-last-child(-n+2) { border-bottom: none; }
+    .closing-stat-num { font-size: 28px; }
+    .cta-btn { padding: 14px 28px; font-size: 14px; width: 100%; text-align: center; }
 
     /* FOOTER */
-    footer { padding: 2rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title { font-size: 28px; }
-    .section-title { font-size: 26px; }
-    .lib-grid { grid-template-columns: 1fr; }
-    .cap-grid { grid-template-columns: 1fr; }
-    .hero-stats { grid-template-columns: 1fr 1fr; }
+    footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 </style>
 </head>
@@ -459,8 +464,9 @@
       <button class="lib-filter" onclick="filterLib('ocd')">OCD & Related</button>
       <button class="lib-filter" onclick="filterLib('pain')">Chronic Pain</button>
     </div>
-    <div class="lib-count reveal">Showing <span id="libCount">14</span> assessments</div>
+    <div class="lib-count reveal">Showing <span id="libCount">44</span> assessments</div>
     <div class="lib-grid" id="libGrid"></div>
+    <button id="libShowAllBtn" style="display:none; margin:1.5rem auto 0; background:var(--green); color:var(--cream); border:none; padding:12px 28px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; font-family:'Inter',sans-serif; width:100%;"></button>
   </div>
 </section>
 
@@ -695,10 +701,22 @@
       <div class="closing-stat"><div class="closing-stat-num">2</div><div class="closing-stat-label">Languages</div></div>
       <div class="closing-stat"><div class="closing-stat-num">3</div><div class="closing-stat-label">Populations</div></div>
     </div>
-    <a href="mailto:ibrahymmokhtarr@gmail.com" class="cta-btn">Request a Demo</a>
+    <a href="https://app.falconmind.online" target="_blank" class="cta-btn">Login to Platform →</a>
     <div style="margin-top:1.5rem; font-size:13px; color:var(--subtle);">falconmind.online</div>
   </div>
 </section>
+
+<!-- MOBILE CARD OVERLAY -->
+<div id="cardOverlay" style="display:none; position:fixed; inset:0; z-index:200; background:var(--cream); flex-direction:column; padding:2rem 1.5rem; overflow-y:auto;">
+  <button onclick="closeCard()" style="align-self:flex-start; background:none; border:none; font-size:15px; color:var(--muted); cursor:pointer; margin-bottom:2rem; display:flex; align-items:center; gap:6px; font-family:'Inter',sans-serif;">← Back</button>
+  <div id="ol-domain" class="lib-card-domain" style="font-size:12px; margin-bottom:10px;"></div>
+  <div id="ol-name" style="font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:500; color:var(--green); line-height:1.1; margin-bottom:1rem;"></div>
+  <div id="ol-full" style="font-size:16px; color:var(--muted); line-height:1.7; margin-bottom:2rem;"></div>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <span id="ol-items" style="font-size:14px; color:var(--subtle);"></span>
+    <span id="ol-pop" class="lib-card-pop"></span>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -810,12 +828,37 @@
 
   const popLabels = { all:'All populations', pre:'Pre-entry', active:'Active duty', vet:'Veterans' };
 
-  function renderLib(filter) {
+  function openCard(a) {
+    if (window.innerWidth > 768) return;
+    const ol = document.getElementById('cardOverlay');
+    document.getElementById('ol-domain').textContent = domainLabel(a.domain);
+    document.getElementById('ol-name').textContent = a.name;
+    document.getElementById('ol-full').textContent = a.full;
+    document.getElementById('ol-items').textContent = a.items;
+    document.getElementById('ol-pop').textContent = popLabels[a.pop];
+    document.getElementById('ol-pop').className = 'lib-card-pop ' + a.pop;
+    ol.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCard() {
+    document.getElementById('cardOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  const MOBILE_LIMIT = 6;
+  let libShowAll = false;
+
+  function renderLib(filter, showAll) {
+    if (showAll !== undefined) libShowAll = showAll;
     const grid = document.getElementById('libGrid');
-    const visible = filter === 'all' ? assessments : assessments.filter(a => a.domain === filter);
-    document.getElementById('libCount').textContent = visible.length;
+    const all = filter === 'all' ? assessments : assessments.filter(a => a.domain === filter);
+    const isMobile = window.innerWidth <= 768;
+    const visible = (isMobile && !libShowAll) ? all.slice(0, MOBILE_LIMIT) : all;
+    document.getElementById('libCount').textContent = all.length;
+
     grid.innerHTML = visible.map(a => `
-      <div class="lib-card visible">
+      <div class="lib-card visible" onclick="openCard(${JSON.stringify(a).replace(/"/g,'&quot;')})">
         <div class="lib-card-domain">${domainLabel(a.domain)}</div>
         <div class="lib-card-name">${a.name}</div>
         <div class="lib-card-full">${a.full}</div>
@@ -824,6 +867,16 @@
           <span class="lib-card-pop ${a.pop}">${popLabels[a.pop]}</span>
         </div>
       </div>`).join('');
+
+    // Show "View all X" button on mobile if more cards exist
+    const btn = document.getElementById('libShowAllBtn');
+    if (isMobile && !libShowAll && all.length > MOBILE_LIMIT) {
+      btn.style.display = 'block';
+      btn.textContent = `View all ${all.length} assessments`;
+      btn.onclick = () => renderLib(filter, true);
+    } else {
+      btn.style.display = 'none';
+    }
   }
 
   function domainLabel(d) {
@@ -831,12 +884,16 @@
     return m[d] || d;
   }
 
+  let currentFilter = 'all';
+
   function filterLib(f) {
+    currentFilter = f;
+    libShowAll = false;
     document.querySelectorAll('.lib-filter').forEach(b => b.classList.toggle('active', b.onclick.toString().includes(`'${f}'`)));
-    renderLib(f);
+    renderLib(f, false);
   }
 
-  renderLib('all');
+  renderLib('all', false);
 </script>
 </body>
 </html>
