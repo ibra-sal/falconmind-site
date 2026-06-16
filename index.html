@@ -190,6 +190,54 @@
 
   /* COUNTER */
   .counter { font-variant-numeric: tabular-nums; }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .nav-link { display: none; }
+
+    section { padding: 4rem 1.5rem; }
+
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    .hero-title { font-size: 38px; }
+    .hero-right { height: 320px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .hero-stat { padding: 1.25rem; }
+    .hero-stat-num { font-size: 38px; }
+
+    .section-title { font-size: 34px; }
+
+    .platform-grid { grid-template-columns: 1fr; }
+
+    .pop-tabs { width: 100%; }
+    .pop-tab { padding: 10px 16px; font-size: 12px; flex: 1; text-align: center; }
+    .pop-content.active { grid-template-columns: 1fr; gap: 1.5rem; }
+    .pop-number { font-size: 56px; }
+    .pop-title { font-size: 28px; }
+
+    .lib-grid { grid-template-columns: 1fr 1fr; }
+
+    .workflow-steps { grid-template-columns: 1fr; }
+    .ai-demo { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .caps-grid { grid-template-columns: 1fr; }
+
+    .inst-grid { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .closing-stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 30px; }
+    .section-title { font-size: 28px; }
+    .lib-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr; }
+    .hero-stat:nth-child(even) { border-right: 1px solid var(--border); }
+    .hero-stat:nth-child(3) { border-bottom: 1px solid var(--border); }
+    .closing-stats { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
