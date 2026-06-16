@@ -1089,7 +1089,7 @@
     if (all.length > CARD_LIMIT) {
       btn.style.display = 'block';
       btn.textContent = libShowAll ? 'Show less ↑' : `View all ${all.length} assessments`;
-      btn.onclick = () => { renderLib(filter, !libShowAll); if (libShowAll === false) document.getElementById('library').scrollIntoView({behavior:'smooth'}); };
+      btn.onclick = () => { renderLib(filter, !libShowAll); if (libShowAll === false) document.getElementById('science').scrollIntoView({behavior:'smooth'}); };
     } else {
       btn.style.display = 'none';
     }
@@ -1133,7 +1133,7 @@
       });
       btn.style.display = 'block';
       btn.textContent = sciShowAll ? 'Show less ↑' : `View all ${SCI_TOTAL} assessments`;
-      btn.onclick = () => { sciShowAll = !sciShowAll; renderSciTable(); if (!sciShowAll) document.getElementById('science').scrollIntoView({behavior:'smooth'}); };
+      btn.onclick = () => { sciShowAll = !sciShowAll; renderSciTable(); if (!sciShowAll) document.getElementById('ai').scrollIntoView({behavior:'smooth'}); };
     }
 
     renderSciTable();
