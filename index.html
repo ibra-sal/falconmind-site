@@ -1086,10 +1086,10 @@
       </div>`).join('');
 
     const btn = document.getElementById('libShowAllBtn');
-    if (!libShowAll && all.length > CARD_LIMIT) {
+    if (all.length > CARD_LIMIT) {
       btn.style.display = 'block';
-      btn.textContent = `View all ${all.length} assessments`;
-      btn.onclick = () => renderLib(filter, true);
+      btn.textContent = libShowAll ? 'Show less ↑' : `View all ${all.length} assessments`;
+      btn.onclick = () => renderLib(filter, !libShowAll);
     } else {
       btn.style.display = 'none';
     }
@@ -1131,13 +1131,9 @@
       allRows.forEach((r, i) => {
         r.style.display = (!sciShowAll && i >= SCI_LIMIT) ? 'none' : '';
       });
-      if (!sciShowAll) {
-        btn.style.display = 'block';
-        btn.textContent = `View all ${SCI_TOTAL} assessments`;
-        btn.onclick = () => { sciShowAll = true; renderSciTable(); };
-      } else {
-        btn.style.display = 'none';
-      }
+      btn.style.display = 'block';
+      btn.textContent = sciShowAll ? 'Show less ↑' : `View all ${SCI_TOTAL} assessments`;
+      btn.onclick = () => { sciShowAll = !sciShowAll; renderSciTable(); };
     }
 
     renderSciTable();
