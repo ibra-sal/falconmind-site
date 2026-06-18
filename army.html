@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(sessionStorage.getItem('fm_auth')!=='1'){window.location.href='index.html';}</script>
+<title>Falcon Mind — AI-Powered Mental Health Screening for Military Institutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE8DF;
+    --cream-darker: #E4DDD2;
+    --green: #2D4A2D;
+    --green-mid: #3D5A3E;
+    --green-light: #5A7A5B;
+    --green-pale: #E8EEE8;
+    --teal: #4A9B8E;
+    --teal-bg: #E8F4F2;
+    --text: #1C2B1C;
+    --muted: #5A6B5A;
+    --subtle: #8A9A8A;
+    --border: #D8D0C4;
+    --border-green: #B8C8B8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,240,232,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 4rem; transition: all 0.3s; }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(44,58,44,0.08); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--green); letter-spacing: 0.02em; }
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+  .nav-link { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s; letter-spacing: 0.02em; cursor: pointer; }
+  .nav-link:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: var(--cream); font-size: 13px; font-weight: 500; padding: 9px 22px; border-radius: 6px; text-decoration: none; transition: all 0.2s; letter-spacing: 0.02em; border: none; cursor: pointer; }
+  .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+  .nav-login { background: transparent; color: var(--green); font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: 6px; text-decoration: none; border: 1.5px solid var(--green); transition: all 0.2s; letter-spacing: 0.02em; }
+  .nav-login:hover { background: var(--green-pale); }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--teal); color: var(--teal); border-radius: 4px; margin-bottom: 1.5rem; }
+  .tag.confidential { border-color: var(--border); color: var(--muted); }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 500; color: var(--green); line-height: 1.1; margin-bottom: 1rem; }
+  .section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 580px; }
+
+  /* HERO */
+  #hero { padding: 0; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 8rem 8rem; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 62px; font-weight: 500; color: var(--green); line-height: 1.08; margin-bottom: 2rem; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 3rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .hero-stat { padding: 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .hero-stat:nth-child(even) { border-right: none; }
+  .hero-stat:nth-child(3), .hero-stat:nth-child(4) { border-bottom: none; }
+  .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 400; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .hero-stat-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .hero-stat-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .hero-right { background: var(--green); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; mix-blend-mode: luminosity; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(45,74,45,0.6) 0%, rgba(45,74,45,0.2) 100%); }
+  .hero-badge { position: absolute; bottom: 3rem; left: 3rem; background: rgba(245,240,232,0.12); backdrop-filter: blur(10px); border: 1px solid rgba(245,240,232,0.2); border-radius: 8px; padding: 1.5rem; }
+  .hero-badge-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--cream); line-height: 1.4; }
+
+  /* PLATFORM OVERVIEW */
+  #platform { background: var(--cream); }
+  .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+  .platform-card { background: var(--cream-dark); border: 1px solid var(--border); border-radius: 10px; padding: 2rem; transition: all 0.25s; }
+  .platform-card:hover { background: var(--cream-darker); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(44,58,44,0.08); }
+  .platform-icon { width: 44px; height: 44px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+  .platform-icon svg { width: 22px; height: 22px; stroke: var(--cream); fill: none; stroke-width: 1.5; }
+  .platform-card-title { font-size: 18px; font-weight: 600; color: var(--green); margin-bottom: 8px; }
+  .platform-card-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* MILITARY USE CASE */
+  #military { background: var(--green); }
+  #military .section-title { color: var(--cream); }
+  #military .section-sub { color: rgba(245,240,232,0.7); }
+  #military .tag { border-color: rgba(245,240,232,0.3); color: rgba(245,240,232,0.6); }
+  .pop-tabs { display: flex; gap: 0; margin: 3rem 0 2rem; border: 1px solid rgba(245,240,232,0.2); border-radius: 8px; overflow: hidden; width: fit-content; }
+  .pop-tab { padding: 10px 28px; font-size: 13px; font-weight: 500; color: rgba(245,240,232,0.5); cursor: pointer; transition: all 0.2s; border: none; background: transparent; }
+  .pop-tab.active { background: rgba(245,240,232,0.12); color: var(--cream); }
+  .pop-tab:hover:not(.active) { color: rgba(245,240,232,0.8); }
+  .pop-content { display: none; }
+  .pop-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .pop-main { }
+  .pop-number { font-family: 'Cormorant Garamond', serif; font-size: 80px; color: rgba(245,240,232,0.12); line-height: 1; margin-bottom: -1rem; }
+  .pop-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; color: var(--cream); margin-bottom: 1.25rem; line-height: 1.2; }
+  .pop-desc { font-size: 15px; color: rgba(245,240,232,0.75); line-height: 1.8; }
+  .pop-tools { margin-top: 2rem; }
+  .pop-tools-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 10px; }
+  .pop-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pop-tag { font-size: 12px; padding: 4px 12px; border: 1px solid rgba(245,240,232,0.2); border-radius: 20px; color: rgba(245,240,232,0.6); }
+  .pop-outcomes { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+  .pop-outcome { background: rgba(245,240,232,0.06); border: 1px solid rgba(245,240,232,0.12); border-radius: 8px; padding: 1.25rem; }
+  .pop-outcome-title { font-size: 14px; font-weight: 600; color: var(--cream); margin-bottom: 5px; }
+  .pop-outcome-desc { font-size: 13px; color: rgba(245,240,232,0.6); line-height: 1.6; }
+
+  /* ASSESSMENT LIBRARY */
+  #library { background: var(--cream-dark); }
+  .lib-filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 2rem 0; }
+  .lib-filter { padding: 7px 18px; border: 1px solid var(--border); border-radius: 20px; font-size: 13px; color: var(--muted); cursor: pointer; transition: all 0.2s; background: transparent; font-family: 'Inter', sans-serif; }
+  .lib-filter.active { background: var(--green); color: var(--cream); border-color: var(--green); }
+  .lib-filter:hover:not(.active) { border-color: var(--green-light); color: var(--green); }
+  .lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .lib-card { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; transition: all 0.2s; display: none; }
+  .lib-card.visible { display: block; animation: fadeIn 0.25s ease; }
+  .lib-card:hover { box-shadow: 0 4px 16px rgba(44,58,44,0.08); transform: translateY(-1px); }
+  .lib-card-domain { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .lib-card-name { font-size: 15px; font-weight: 600; color: var(--green); margin-bottom: 4px; }
+  .lib-card-full { font-size: 12px; color: var(--muted); margin-bottom: 10px; line-height: 1.4; }
+  .lib-card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .lib-card-items { font-size: 11px; color: var(--subtle); }
+  .lib-card-pop { font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+  .lib-card-pop.all { background: var(--green-pale); color: var(--green); }
+  .lib-card-pop.active { background: #EEE8F8; color: #5A3A9A; }
+  .lib-card-pop.pre { background: var(--teal-bg); color: var(--teal); }
+  .lib-card-pop.vet { background: #FEF3E8; color: #A05A1A; }
+  .lib-count { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; }
+  .lib-count span { font-weight: 600; color: var(--green); }
+
+  /* SCIENCE */
+  #science { background: var(--cream); }
+  .sci-hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 2.5rem 0; }
+  .sci-stat { background: var(--cream); padding: 1.5rem 1.25rem; text-align: center; }
+  .sci-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: var(--green); line-height: 1; }
+  .sci-stat-label { font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+  .sci-stat-source { font-size: 10px; color: var(--teal); margin-top: 4px; font-weight: 500; }
+  .science-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 2rem; }
+  .science-left .section-sub { margin-bottom: 1.5rem; }
+  .science-proof { background: var(--teal-bg); border: 1px solid var(--border-green); border-radius: 8px; padding: 1.25rem 1.5rem; font-size: 13.5px; color: #2A6B60; line-height: 1.7; margin-bottom: 0.75rem; }
+  .science-proof strong { font-weight: 600; }
+  .deployed-bar { background: var(--teal-bg); border: 1px solid var(--border-green); border-radius: 6px; padding: 10px 16px; font-size: 12px; color: #2A6B60; margin-top: 8px; }
+  .deployed-bar strong { font-weight: 600; }
+  .sci-proofs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.5rem 0; }
+  .sci-proof-card { background: var(--teal-bg); border: 1px solid var(--border-green); border-radius: 8px; padding: 1rem 1.25rem; font-size: 13px; color: #2A6B60; line-height: 1.6; }
+  .inst-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .inst-card { background: var(--cream-dark); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; transition: all 0.2s; cursor: default; }
+  .inst-card:hover { background: var(--cream-darker); }
+  .inst-name { font-size: 13px; font-weight: 600; color: var(--green); margin-bottom: 4px; }
+  .inst-tools { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 6px; }
+  .inst-stat { font-size: 11.5px; color: #2A6B60; background: var(--teal-bg); border-radius: 4px; padding: 3px 7px; display: inline-block; margin-bottom: 4px; line-height: 1.4; }
+  .inst-loc { font-size: 11px; color: var(--teal); font-weight: 500; }
+  /* ASSESSMENT TABLE */
+  .sci-table-wrap { margin-top: 0; background: var(--cream-dark); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .sci-table-label { font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 1rem 1.25rem 0.5rem; }
+  .sci-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .sci-table thead th { text-align: left; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0.07em; text-transform: uppercase; padding: 8px 14px; background: var(--cream-dark); border-bottom: 1px solid var(--border); }
+  .sci-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; background: var(--cream); }
+  .sci-table tbody tr:last-child { border-bottom: none; }
+  .sci-table tbody tr:hover { background: #ede8de; }
+  .sci-table td { padding: 10px 14px; vertical-align: middle; line-height: 1.4; }
+  .sci-td-name { font-weight: 700; color: var(--green); white-space: nowrap; font-size: 13px; width: 90px; }
+  .sci-td-stat { color: #3a3a3a; font-size: 12px; }
+  .sci-td-flag { white-space: nowrap; text-align: right; }
+  .sci-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+  .sci-badge-core { background: #2D4A2D; color: var(--cream); }
+  .sci-badge-sec { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .sci-td-country { font-size: 11px; color: var(--teal); font-weight: 500; white-space: nowrap; padding-right: 6px; }
+  /* REFS */
+  .sci-refs { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+  .sci-refs-title { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .sci-refs-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .sci-ref-tag { font-size: 10.5px; color: var(--muted); background: var(--cream-dark); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; line-height: 1.5; }
+
+  /* AI COMPARISON */
+  #ai { background: var(--green); }
+  #ai .section-title { color: var(--cream); }
+  #ai .tag { border-color: rgba(245,240,232,0.3); color: rgba(245,240,232,0.5); }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 3rem; }
+  .compare-card { border-radius: 10px; padding: 2rem; }
+  .compare-card.traditional { background: rgba(0,0,0,0.25); }
+  .compare-card.falcon { background: rgba(245,240,232,0.1); border: 1px solid rgba(245,240,232,0.15); }
+  .compare-title { font-size: 17px; font-weight: 600; margin-bottom: 1.5rem; }
+  .compare-card.traditional .compare-title { color: rgba(245,240,232,0.5); }
+  .compare-card.falcon .compare-title { color: var(--cream); }
+  .compare-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(245,240,232,0.08); font-size: 14px; line-height: 1.5; }
+  .compare-item:last-child { border-bottom: none; }
+  .compare-card.traditional .compare-item { color: rgba(245,240,232,0.45); }
+  .compare-card.falcon .compare-item { color: rgba(245,240,232,0.85); }
+  .ci { flex-shrink: 0; font-size: 15px; }
+
+  /* CAPABILITIES */
+  #capabilities { background: var(--cream-dark); }
+  .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 3rem; }
+  .cap-card { background: var(--cream); border: 1px solid var(--border); border-radius: 10px; padding: 2rem; transition: all 0.25s; }
+  .cap-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,58,44,0.08); }
+  .cap-icon { width: 40px; height: 40px; margin-bottom: 1.25rem; }
+  .cap-icon svg { width: 40px; height: 40px; stroke: var(--green); fill: none; stroke-width: 1.5; }
+  .cap-title { font-size: 17px; font-weight: 600; color: var(--green); margin-bottom: 8px; }
+  .cap-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* CLOSING */
+  #closing { background: var(--cream); text-align: center; padding: 8rem 4rem; }
+  #closing .section-title { font-size: 58px; margin-bottom: 1.5rem; }
+  #closing .section-sub { margin: 0 auto 3rem; text-align: center; max-width: 560px; font-size: 17px; }
+  .closing-stats { display: flex; justify-content: center; gap: 0; border: 1px solid var(--border); border-radius: 10px; width: fit-content; margin: 0 auto 3rem; overflow: hidden; }
+  .closing-stat { padding: 1.5rem 3rem; border-right: 1px solid var(--border); text-align: center; }
+  .closing-stat:last-child { border-right: none; }
+  .closing-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--green); font-weight: 500; }
+  .closing-stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .cta-btn { display: inline-block; background: var(--green); color: var(--cream); font-size: 15px; font-weight: 500; padding: 16px 40px; border-radius: 8px; text-decoration: none; transition: all 0.25s; letter-spacing: 0.02em; }
+  .cta-btn:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,58,44,0.2); }
+
+  /* FOOTER */
+  footer { background: var(--green); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--cream); font-weight: 600; }
+  .footer-text { font-size: 13px; color: rgba(245,240,232,0.4); }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* COUNTER */
+  .counter { font-variant-numeric: tabular-nums; }
+
+  /* MOBILE BOTTOM NAV */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 999;
+    background: var(--green);
+    border-top: 1px solid rgba(245,240,232,0.15);
+    padding: 0 0 env(safe-area-inset-bottom);
+  }
+  .mobile-nav-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 56px;
+  }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    flex: 1;
+  }
+  .mobile-nav-item:active { background: rgba(245,240,232,0.1); }
+  .mobile-nav-item.active .mni-dot { background: var(--cream); }
+  .mobile-nav-item.active .mni-label { color: var(--cream); }
+  .mni-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(245,240,232,0.35); transition: background 0.2s; }
+  .mni-label { font-size: 10px; font-weight: 500; color: rgba(245,240,232,0.5); letter-spacing: 0.02em; font-family: 'Inter', sans-serif; transition: color 0.2s; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .mobile-nav { display: block; }
+    body { padding-bottom: 56px; }
+    /* NAV — logo + login only */
+    nav { padding: 0 1.25rem; height: 56px; }
+    .nav-link { display: none; }
+    .nav-links { gap: 0.75rem; }
+    .nav-cta { padding: 8px 18px; font-size: 13px; }
+
+    /* SECTIONS */
+    section { padding: 3rem 1.25rem; }
+    .section-title { font-size: 30px; line-height: 1.15; }
+    .section-sub { font-size: 14px; }
+
+    /* HERO — image full screen, text overlay */
+    #hero { display: block; min-height: 100svh; position: relative; }
+    .hero-left { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem 1.25rem 2.5rem; background: linear-gradient(to top, rgba(20,36,20,0.88) 0%, rgba(20,36,20,0.3) 60%, transparent 100%); }
+    .hero-right { position: absolute; inset: 0; height: 100%; }
+    .hero-right > div { height: 100%; }
+    .tag.confidential { display: none; }
+    .hero-title { font-size: 30px; color: var(--cream); margin-bottom: 1.5rem; line-height: 1.15; }
+    .hero-stats { grid-template-columns: 1fr 1fr; border-color: rgba(245,240,232,0.2); border-radius: 10px; }
+    .hero-stat { padding: 0.875rem; border-color: rgba(245,240,232,0.15); background: rgba(245,240,232,0.08); backdrop-filter: blur(8px); }
+    .hero-stat-num { font-size: 32px; color: var(--cream); }
+    .hero-stat-label { font-size: 11px; color: rgba(245,240,232,0.9); }
+    .hero-stat-desc { display: none; }
+
+    /* PLATFORM — hide on mobile, too long */
+    #platform { display: none; }
+
+    /* MILITARY TABS */
+    .pop-tabs { width: 100%; }
+    .pop-tab { padding: 10px 6px; font-size: 11px; flex: 1; text-align: center; }
+    .pop-content.active { grid-template-columns: 1fr; gap: 1.25rem; }
+    .pop-number { display: none; }
+    .pop-title { font-size: 24px; }
+    .pop-desc { font-size: 13px; }
+    .pop-outcomes { gap: 8px; }
+
+    /* ASSESSMENT LIBRARY — show category buttons + 6 cards max */
+    #library { background: var(--cream-dark); }
+    .lib-filters { gap: 6px; }
+    .lib-filter { padding: 6px 12px; font-size: 12px; }
+    .lib-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* SCIENCE — full width, table scrollable, stats 2col */
+    .sci-hero-stats { grid-template-columns: 1fr 1fr; }
+    .sci-proofs-row { grid-template-columns: 1fr; gap: 8px; }
+    .sci-table thead th:nth-child(3) { display: none; }
+    .sci-table td:nth-child(3) { display: none; }
+    .sci-table td { padding: 8px 10px; font-size: 11.5px; }
+    .sci-td-name { font-size: 12px; }
+    .sci-td-stat { font-size: 11px; }
+
+    /* AI COMPARISON */
+    .compare-grid { grid-template-columns: 1fr; gap: 10px; }
+    .compare-card { padding: 1.25rem; }
+
+    /* CAPABILITIES — 2 col */
+    .cap-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cap-card { padding: 1.25rem; }
+    .cap-desc { font-size: 12px; }
+
+    /* WORKFLOW — single column on mobile */
+    #workflow { padding: 3.5rem 1.25rem !important; }
+    #workflow > div > div[style*="grid"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+    /* CLOSING */
+    #closing { padding: 3.5rem 1.25rem; }
+    #closing .section-title { font-size: 28px; }
+    #closing .section-sub { font-size: 14px; }
+    .closing-stats { flex-direction: row; flex-wrap: wrap; width: 100%; border-radius: 8px; }
+    .closing-stat { flex: 1; min-width: 45%; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem; }
+    .closing-stat:nth-child(even) { border-right: none; }
+    .closing-stat:nth-last-child(-n+2) { border-bottom: none; }
+    .closing-stat-num { font-size: 28px; }
+    .cta-btn { padding: 14px 28px; font-size: 14px; width: 100%; text-align: center; }
+
+    /* FOOTER */
+    footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div style="display:flex;align-items:center;gap:20px;">
+    <a href="index.html" style="font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;letter-spacing:0.04em;display:flex;align-items:center;gap:4px;opacity:0.7;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">← All institutions</a>
+    <div class="nav-logo">Falcon Mind</div>
+  </div>
+  <div class="nav-links">
+    <span class="nav-link" onclick="document.getElementById('platform').scrollIntoView({behavior:'smooth'})">Platform</span>
+    <span class="nav-link" onclick="document.getElementById('military').scrollIntoView({behavior:'smooth'})">Military</span>
+    <span class="nav-link" onclick="document.getElementById('library').scrollIntoView({behavior:'smooth'})">Assessments</span>
+    <span class="nav-link" onclick="document.getElementById('science').scrollIntoView({behavior:'smooth'})">Science</span>
+    <span class="nav-link" onclick="document.getElementById('ai').scrollIntoView({behavior:'smooth'})">AI Engine</span>
+    <span class="nav-link" onclick="document.getElementById('capabilities').scrollIntoView({behavior:'smooth'})">Platform Features</span>
+    <span class="nav-link" onclick="document.getElementById('workflow').scrollIntoView({behavior:'smooth'})">How It Works</span>
+    <a href="https://app.falconmind.online" target="_blank" class="nav-cta">Login →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left" style="position:relative; overflow:hidden; padding:0; background-image:url('hero-image.png'); background-size:cover; background-position:center top;">
+    <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(20,36,20,0.45) 0%, rgba(20,36,20,0.75) 100%);"></div>
+    <div style="position:relative; z-index:2; padding:8rem 4rem 8rem 8rem; display:flex; flex-direction:column; justify-content:center; min-height:100vh; box-sizing:border-box;">
+    <div class="tag confidential">Confidential</div>
+    <h1 class="hero-title">AI-Powered Mental Health Screening for Military Institutions</h1>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num counter" data-target="44">0</div>
+        <div class="hero-stat-label">Validated Assessments</div>
+        <div class="hero-stat-desc">Clinical instruments covering the full psychological spectrum for the Army</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num counter" data-target="1">0</div>
+        <div class="hero-stat-label">AI Clinical Engine</div>
+        <div class="hero-stat-desc">Nuanced analysis beyond basic scoring</div>
+      </div>
+      <div class="hero-stat" style="border-bottom:none;">
+        <div class="hero-stat-num counter" data-target="2">0</div>
+        <div class="hero-stat-label">Languages</div>
+        <div class="hero-stat-desc">Arabic & English — bilingual-first design</div>
+      </div>
+      <div class="hero-stat" style="border-right:none; border-bottom:none;">
+        <div class="hero-stat-num counter" data-target="3">0</div>
+        <div class="hero-stat-label">Populations</div>
+        <div class="hero-stat-desc">Pre-entry · Active Duty · Veterans</div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div style="width:100%; height:100%; position:relative; overflow:hidden;">
+      <img src="hero-soldier.png" alt="" style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;">
+      <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(45,74,45,0.3) 0%, rgba(28,48,32,0.55) 100%);"></div>
+      <div style="position:absolute; bottom:3rem; left:3rem; right:3rem; display:flex; flex-direction:column; gap:1rem;">
+        <div style="background:rgba(245,240,232,0.12); backdrop-filter:blur(10px); border:1px solid rgba(245,240,232,0.2); border-radius:8px; padding:1.25rem 1.5rem;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--cream); line-height:1.4;">Built for Gulf Armed<br>Forces Medical Services</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM OVERVIEW -->
+<section id="platform">
+  <div class="container">
+    <div class="tag">Platform Overview</div>
+    <div style="font-size:13px; color:var(--muted); margin-bottom:0.5rem; font-weight:500;">What Is Falcon Mind?</div>
+    <h2 class="section-title">A Clinical Intelligence<br>Platform for the Armed Forces</h2>
+    <p class="section-sub">A mobile-first clinical mental health assessment platform built for organizations where early identification of psychological risk is mission-critical.</p>
+    <div class="platform-grid reveal">
+      <div class="platform-card">
+        <div class="platform-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div>
+        <div class="platform-card-title">Mobile-First Platform</div>
+        <div class="platform-card-body">Clinician dashboard & patient app. Arabic + English. iOS, Android, and web — one codebase, every device.</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+        <div class="platform-card-title">AI Clinical Engine</div>
+        <div class="platform-card-body">Full narrative interpretation. Cross-references all assessments. Military & operational context built in to every report.</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="platform-card-title">Longitudinal Tracking</div>
+        <div class="platform-card-body">Track patients over time. Score deltas, trend detection, early warning alerts before conditions escalate.</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="platform-card-title">Arabic-First UX</div>
+        <div class="platform-card-body">Full RTL Arabic interface. Bilingual toggle. Validated Arabic translations. Purpose-built for GCC deployment.</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="platform-card-title">Data Sovereignty</div>
+        <div class="platform-card-body">Deployed on your cloud infrastructure. Full data ownership. Saudi NCA compliant. No data leaves your jurisdiction.</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <div class="platform-card-title">Real-Time Alerts</div>
+        <div class="platform-card-body">Severity flags auto-surface. HIGH-risk patients prioritized and surfaced immediately. Clinician-controlled workflow at all times.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MILITARY USE CASE -->
+<section id="military">
+  <div class="container">
+    <div class="tag">Military Deployment</div>
+    <h2 class="section-title">Built for Every Stage<br>of Military Service</h2>
+    <p class="section-sub" style="color:rgba(245,240,232,0.65);">Pre-Entry Soldiers · Active Duty · Veterans & Reintegration</p>
+
+    <div class="pop-tabs">
+      <button class="pop-tab active" onclick="switchPop(0)">Pre-Entry Screening</button>
+      <button class="pop-tab" onclick="switchPop(1)">Active Duty Monitoring</button>
+      <button class="pop-tab" onclick="switchPop(2)">Veterans & Reintegration</button>
+    </div>
+
+    <div class="pop-content active" id="pop0">
+      <div class="pop-main">
+        <div class="pop-number">1</div>
+        <div class="pop-title">Pre-Entry Screening</div>
+        <div class="pop-desc">Baseline psychological profiling before enlistment. Detect hidden PTSD, personality disorders, and addiction risk. Fitness for duty — objective, AI-backed assessment. Identify high-risk profiles before deployment.</div>
+        <div class="pop-tools">
+          <div class="pop-tools-label">Default battery</div>
+          <div class="pop-tags">
+            <span class="pop-tag">PHQ-9</span><span class="pop-tag">GAD-7</span><span class="pop-tag">AUDIT</span><span class="pop-tag">MDQ</span><span class="pop-tag">UPPS-P</span><span class="pop-tag">BRS</span><span class="pop-tag">ASRS v1.1</span>
+          </div>
+        </div>
+      </div>
+      <div class="pop-outcomes">
+        <div class="pop-outcome"><div class="pop-outcome-title">Outcome: Accept or Refer</div><div class="pop-outcome-desc">Flagged cases go to specialized clinician for interview. Clinician makes the final fitness-for-service decision.</div></div>
+        <div class="pop-outcome"><div class="pop-outcome-title">~25 minutes</div><div class="pop-outcome-desc">7 validated assessments. Self-administered online. No clinician needed in the room during completion.</div></div>
+        <div class="pop-outcome"><div class="pop-outcome-title">Arabic + English</div><div class="pop-outcome-desc">Full bilingual support. Soldier selects language at start. All questions validated in both languages.</div></div>
+      </div>
+    </div>
+
+    <div class="pop-content" id="pop1">
+      <div class="pop-main">
+        <div class="pop-number">2</div>
+        <div class="pop-title">Active Duty Monitoring</div>
+        <div class="pop-desc">Ongoing mental fitness monitoring during service. Anger, impulse control & aggression screening. Burnout & occupational strain — OLBI, PSS-10. Unit-level resilience & psychological safety. Early detection before performance degrades.</div>
+        <div class="pop-tools">
+          <div class="pop-tools-label">Default battery</div>
+          <div class="pop-tags">
+            <span class="pop-tag">PHQ-9</span><span class="pop-tag">GAD-7</span><span class="pop-tag">PCL-5</span><span class="pop-tag">DAR-5</span><span class="pop-tag">RIS</span><span class="pop-tag">OLBI</span><span class="pop-tag">PSS-10</span><span class="pop-tag">AUDIT</span>
+          </div>
+        </div>
+      </div>
+      <div class="pop-outcomes">
+        <div class="pop-outcome"><div class="pop-outcome-title">Outcome: Intervene or Modify Duty</div><div class="pop-outcome-desc">Clinician dashboard surfaces flagged soldiers. Decides intervention, duty modification, or referral to specialist care.</div></div>
+        <div class="pop-outcome"><div class="pop-outcome-title">Periodic or Triggered</div><div class="pop-outcome-desc">Scheduled monitoring every 3–6 months, or triggered by deployment return, incident, or command referral.</div></div>
+        <div class="pop-outcome"><div class="pop-outcome-title">~30 minutes</div><div class="pop-outcome-desc">8 assessments covering the full active-duty risk profile — PTSD, sleep, anger, burnout, stress, alcohol.</div></div>
+      </div>
+    </div>
+
+    <div class="pop-content" id="pop2">
+      <div class="pop-main">
+        <div class="pop-number">3</div>
+        <div class="pop-title">Veterans & Reintegration</div>
+        <div class="pop-desc">Longitudinal PTSD monitoring post-deployment. Trauma screening — PCL-5, IES-R, ITQ. Suicide risk tracking with priority alerting. Resilience & reintegration readiness scoring. Identify veterans who need support before crisis.</div>
+        <div class="pop-tools">
+          <div class="pop-tools-label">Default battery</div>
+          <div class="pop-tags">
+            <span class="pop-tag">PCL-5</span><span class="pop-tag">PHQ-9</span><span class="pop-tag">GAD-7</span><span class="pop-tag">AUDIT</span><span class="pop-tag">RIS</span><span class="pop-tag">DAR-5</span><span class="pop-tag">BRS</span><span class="pop-tag">WHOQOL-BREF</span>
+          </div>
+        </div>
+      </div>
+      <div class="pop-outcomes">
+        <div class="pop-outcome"><div class="pop-outcome-title">Outcome: Refer to Care</div><div class="pop-outcome-desc">Flagged veterans referred to appropriate support — counselling, psychiatric care, or reintegration programs.</div></div>
+        <div class="pop-outcome"><div class="pop-outcome-title">~25 minutes</div><div class="pop-outcome-desc">8 assessments. Focused on post-service risk: PTSD, sleep disruption, anger, alcohol, quality of life.</div></div>
+        <div class="pop-outcome"><div class="pop-outcome-title">Longitudinal history</div><div class="pop-outcome-desc">Score trends tracked over time. AI detects deterioration patterns before they become crises.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSESSMENT LIBRARY -->
+<section id="library">
+  <div class="container">
+    <div class="tag">Assessments Library</div>
+    <h2 class="section-title reveal">44 Validated Army-Related<br>Assessments</h2>
+    <p class="section-sub reveal">Covering the full psychological spectrum — from initial screening to deep clinical profiling.</p>
+    <div class="lib-filters reveal">
+      <button class="lib-filter active" onclick="filterLib('all')">All (44)</button>
+      <button class="lib-filter" onclick="filterLib('mood')">Mood</button>
+      <button class="lib-filter" onclick="filterLib('anxiety')">Anxiety</button>
+      <button class="lib-filter" onclick="filterLib('trauma')">Trauma</button>
+      <button class="lib-filter" onclick="filterLib('emotion')">Emotion Regulation</button>
+      <button class="lib-filter" onclick="filterLib('resilience')">Resilience & Wellbeing</button>
+      <button class="lib-filter" onclick="filterLib('stress')">Stress & Distress</button>
+      <button class="lib-filter" onclick="filterLib('substance')">Substance Use</button>
+      <button class="lib-filter" onclick="filterLib('personality')">Personality</button>
+      <button class="lib-filter" onclick="filterLib('functioning')">Functioning</button>
+      <button class="lib-filter" onclick="filterLib('executive')">Executive Function</button>
+      <button class="lib-filter" onclick="filterLib('psyflex')">Psychological Flexibility</button>
+      <button class="lib-filter" onclick="filterLib('coping')">Coping</button>
+      <button class="lib-filter" onclick="filterLib('impulse')">Impulse Control</button>
+      <button class="lib-filter" onclick="filterLib('sleep')">Sleep</button>
+      <button class="lib-filter" onclick="filterLib('occupational')">Occupational Health</button>
+      <button class="lib-filter" onclick="filterLib('qol')">Quality of Life</button>
+      <button class="lib-filter" onclick="filterLib('ocd')">OCD & Related</button>
+      <button class="lib-filter" onclick="filterLib('pain')">Chronic Pain</button>
+    </div>
+    <div class="lib-count reveal">Showing <span id="libCount">44</span> assessments</div>
+    <div class="lib-grid" id="libGrid"></div>
+    <button id="libShowAllBtn" style="display:none; margin:1.5rem auto 0; background:var(--green); color:var(--cream); border:none; padding:12px 28px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; font-family:'Inter',sans-serif; width:100%;"></button>
+  </div>
+</section>
+
+<!-- SCIENCE -->
+<section id="science">
+  <div class="container">
+    <div class="tag">Scientific Foundation</div>
+    <h2 class="section-title reveal">Built on Decades of<br>Peer-Reviewed Science</h2>
+    <p class="section-sub reveal" style="max-width:680px;">Falcon Mind's assessment library is grounded in instruments validated across decades of academic research and real-world military deployment — from the World Health Organization to the U.S. Department of Veterans Affairs.</p>
+
+    <!-- HERO STATS -->
+    <div class="sci-hero-stats reveal">
+      <div class="sci-stat">
+        <div class="sci-stat-num">26,100+</div>
+        <div class="sci-stat-label">Citations for GAD-7 anxiety scale</div>
+        <div class="sci-stat-source">Semantic Scholar</div>
+      </div>
+      <div class="sci-stat">
+        <div class="sci-stat-num">63%</div>
+        <div class="sci-stat-label">Combat-deployed personnel meet insomnia criteria</div>
+        <div class="sci-stat-source">ScienceDirect Meta-Analysis</div>
+      </div>
+      <div class="sci-stat">
+        <div class="sci-stat-num">5.8M</div>
+        <div class="sci-stat-label">Veterans screened annually under VA PTSD protocol</div>
+        <div class="sci-stat-source">VA.gov FY2024</div>
+      </div>
+      <div class="sci-stat">
+        <div class="sci-stat-num">30%</div>
+        <div class="sci-stat-label">Veterans report problem anger post-combat</div>
+        <div class="sci-stat-source">ScienceDirect, 2014</div>
+      </div>
+    </div>
+
+    <!-- PROOF CARDS ROW -->
+    <div class="sci-proofs-row reveal">
+      <div class="sci-proof-card"><strong>UNSW (2021)</strong> — PCL-5, PHQ-9, and GAD-7 confirmed valid for Australian Police Forces and Armed Forces personnel.</div>
+      <div class="sci-proof-card"><strong>UK Armed Forces (2022)</strong> — ITQ validated in 732 veterans; 56.7% met criteria for Complex PTSD. <em>British Journal of Psychiatry.</em></div>
+      <div class="sci-proof-card"><strong>US Army (2022)</strong> — Brief Resilience Scale confirmed in 3,030 active-duty soldiers, deployed and garrison. <em>Occupational Health Science.</em></div>
+    </div>
+
+    <div class="deployed-bar reveal" style="margin-bottom:2rem;">
+      <strong>Deployed by:</strong> US Department of Veterans Affairs (PCL-5) · NATO Allied Forces · Australian Defence Force · Canadian Armed Forces
+    </div>
+
+    <div class="science-layout" style="display:block;">
+      <div class="science-right reveal">
+
+        <div class="sci-table-wrap">
+          <div class="sci-table-label">Assessment Military Evidence — All 23 Documented</div>
+          <table class="sci-table">
+            <thead>
+              <tr>
+                <th>Assessment</th>
+                <th>Military Evidence</th>
+                <th>Source</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="sci-td-name">PHQ-9</td>
+                <td class="sci-td-stat">20,652 citations · DoD/VA standard across all military healthcare</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">GAD-7</td>
+                <td class="sci-td-stat">26,100 citations · Validated in Canadian Armed Forces (α=0.91)</td>
+                <td class="sci-td-country">🇨🇦 Canada</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">PCL-5</td>
+                <td class="sci-td-stat">5.8M veterans screened annually · VA/NATO gold standard</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">DAR-5</td>
+                <td class="sci-td-stat">30.7% of veterans report problem anger · Validated in 163 combat PTSD veterans (α=.86)</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">BRS</td>
+                <td class="sci-td-stat">Validated in 3,030 active-duty US Army soldiers, deployed + garrison</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">AUDIT</td>
+                <td class="sci-td-stat">16.7% hazardous drinking in deployed special forces (N=671)</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">PSS-10</td>
+                <td class="sci-td-stat">Validated in military samples — Korean (N=373), Iranian (N=406), Romanian armed forces</td>
+                <td class="sci-td-country">Multi-NATO</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">OLBI</td>
+                <td class="sci-td-stat">~50% of US Army health providers report moderate-to-high burnout (2021)</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">RIS</td>
+                <td class="sci-td-stat">63.6% of combat-deployed personnel meet insomnia criteria; 40.5% of post-9/11 veterans</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">MDQ</td>
+                <td class="sci-td-stat">3.9% bipolar prevalence in veterans · Incidence rising post-COVID across all branches</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">UPPS-P</td>
+                <td class="sci-td-stat">Validated in 254 soldiers · Predicts alcohol/cannabis use in 361 OEF/OIF/OND veterans</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">ASRS v1.1</td>
+                <td class="sci-td-stat">50% of military parents screened ADHD-positive · WHO-developed, 80+ countries</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-core">Core</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">IES-R</td>
+                <td class="sci-td-stat">Most widely used PTSD scale worldwide · Validated in combat veterans (N=195)</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">ITQ</td>
+                <td class="sci-td-stat">56.7% C-PTSD in UK veteran sample (N=732) · British Journal of Psychiatry</td>
+                <td class="sci-td-country">🇬🇧 UK</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">OCI-R</td>
+                <td class="sci-td-stat">Up to 70% of PTSD veterans also have OCD · Severely underdiagnosed in military</td>
+                <td class="sci-td-country">🇬🇧 UK</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">ACE-Q</td>
+                <td class="sci-td-stat">56–66% of recruits report childhood abuse · Military volunteers have higher ACE than civilians</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">DERS-16</td>
+                <td class="sci-td-stat">Emotion dysregulation predicts suicide risk in 465 combat-exposed veterans</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">WHODAS 2.0</td>
+                <td class="sci-td-stat">VA standard for PTSD disability assessments (N=1,109 veterans across VA medical centers)</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">DUDIT</td>
+                <td class="sci-td-stat">10% of veterans diagnosed with substance disorder · Prescription misuse doubled 2002–2008</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">WHOQOL-BREF</td>
+                <td class="sci-td-stat">Validated in treatment-seeking male veterans (Military Psychology, 2015)</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">TSK</td>
+                <td class="sci-td-stat">Used in Gulf War Veterans chronic pain + PTSD studies; active military injury trials</td>
+                <td class="sci-td-country">🇺🇸 USA</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">Brief-COPE</td>
+                <td class="sci-td-stat">Used in Dutch servicemembers post-deployment coping study (NATO)</td>
+                <td class="sci-td-country">🇳🇱 NATO</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+              <tr>
+                <td class="sci-td-name">DASS-21</td>
+                <td class="sci-td-stat">21.6% depression · 17.9% anxiety in military hospital healthcare workers</td>
+                <td class="sci-td-country">🇬🇷 Greece</td>
+                <td class="sci-td-flag"><span class="sci-badge sci-badge-sec">Extended</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- REFERENCES -->
+        <div class="sci-refs">
+          <div class="sci-refs-title">Key References</div>
+          <div class="sci-refs-list">
+            <span class="sci-ref-tag">Kroenke et al. (2001) — PHQ-9 · J. General Internal Medicine</span>
+            <span class="sci-ref-tag">Spitzer et al. (2006) — GAD-7 · Archives of Internal Medicine</span>
+            <span class="sci-ref-tag">VA NCPTSD — PCL-5 · ptsd.va.gov</span>
+            <span class="sci-ref-tag">Engle et al. (2022) — BRS in US Army · Occupational Health Science</span>
+            <span class="sci-ref-tag">Murphy et al. (2020) — ITQ in UK Veterans · British J. Psychiatry</span>
+            <span class="sci-ref-tag">Steele et al. (2020) — OCD in Veterans · PubMed Systematic Review</span>
+            <span class="sci-ref-tag">Troxel et al. (2015) — Sleep in Military · ScienceDirect</span>
+            <span class="sci-ref-tag">Hoge et al. (2004) — PTSD Post-Deployment · NEJM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI COMPARISON -->
+<section id="ai">
+  <div class="container">
+    <div class="tag">AI Intelligence</div>
+    <h2 class="section-title">AI Clinical Analysis —<br>Beyond Basic Scoring</h2>
+    <div class="compare-grid reveal">
+      <div class="compare-card traditional">
+        <div class="compare-title">Traditional Platforms</div>
+        <div class="compare-item"><span class="ci">✕</span> Static score + one-line descriptor</div>
+        <div class="compare-item"><span class="ci">✕</span> No cross-assessment correlation</div>
+        <div class="compare-item"><span class="ci">✕</span> No longitudinal pattern detection</div>
+        <div class="compare-item"><span class="ci">✕</span> Generic text — same for every patient</div>
+        <div class="compare-item"><span class="ci">✕</span> No military or operational context</div>
+        <div class="compare-item"><span class="ci">✕</span> No safety flag intelligence</div>
+      </div>
+      <div class="compare-card falcon">
+        <div class="compare-title">Falcon Mind AI</div>
+        <div class="compare-item"><span class="ci" style="color:#7EC8A0;">✓</span> Full narrative clinical interpretation</div>
+        <div class="compare-item"><span class="ci" style="color:#7EC8A0;">✓</span> Cross-references all completed assessments</div>
+        <div class="compare-item"><span class="ci" style="color:#7EC8A0;">✓</span> Flags symptom trajectory & pattern changes</div>
+        <div class="compare-item"><span class="ci" style="color:#7EC8A0;">✓</span> Military & operational context built-in</div>
+        <div class="compare-item"><span class="ci" style="color:#7EC8A0;">✓</span> Psychopathy & high-risk pattern detection</div>
+        <div class="compare-item"><span class="ci" style="color:#7EC8A0;">✓</span> Clinician-controlled — save when ready</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="container">
+    <div class="tag">Platform Features</div>
+    <h2 class="section-title reveal">Platform Capabilities</h2>
+    <p class="section-sub reveal">Everything a clinical team needs — in one platform.</p>
+    <div class="cap-grid reveal">
+      <div class="cap-card">
+        <div class="cap-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <div class="cap-title">Mobile App</div>
+        <div class="cap-desc">iOS & Android. Patient & clinician views. Arabic + English bilingual toggle. Works offline.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="cap-title">Clinician Dashboard</div>
+        <div class="cap-desc">Priority alerts, pending deadlines, and patient reminders in one view. Flag-first design.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="cap-title">Longitudinal Charts</div>
+        <div class="cap-desc">Track every patient over time. Score delta at a glance. Trend detection across re-assessments.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="cap-title">Data Security</div>
+        <div class="cap-desc">Deployed on client's cloud. Full data ownership & compliance. Saudi NCA compliant architecture.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <div class="cap-title">Real-Time Alerts</div>
+        <div class="cap-desc">Severity flags auto-surface. HIGH-risk patients front & center. Clinician decides next action.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="cap-title">Arabic-First UX</div>
+        <div class="cap-desc">Full RTL Arabic UI. Bilingual toggle. Built for GCC deployment. Validated clinical translations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow" style="background:var(--cream); padding:7rem 4rem;">
+  <div class="container">
+    <div class="tag">How It Works</div>
+    <h2 class="section-title reveal">From Assessment to Action<br>in Minutes</h2>
+    <p class="section-sub reveal">A complete clinical workflow — soldier completes, AI interprets, clinician acts. No manual coordination, no paperwork.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:3rem; align-items:start;">
+
+      <!-- LEFT: FLOW STEPS -->
+      <div class="reveal">
+        <div style="display:flex; flex-direction:column; gap:0;">
+
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--border);">
+            <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:var(--cream); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</div>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--green); margin-bottom:5px;">Soldier selects population</div>
+              <div style="font-size:13px; color:var(--muted); line-height:1.7;">Pre-entry, Active duty, or Veteran. The correct battery of assessments loads automatically — no admin setup needed.</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--border);">
+            <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:var(--cream); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</div>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--green); margin-bottom:5px;">Completes assessments online</div>
+              <div style="font-size:13px; color:var(--muted); line-height:1.7;">Self-administered. Arabic or English. 20–30 minutes. Works on mobile, tablet, or desktop. No clinician in the room required.</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--border);">
+            <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:var(--cream); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</div>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--green); margin-bottom:5px;">Scores calculated instantly</div>
+              <div style="font-size:13px; color:var(--muted); line-height:1.7;">All 44 assessments scored automatically using validated clinical algorithms. Severity labels and red/amber/green flags assigned in real time.</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--border);">
+            <div style="width:36px; height:36px; border-radius:50%; background:var(--teal); color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</div>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--green); margin-bottom:5px;">AI generates clinical summary</div>
+              <div style="font-size:13px; color:var(--muted); line-height:1.7;">The AI reads all scores together, identifies patterns, flags safety concerns, and writes a full narrative report tailored to military context — in Arabic or English.</div>
+              <div style="margin-top:8px; background:var(--teal-bg); border:1px solid var(--border-green); border-radius:6px; padding:10px 14px; font-size:12px; color:#2A6B60; line-height:1.6; font-style:italic;">"This soldier shows probable PTSD (PCL-5: 38) with co-occurring severe depression (PHQ-9: 19) and significant sleep disruption. Burnout levels are elevated. Recommended: IES-R, DERS-16 for deeper analysis."</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--border);">
+            <div style="width:36px; height:36px; border-radius:50%; background:var(--teal); color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">5</div>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--green); margin-bottom:5px;">Clinician reviews flagged cases</div>
+              <div style="font-size:13px; color:var(--muted); line-height:1.7;">Only flagged soldiers surface in the clinician dashboard. Full scores, AI summary, and question-by-question responses all in one view. Clinician makes the clinical decision.</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0;">
+            <div style="width:36px; height:36px; border-radius:50%; background:var(--teal); color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">6</div>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--green); margin-bottom:5px;">One click — assign deeper tools</div>
+              <div style="font-size:13px; color:var(--muted); line-height:1.7;">AI suggests which additional assessments would sharpen the clinical picture. Clinician clicks send — soldier receives them instantly. Results flow back automatically.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: FEATURE HIGHLIGHTS -->
+      <div style="display:flex; flex-direction:column; gap:12px;" class="reveal reveal-delay-1">
+
+        <div style="background:var(--green); border-radius:10px; padding:1.5rem; color:var(--cream);">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; color:rgba(245,240,232,0.5); margin-bottom:8px; text-transform:uppercase;">What makes this different</div>
+          <div style="font-size:22px; font-family:'Cormorant Garamond',serif; line-height:1.3; margin-bottom:1rem;">The AI doesn't just score.<br>It thinks clinically.</div>
+          <div style="font-size:13px; color:rgba(245,240,232,0.7); line-height:1.8;">
+            ✓ Cross-references every completed assessment<br>
+            ✓ Detects comorbidity patterns automatically<br>
+            ✓ Flags safety items (suicide ideation, aggression)<br>
+            ✓ Compares against soldier's own history<br>
+            ✓ Military & operational context in every report<br>
+            ✓ Full report in Arabic MSA on request
+          </div>
+        </div>
+
+        <div style="background:var(--cream-dark); border:1px solid var(--border); border-radius:10px; padding:1.5rem;">
+          <div style="font-size:13px; font-weight:600; color:var(--green); margin-bottom:12px;">Clinician dashboard at a glance</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--cream); border-radius:6px; border:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text);">Depression (PHQ-9)</span>
+              <span style="font-size:11px; font-weight:600; padding:2px 10px; background:#fef2f2; color:#dc2626; border-radius:4px;">Severe</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--cream); border-radius:6px; border:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text);">PTSD (PCL-5)</span>
+              <span style="font-size:11px; font-weight:600; padding:2px 10px; background:#fef2f2; color:#dc2626; border-radius:4px;">Probable</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--cream); border-radius:6px; border:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text);">Sleep (RIS)</span>
+              <span style="font-size:11px; font-weight:600; padding:2px 10px; background:#fffbeb; color:#d97706; border-radius:4px;">Disrupted</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--cream); border-radius:6px; border:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text);">Burnout (OLBI)</span>
+              <span style="font-size:11px; font-weight:600; padding:2px 10px; background:#fef2f2; color:#dc2626; border-radius:4px;">Exhausted</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--cream); border-radius:6px; border:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text);">Alcohol (AUDIT)</span>
+              <span style="font-size:11px; font-weight:600; padding:2px 10px; background:#ecfdf5; color:#059669; border-radius:4px;">Low risk</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--teal-bg); border:1px solid var(--border-green); border-radius:10px; padding:1.5rem;">
+          <div style="font-size:13px; font-weight:600; color:var(--teal); margin-bottom:8px;">Bilingual — Arabic first</div>
+          <div style="font-size:13px; color:var(--muted); line-height:1.7;">Every question, label, severity output, and AI narrative report is available in full Modern Standard Arabic. RTL interface built natively — not translated after the fact.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="container">
+    <div class="tag confidential" style="margin-bottom:2rem;">Confidential</div>
+    <h2 class="section-title">The Clinical Intelligence Platform<br>for Military Mental Health</h2>
+    <p class="section-sub">Falcon Mind delivers validated assessments, AI-powered clinical analysis, and longitudinal tracking — purpose-built for organizations where psychological readiness is mission-critical.</p>
+    <div class="closing-stats">
+      <div class="closing-stat"><div class="closing-stat-num">44</div><div class="closing-stat-label">Assessments</div></div>
+      <div class="closing-stat"><div class="closing-stat-num">1</div><div class="closing-stat-label">AI Clinical Engine</div></div>
+      <div class="closing-stat"><div class="closing-stat-num">2</div><div class="closing-stat-label">Languages</div></div>
+      <div class="closing-stat"><div class="closing-stat-num">3</div><div class="closing-stat-label">Populations</div></div>
+    </div>
+    <a href="https://app.falconmind.online" target="_blank" class="cta-btn">Login to Platform →</a>
+  </div>
+</section>
+
+<!-- MOBILE CARD OVERLAY -->
+<div id="cardOverlay" style="display:none; position:fixed; inset:0; z-index:200; background:var(--cream); flex-direction:column; padding:2rem 1.5rem; overflow-y:auto;">
+  <button onclick="closeCard()" style="align-self:flex-start; background:none; border:none; font-size:15px; color:var(--muted); cursor:pointer; margin-bottom:2rem; display:flex; align-items:center; gap:6px; font-family:'Inter',sans-serif;">← Back</button>
+  <div id="ol-domain" class="lib-card-domain" style="font-size:12px; margin-bottom:10px;"></div>
+  <div id="ol-name" style="font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:500; color:var(--green); line-height:1.1; margin-bottom:1rem;"></div>
+  <div id="ol-full" style="font-size:16px; color:var(--muted); line-height:1.7; margin-bottom:2rem;"></div>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <span id="ol-items" style="font-size:14px; color:var(--subtle);"></span>
+    <span id="ol-pop" class="lib-card-pop"></span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Falcon Mind</div>
+  <div class="footer-text">Confidential &nbsp;|&nbsp; © 2025 Falcon Mind &nbsp;|&nbsp; falconmind.online</div>
+</footer>
+
+<script>
+  // NAV SCROLL
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // COUNTER ANIMATION
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 1200;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current);
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  // INTERSECTION OBSERVER
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        if (e.target.classList.contains('counter')) animateCounter(e.target);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .counter').forEach(el => observer.observe(el));
+
+  // POPULATION TABS
+  function switchPop(n) {
+    document.querySelectorAll('.pop-tab').forEach((t,i) => t.classList.toggle('active', i===n));
+    document.querySelectorAll('.pop-content').forEach((c,i) => c.classList.toggle('active', i===n));
+  }
+
+  // ASSESSMENT LIBRARY — Exact 44 tools in Falcon Mind app
+  const assessments = [
+    // CORE MENTAL HEALTH (9)
+    { name:'PHQ-9', full:'Patient Health Questionnaire', domain:'mood', items:'9 items', pop:'all' },
+    { name:'GAD-7', full:'Generalised Anxiety Disorder Scale', domain:'anxiety', items:'7 items', pop:'all' },
+    { name:'DASS-21', full:'Depression Anxiety Stress Scales', domain:'mood', items:'21 items', pop:'all' },
+    { name:'CES-DR', full:'Center for Epidemiologic Studies Depression — Revised', domain:'mood', items:'20 items', pop:'all' },
+    { name:'MDQ', full:'Mood Disorder Questionnaire', domain:'mood', items:'13 items', pop:'pre' },
+    { name:'GBI', full:'General Behaviour Inventory', domain:'mood', items:'73 items', pop:'pre' },
+    { name:'ASRS v1.1', full:'Adult ADHD Self-Report Scale', domain:'executive', items:'18 items', pop:'pre' },
+    { name:'MSI-BPD', full:'McLean Screening Instrument for BPD', domain:'personality', items:'10 items', pop:'pre' },
+    // TRAUMA & PTSD (5)
+    { name:'PCL-5', full:'PTSD Checklist for DSM-5', domain:'trauma', items:'20 items', pop:'active' },
+    { name:'IES-R', full:'Impact of Event Scale — Revised', domain:'trauma', items:'22 items', pop:'active' },
+    { name:'ITQ', full:'International Trauma Questionnaire (Complex PTSD)', domain:'trauma', items:'6 items', pop:'vet' },
+    { name:'LEC-5', full:'Life Events Checklist for DSM-5', domain:'trauma', items:'16 items', pop:'active' },
+    { name:'ACE-Q', full:'Adverse Childhood Experiences Questionnaire', domain:'trauma', items:'10 items', pop:'pre' },
+    // RESILIENCE & WELLBEING
+    { name:'BRS', full:'Brief Resilience Scale', domain:'resilience', items:'6 items', pop:'all' },
+    { name:'LOT-R', full:'Life Orientation Test — Revised', domain:'resilience', items:'10 items', pop:'all' },
+    { name:'PFRS', full:'Protective Factors of Resilience Scale', domain:'resilience', items:'15 items', pop:'active' },
+    { name:'SWLS', full:'Satisfaction with Life Scale', domain:'resilience', items:'5 items', pop:'all' },
+    { name:'FS', full:'Flourishing Scale', domain:'resilience', items:'8 items', pop:'all' },
+    { name:'SPANE', full:'Scale of Positive & Negative Experience', domain:'resilience', items:'12 items', pop:'all' },
+    { name:'PWI-A', full:'Personal Wellbeing Index — Adult', domain:'resilience', items:'9 items', pop:'all' },
+    // STRESS & DISTRESS
+    { name:'PSS-10', full:'Perceived Stress Scale', domain:'stress', items:'10 items', pop:'active' },
+    { name:'K10', full:'Kessler Psychological Distress Scale', domain:'stress', items:'10 items', pop:'all' },
+    // OCCUPATIONAL HEALTH
+    { name:'OLBI', full:'Oldenburg Burnout Inventory', domain:'occupational', items:'16 items', pop:'active' },
+    { name:'APSQ', full:'Athlete Psychological Strain Questionnaire', domain:'occupational', items:'10 items', pop:'active' },
+    // QUALITY OF LIFE
+    { name:'WHOQOL-BREF', full:'WHO Quality of Life — Brief', domain:'qol', items:'26 items', pop:'vet' },
+    { name:'WHODAS 2.0', full:'WHO Disability Assessment Schedule 2.0', domain:'functioning', items:'36 items', pop:'vet' },
+    // PERSONALITY
+    { name:'PID-5-SF', full:'Personality Inventory for DSM-5 — Short Form', domain:'personality', items:'25 items', pop:'pre' },
+    { name:'IPIP-NEO-120', full:'International Personality Item Pool NEO', domain:'personality', items:'120 items', pop:'pre' },
+    { name:'TIPI', full:'Ten Item Personality Inventory', domain:'personality', items:'10 items', pop:'pre' },
+    { name:'BSL-23', full:'Borderline Symptom List', domain:'personality', items:'23 items', pop:'pre' },
+    // IMPULSE CONTROL
+    { name:'UPPS-P', full:'Impulsive Behaviour Scale', domain:'impulse', items:'59 items', pop:'pre' },
+    { name:'DAR-5', full:'Difficulties in Anger Regulation Scale', domain:'emotion', items:'5 items', pop:'active' },
+    // EMOTION REGULATION
+    { name:'DERS-16', full:'Difficulties in Emotion Regulation Scale', domain:'emotion', items:'16 items', pop:'active' },
+    // OCD (mapped to impulse as closest)
+    { name:'OCI-R', full:'Obsessive-Compulsive Inventory — Revised', domain:'ocd', items:'18 items', pop:'vet' },
+    // SUBSTANCE USE
+    { name:'AUDIT', full:'Alcohol Use Disorders Identification Test', domain:'substance', items:'10 items', pop:'all' },
+    { name:'DUDIT', full:'Drug Use Disorders Identification Test', domain:'substance', items:'11 items', pop:'all' },
+    // PSYCHOLOGICAL FLEXIBILITY
+    { name:'AAQ-2', full:'Acceptance and Action Questionnaire', domain:'psyflex', items:'7 items', pop:'vet' },
+    { name:'BEAQ', full:'Brief Experiential Avoidance Questionnaire', domain:'psyflex', items:'15 items', pop:'all' },
+    // COPING
+    { name:'Brief-COPE', full:'Brief Coping Orientation to Problems Experienced', domain:'coping', items:'28 items', pop:'vet' },
+    // SLEEP
+    { name:'RIS', full:'Regensburg Insomnia Scale', domain:'sleep', items:'10 items', pop:'active' },
+    // FUNCTIONING
+    { name:'FAS', full:'Fatigue Assessment Scale', domain:'functioning', items:'10 items', pop:'vet' },
+    { name:'TSK', full:'Tampa Scale of Kinesiophobia', domain:'pain', items:'17 items', pop:'vet' },
+    // EXECUTIVE FUNCTION
+    { name:'CFI', full:'Cognitive Flexibility Inventory', domain:'executive', items:'20 items', pop:'vet' },
+    { name:'MDRS-22', full:'Modified Dementia Rating Scale', domain:'executive', items:'22 items', pop:'all' },
+  ];
+
+  const popLabels = { all:'All populations', pre:'Pre-entry', active:'Active duty', vet:'Veterans' };
+
+  function openCard(a) {
+    if (window.innerWidth > 768) return;
+    const ol = document.getElementById('cardOverlay');
+    document.getElementById('ol-domain').textContent = domainLabel(a.domain);
+    document.getElementById('ol-name').textContent = a.name;
+    document.getElementById('ol-full').textContent = a.full;
+    document.getElementById('ol-items').textContent = a.items;
+    document.getElementById('ol-pop').textContent = popLabels[a.pop];
+    document.getElementById('ol-pop').className = 'lib-card-pop ' + a.pop;
+    ol.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCard() {
+    document.getElementById('cardOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  const CARD_LIMIT = 12;
+  let libShowAll = false;
+
+  function renderLib(filter, showAll) {
+    if (showAll !== undefined) libShowAll = showAll;
+    const grid = document.getElementById('libGrid');
+    const all = filter === 'all' ? assessments : assessments.filter(a => a.domain === filter);
+    const visible = libShowAll ? all : all.slice(0, CARD_LIMIT);
+    document.getElementById('libCount').textContent = all.length;
+
+    grid.innerHTML = visible.map(a => `
+      <div class="lib-card visible" onclick="openCard(${JSON.stringify(a).replace(/"/g,'&quot;')})">
+        <div class="lib-card-domain">${domainLabel(a.domain)}</div>
+        <div class="lib-card-name">${a.name}</div>
+        <div class="lib-card-full">${a.full}</div>
+        <div class="lib-card-footer">
+          <span class="lib-card-items">${a.items}</span>
+          <span class="lib-card-pop ${a.pop}">${popLabels[a.pop]}</span>
+        </div>
+      </div>`).join('');
+
+    const btn = document.getElementById('libShowAllBtn');
+    if (all.length > CARD_LIMIT) {
+      btn.style.display = 'block';
+      btn.textContent = libShowAll ? 'Show less ↑' : `View all ${all.length} assessments`;
+      btn.onclick = () => { renderLib(filter, !libShowAll); if (libShowAll === false) document.getElementById('science').scrollIntoView({behavior:'smooth'}); };
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+
+  function domainLabel(d) {
+    const m = {mood:'Mood',anxiety:'Anxiety',trauma:'Trauma',emotion:'Emotion Regulation',resilience:'Resilience & Wellbeing',stress:'Stress & Distress',substance:'Substance Use',personality:'Personality',functioning:'Functioning',executive:'Executive Function',psyflex:'Psychological Flexibility',coping:'Coping',impulse:'Impulse Control',sleep:'Sleep',occupational:'Occupational Health',qol:'Quality of Life',ocd:'OCD & Related Disorders',pain:'Chronic Pain'};
+    return m[d] || d;
+  }
+
+  let currentFilter = 'all';
+
+  function filterLib(f) {
+    currentFilter = f;
+    libShowAll = false;
+    document.querySelectorAll('.lib-filter').forEach(b => b.classList.toggle('active', b.onclick.toString().includes(`'${f}'`)));
+    renderLib(f, false);
+  }
+
+  renderLib('all', false);
+
+  // SCIENCE TABLE — collapse on all screen sizes
+  (function() {
+    const SCI_LIMIT = 8;
+    const SCI_TOTAL = 23;
+    const tbody = document.querySelector('.sci-table tbody');
+    if (!tbody) return;
+    const allRows = Array.from(tbody.querySelectorAll('tr'));
+
+    const wrap = document.querySelector('.sci-table-wrap');
+    const btn = document.createElement('button');
+    btn.id = 'sciShowAllBtn';
+    btn.style.cssText = 'display:none;width:100%;background:var(--green);color:var(--cream);border:none;padding:12px 28px;border-radius:0 0 10px 10px;font-size:14px;font-weight:500;cursor:pointer;font-family:Inter,sans-serif;border-top:1px solid rgba(245,240,232,0.15);';
+    wrap.after(btn);
+
+    let sciShowAll = false;
+
+    function renderSciTable() {
+      allRows.forEach((r, i) => {
+        r.style.display = (!sciShowAll && i >= SCI_LIMIT) ? 'none' : '';
+      });
+      btn.style.display = 'block';
+      btn.textContent = sciShowAll ? 'Show less ↑' : `View all ${SCI_TOTAL} assessments`;
+      btn.onclick = () => { sciShowAll = !sciShowAll; renderSciTable(); if (!sciShowAll) document.getElementById('ai').scrollIntoView({behavior:'smooth'}); };
+    }
+
+    renderSciTable();
+  })();
+</script>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <div class="mobile-nav-item active" onclick="mobileNav('hero')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Home</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('military')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Military</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('library')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Assessments</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('workflow')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Workflow</span>
+    </div>
+    <div class="mobile-nav-item" onclick="mobileNav('science')">
+      <div class="mni-dot"></div>
+      <span class="mni-label">Science</span>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function mobileNav(id) {
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  }
+
+  // Highlight active section on scroll
+  const mniSections = ['hero','military','library','workflow','science'];
+  const mniItems = document.querySelectorAll('.mobile-nav-item');
+  const mniObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = mniSections.indexOf(e.target.id);
+        if (idx >= 0) {
+          mniItems.forEach((el, i) => el.classList.toggle('active', i === idx));
+        }
+      }
+    });
+  }, { threshold: 0.4 });
+  mniSections.forEach(id => { const el = document.getElementById(id); if (el) mniObserver.observe(el); });
+</script>
+</body>
+</html>

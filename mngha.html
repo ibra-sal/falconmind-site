@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(sessionStorage.getItem('fm_auth')!=='1'){window.location.href='index.html';}</script>
+<title>Falcon Mind × MNGHA — Mental Health Intelligence for 1.3 Million Beneficiaries</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-900: #0D3320;
+    --green-800: #1A5C36;
+    --green-700: #1F6E40;
+    --green-600: #2E8A54;
+    --green-400: #4CAF78;
+    --green-100: #D6EFE0;
+    --green-50:  #EDF7F2;
+    --gold-700:  #9A6E1A;
+    --gold-500:  #C5973A;
+    --gold-300:  #E8C170;
+    --gold-100:  #FAF0D7;
+    --gold-50:   #FEFBF4;
+    --ink:       #0F1F14;
+    --muted:     #4A6558;
+    --border:    #D0E4D8;
+    --white:     #FFFFFF;
+    --light:     #F7FAF8;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--green-900);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--gold-500); display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: var(--white);
+  }
+  .nav-logo-text { font-size: 15px; font-weight: 700; color: var(--white); }
+  .nav-logo-sub { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .nav-badge {
+    background: var(--gold-100); color: var(--gold-700);
+    font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--green-900);
+    padding: 80px 2rem 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(197,151,58,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(197,151,58,0.15); border: 1px solid rgba(197,151,58,0.3);
+    color: var(--gold-300); font-size: 12px; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 28px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero-title {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800; color: var(--white); line-height: 1.15;
+    max-width: 860px; margin: 0 auto 16px;
+  }
+  .hero-title em { color: var(--gold-300); font-style: normal; }
+  .hero-arabic {
+    font-size: clamp(18px, 3vw, 28px);
+    color: rgba(255,255,255,0.55); font-weight: 400;
+    margin-bottom: 28px; direction: rtl;
+  }
+  .hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.65);
+    max-width: 640px; margin: 0 auto 48px; line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+    max-width: 720px; margin: 0 auto;
+    overflow: hidden;
+  }
+  .hero-stat {
+    flex: 1; min-width: 140px;
+    padding: 20px 24px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num { font-size: 28px; font-weight: 800; color: var(--gold-300); display: block; }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+  /* SECTION STRUCTURE */
+  section { padding: 72px 2rem; }
+  section:nth-child(even) { background: var(--light); }
+  section.hero,
+  section.dark { background: var(--green-900) !important; }
+  section.light { background: var(--light) !important; }
+  section.gold-bg { background: var(--gold-50) !important; border-top: 1px solid var(--gold-100); }
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--green-700); margin-bottom: 10px;
+  }
+  .section-title { font-size: clamp(22px, 3.5vw, 36px); font-weight: 800; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
+  .section-sub { font-size: 16px; color: var(--muted); max-width: 600px; line-height: 1.7; margin-bottom: 48px; }
+
+  /* POPULATION CARDS */
+  .pop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+  .pop-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px;
+    cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s;
+  }
+  .pop-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-color: var(--green-600); }
+  .pop-card.active { border: 2px solid var(--green-700); background: var(--green-50); }
+  .pop-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 12px;
+  }
+  .pop-num { font-size: 22px; font-weight: 800; color: var(--ink); }
+  .pop-label { font-size: 13px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+  .pop-sub { font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .pop-tools { font-size: 11px; font-weight: 700; color: var(--green-700); margin-top: 10px; }
+
+  /* ASSESSMENT MATRIX */
+  .matrix-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .matrix-tab {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 16px; cursor: pointer;
+    font-size: 13px; font-weight: 600; color: var(--muted);
+    transition: all 0.15s;
+  }
+  .matrix-tab:hover { border-color: var(--green-600); color: var(--green-700); }
+  .matrix-tab.active { background: var(--green-800); color: white; border-color: var(--green-800); }
+  .matrix-panel { display: none; }
+  .matrix-panel.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .domain-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px;
+  }
+  .domain-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .domain-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .domain-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .domain-tools { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tool-pill {
+    font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px;
+    background: var(--green-50); color: var(--green-800); border: 1px solid var(--green-100);
+  }
+  .tool-pill.cond {
+    background: var(--gold-50); color: var(--gold-700); border-color: var(--gold-100);
+  }
+  .tool-pill.new {
+    background: #EFF6FF; color: #1E40AF; border-color: #BFDBFE;
+  }
+  .domain-note { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  /* COVERAGE NUMBERS */
+  .coverage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+  .coverage-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+  }
+  .coverage-num { font-size: 30px; font-weight: 800; color: var(--green-800); display: block; }
+  .coverage-label { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; font-weight: 500; }
+
+  /* GAP ANALYSIS */
+  .gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 640px) { .gap-grid { grid-template-columns: 1fr; } }
+  .gap-col-title { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+  .gap-col-title.before { color: #991B1B; }
+  .gap-col-title.after { color: var(--green-800); }
+  .gap-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 12px; font-size: 14px; line-height: 1.6;
+  }
+  .gap-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .gap-text { color: var(--ink); }
+  .gap-text small { display: block; color: var(--muted); font-size: 12px; }
+
+  /* KAIMRC SECTION */
+  .kaimrc-card {
+    background: var(--green-900); border-radius: 20px;
+    padding: 48px; color: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: center;
+  }
+  @media (max-width: 640px) { .kaimrc-card { grid-template-columns: 1fr; padding: 32px; } }
+  .kaimrc-eyebrow { font-size: 11px; font-weight: 700; color: var(--gold-300); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .kaimrc-title { font-size: 26px; font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 16px; }
+  .kaimrc-body { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+  .kaimrc-points { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .kaimrc-point { display: flex; gap: 12px; align-items: flex-start; }
+  .kaimrc-point-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold-300); flex-shrink: 0; margin-top: 7px;
+  }
+  .kaimrc-point-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+  .kaimrc-point-text strong { color: var(--white); }
+
+  /* LEGEND */
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  /* POPULATIONS BAR CHART */
+  .pop-bar-wrap { margin-bottom: 32px; }
+  .pop-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .pop-bar-label { font-size: 13px; color: var(--ink); font-weight: 600; min-width: 180px; }
+  .pop-bar-track { flex: 1; background: var(--green-50); border-radius: 4px; height: 24px; overflow: hidden; }
+  .pop-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; }
+  .pop-bar-val { font-size: 11px; font-weight: 700; color: white; }
+  .pop-bar-num { font-size: 12px; color: var(--muted); min-width: 80px; text-align: right; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--gold-50); border-top: 1px solid var(--gold-100);
+    padding: 72px 2rem; text-align: center;
+  }
+  .cta-title { font-size: 32px; font-weight: 800; color: var(--ink); margin-bottom: 12px; }
+  .cta-sub { font-size: 16px; color: var(--muted); max-width: 540px; margin: 0 auto 32px; }
+  .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+  .btn-primary {
+    background: var(--green-800); color: white;
+    font-size: 15px; font-weight: 700; padding: 14px 28px;
+    border-radius: 10px; border: none; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary {
+    background: white; color: var(--green-800);
+    font-size: 15px; font-weight: 700; padding: 14px 28px;
+    border-radius: 10px; border: 1.5px solid var(--green-700); cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-900); color: rgba(255,255,255,0.4);
+    padding: 28px 2rem; text-align: center; font-size: 13px;
+  }
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-stats { flex-direction: column; }
+    .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .hero-stat:last-child { border-bottom: none; }
+    nav { padding: 0 1rem; }
+    section { padding: 48px 1rem; }
+    .pop-bar-label { min-width: 120px; font-size: 11px; }
+    .gap-grid { grid-template-columns: 1fr; }
+    .kaimrc-card { grid-template-columns: 1fr; padding: 28px; }
+    .assessment-grid { grid-template-columns: 1fr; }
+    .coverage-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* NAV UPGRADE */
+  nav { display: flex; align-items: center; justify-content: space-between; }
+  .nav-back {
+    font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35);
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.2s; white-space: nowrap;
+  }
+  .nav-back:hover { color: rgba(255,255,255,0.75); }
+  .nav-logo-words { display: flex; flex-direction: column; }
+  .nav-links-row {
+    display: flex; align-items: center; gap: 4px;
+  }
+  .nav-link-item {
+    font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.45);
+    padding: 6px 10px; border-radius: 6px; cursor: pointer;
+    transition: color 0.2s, background 0.2s; white-space: nowrap;
+  }
+  .nav-link-item:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.07); }
+  .nav-cta-btn {
+    margin-left: 8px; background: var(--gold-500); color: var(--green-900);
+    font-size: 12px; font-weight: 700; padding: 7px 16px;
+    border-radius: 7px; text-decoration: none; white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .nav-cta-btn:hover { opacity: 0.88; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 6px;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.6); border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--green-900); border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-direction: column; z-index: 99; padding: 8px 0 16px;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu span, .nav-mobile-menu a {
+    padding: 13px 20px; font-size: 14px; font-weight: 500;
+    color: rgba(255,255,255,0.65); cursor: pointer; text-decoration: none;
+    transition: background 0.15s;
+  }
+  .nav-mobile-menu span:hover, .nav-mobile-menu a:hover { background: rgba(255,255,255,0.06); }
+  .nav-mobile-menu a { color: var(--gold-300); font-weight: 700; }
+
+  @media (max-width: 860px) {
+    .nav-links-row { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-logo-sub { display: none; }
+  }
+  @media (max-width: 480px) {
+    .hero-title { font-size: 28px; }
+    .hero-stats { flex-direction: column; }
+    .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .pop-grid { grid-template-columns: 1fr; }
+    .coverage-grid { grid-template-columns: 1fr; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mngha-nav">
+  <div class="nav-logo">
+    <a href="index.html" class="nav-back">← All institutions</a>
+    <div class="nav-logo-mark">F</div>
+    <div class="nav-logo-words">
+      <div class="nav-logo-text">Falcon Mind</div>
+      <div class="nav-logo-sub">× MNGHA</div>
+    </div>
+  </div>
+  <div class="nav-links-row">
+    <span class="nav-link-item" onclick="navTo('sec-population')">Population</span>
+    <span class="nav-link-item" onclick="navTo('sec-assessments')">Assessments</span>
+    <span class="nav-link-item" onclick="navTo('sec-gap')">The Gap</span>
+    <span class="nav-link-item" onclick="navTo('sec-kaimrc')">KAIMRC</span>
+    <span class="nav-link-item" onclick="navTo('sec-how')">How It Works</span>
+    <a href="https://app.falconmind.online" target="_blank" class="nav-cta-btn">Login →</a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <span onclick="navTo('sec-population');toggleMobileMenu()">Population</span>
+  <span onclick="navTo('sec-assessments');toggleMobileMenu()">Assessments</span>
+  <span onclick="navTo('sec-gap');toggleMobileMenu()">The Gap</span>
+  <span onclick="navTo('sec-kaimrc');toggleMobileMenu()">KAIMRC</span>
+  <span onclick="navTo('sec-how');toggleMobileMenu()">How It Works</span>
+  <a href="https://app.falconmind.online" target="_blank">Login →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="padding: 80px 2rem 72px; background: var(--green-900);">
+  <div class="hero-eyebrow">
+    <span>🇸🇦</span>
+    Exclusively designed for Ministry of National Guard Health Affairs
+  </div>
+  <h1 class="hero-title">
+    Mental Health Intelligence for<br>
+    <em>MNGHA's 1.3 Million Beneficiaries</em>
+  </h1>
+  <p class="hero-arabic">الصحة النفسية لـ 1.3 مليون مستفيد من وزارة الحرس الوطني</p>
+  <p class="hero-sub">
+    170 clinically validated Arabic-first assessment tools. AI-powered triage. Built for the unique population structure of SANG personnel, their families, civilian staff, and academic communities.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">1.3M</span>
+      <span class="hero-stat-label">MNGHA beneficiaries</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">170</span>
+      <span class="hero-stat-label">validated tools</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label">population groups covered</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">Arabic</span>
+      <span class="hero-stat-label">first language</span>
+    </div>
+  </div>
+</section>
+
+<!-- POPULATION BREAKDOWN -->
+<section id="sec-population" class="light" style="background: var(--light);">
+  <div class="section-inner">
+    <div class="section-eyebrow">The MNGHA Population</div>
+    <h2 class="section-title">Five distinct groups. One platform.</h2>
+    <p class="section-sub">Each group has different clinical needs, different risk profiles, and different assessment pathways. Falcon Mind covers all five.</p>
+
+    <div class="pop-bar-wrap">
+      <div class="pop-bar-row">
+        <div class="pop-bar-label">Spouses & dependents</div>
+        <div class="pop-bar-track">
+          <div class="pop-bar-fill" style="width: 73%; background: var(--green-600);">
+            <span class="pop-bar-val">73%</span>
+          </div>
+        </div>
+        <div class="pop-bar-num">~950,000</div>
+      </div>
+      <div class="pop-bar-row">
+        <div class="pop-bar-label">Active SANG personnel</div>
+        <div class="pop-bar-track">
+          <div class="pop-bar-fill" style="width: 10%; background: var(--green-800);">
+            <span class="pop-bar-val"></span>
+          </div>
+        </div>
+        <div class="pop-bar-num">~112,000</div>
+      </div>
+      <div class="pop-bar-row">
+        <div class="pop-bar-label">Academic programs</div>
+        <div class="pop-bar-track">
+          <div class="pop-bar-fill" style="width: 7%; background: var(--gold-500);">
+            <span class="pop-bar-val"></span>
+          </div>
+        </div>
+        <div class="pop-bar-num">~75,000</div>
+      </div>
+      <div class="pop-bar-row">
+        <div class="pop-bar-label">Veterans & retirees</div>
+        <div class="pop-bar-track">
+          <div class="pop-bar-fill" style="width: 6%; background: var(--green-700);">
+            <span class="pop-bar-val"></span>
+          </div>
+        </div>
+        <div class="pop-bar-num">~75,000</div>
+      </div>
+      <div class="pop-bar-row">
+        <div class="pop-bar-label">Civilian SANG staff</div>
+        <div class="pop-bar-track">
+          <div class="pop-bar-fill" style="width: 4%; background: var(--gold-700);">
+            <span class="pop-bar-val"></span>
+          </div>
+        </div>
+        <div class="pop-bar-num">~40,000</div>
+      </div>
+    </div>
+
+    <div class="pop-grid">
+      <div class="pop-card active" onclick="selectPop('military')">
+        <div class="pop-icon" style="background: #EDF7F2;">⚔️</div>
+        <div class="pop-num">112,000</div>
+        <div class="pop-label">Active SANG Personnel</div>
+        <div class="pop-sub">Active-duty soldiers requiring fitness-for-duty screening, PTSD monitoring, and occupational mental health tracking</div>
+        <div class="pop-tools">32 assessment tools mapped →</div>
+      </div>
+      <div class="pop-card" onclick="selectPop('veteran')">
+        <div class="pop-icon" style="background: #EDF7F2;">🎖️</div>
+        <div class="pop-num">75,000</div>
+        <div class="pop-label">Veterans & Retirees</div>
+        <div class="pop-sub">Complex PTSD, chronic pain, disability assessment, quality of life, and reintegration support</div>
+        <div class="pop-tools">28 assessment tools mapped →</div>
+      </div>
+      <div class="pop-card" onclick="selectPop('civilian')">
+        <div class="pop-icon" style="background: #FEF9EC;">👔</div>
+        <div class="pop-num">40,000</div>
+        <div class="pop-label">Civilian SANG Staff</div>
+        <div class="pop-sub">Burnout, occupational stress, general mental health for administrative and support workforce</div>
+        <div class="pop-tools">18 assessment tools mapped →</div>
+      </div>
+      <div class="pop-card" onclick="selectPop('family')">
+        <div class="pop-icon" style="background: #FFF0F0;">👨‍👩‍👧‍👦</div>
+        <div class="pop-num">950,000</div>
+        <div class="pop-label">Spouses & Dependents</div>
+        <div class="pop-sub">Adult mental health, perinatal care, child & adolescent wellbeing, secondary trauma in military families</div>
+        <div class="pop-tools">45+ assessment tools mapped →</div>
+      </div>
+      <div class="pop-card" onclick="selectPop('academic')">
+        <div class="pop-icon" style="background: #EEF2FF;">🎓</div>
+        <div class="pop-num">75,000</div>
+        <div class="pop-label">Students & Residents</div>
+        <div class="pop-sub">KSAU-HS students, interns, residents (1,945 specialists in training) — burnout, wellbeing, ADHD, anxiety</div>
+        <div class="pop-tools">22 assessment tools mapped →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSESSMENT MATRIX -->
+<section id="sec-assessments">
+  <div class="section-inner">
+    <div class="section-eyebrow">Assessment Coverage</div>
+    <h2 class="section-title">The right tool for every clinical need</h2>
+    <p class="section-sub">170 validated tools organised by population. Click a group to see the full clinical coverage.</p>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--green-100); border: 1px solid var(--green-600);"></div> Core (always administered)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--gold-100); border: 1px solid var(--gold-500);"></div> Conditional (score-triggered)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: #DBEAFE; border: 1px solid #93C5FD;"></div> In development</div>
+    </div>
+
+    <div class="matrix-tabs">
+      <button class="matrix-tab active" onclick="switchTab('military', this)">⚔️ Active military</button>
+      <button class="matrix-tab" onclick="switchTab('veteran', this)">🎖️ Veterans</button>
+      <button class="matrix-tab" onclick="switchTab('civilian', this)">👔 Civilian staff</button>
+      <button class="matrix-tab" onclick="switchTab('family', this)">👨‍👩‍👧‍👦 Families</button>
+      <button class="matrix-tab" onclick="switchTab('academic', this)">🎓 Academic</button>
+    </div>
+
+    <!-- ACTIVE MILITARY -->
+    <div id="panel-military" class="matrix-panel active">
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1A5C36;"></div><div class="domain-title">Mood & Depression</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PHQ-9</span>
+          <span class="tool-pill cond">MDRS-22</span>
+          <span class="tool-pill cond">DASS-21</span>
+          <span class="tool-pill cond">MDQ</span>
+          <span class="tool-pill new">MADRS</span>
+          <span class="tool-pill cond">BDI-II</span>
+        </div>
+        <div class="domain-note">PHQ-9 Q9 is universal suicide flag. MDRS-22 captures male-specific externalising depression PHQ-9 misses.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#2E8A54;"></div><div class="domain-title">PTSD & Trauma</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PCL-5</span>
+          <span class="tool-pill cond">ITQ</span>
+          <span class="tool-pill cond">LEC-5</span>
+          <span class="tool-pill cond">ACE-Q</span>
+          <span class="tool-pill cond">PCEs</span>
+          <span class="tool-pill cond">SPRINT</span>
+        </div>
+        <div class="domain-note">PCL-5 (DSM-5) + ITQ (ICD-11 Complex PTSD) together — the only platform covering both diagnostic frameworks.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#C5973A;"></div><div class="domain-title">Resilience & Readiness</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">BRS</span>
+          <span class="tool-pill cond">LOT-R</span>
+          <span class="tool-pill cond">PFRS</span>
+          <span class="tool-pill cond">FS</span>
+          <span class="tool-pill cond">SWLS</span>
+          <span class="tool-pill new">RSES</span>
+        </div>
+        <div class="domain-note">BRS validated in 3,030 US Army soldiers. FS predicted military task performance (Ghana Armed Forces, 2025).</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1F6E40;"></div><div class="domain-title">Anxiety</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">GAD-7</span>
+          <span class="tool-pill cond">DASS-21</span>
+          <span class="tool-pill cond">STAI</span>
+          <span class="tool-pill cond">PDSS</span>
+          <span class="tool-pill cond">OASIS</span>
+        </div>
+        <div class="domain-note">GAD-7 validated alongside PCL-5 in 1,921+ veterans.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#9A6E1A;"></div><div class="domain-title">Substance Use</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">AUDIT</span>
+          <span class="tool-pill">DAR-5</span>
+          <span class="tool-pill cond">DUDIT</span>
+          <span class="tool-pill cond">DAST-10</span>
+          <span class="tool-pill cond">SDS</span>
+        </div>
+        <div class="domain-note">AUDIT Arabic validated (landmark military screening study, PubMed 25511518).</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#4CAF78;"></div><div class="domain-title">Occupational Health</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">K10</span>
+          <span class="tool-pill cond">OLBI</span>
+          <span class="tool-pill cond">APSQ</span>
+          <span class="tool-pill cond">MBI</span>
+          <span class="tool-pill cond">JSS</span>
+          <span class="tool-pill new">PANAS</span>
+        </div>
+        <div class="domain-note">K10 validated in Canadian Armed Forces (AUC=.92). OLBI validated in Tunisian military.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#3B82F6;"></div><div class="domain-title">Personality & Fitness</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">TIPI</span>
+          <span class="tool-pill cond">IPIP-NEO-120</span>
+          <span class="tool-pill cond">PID-5-SF</span>
+          <span class="tool-pill cond">MSI-BPD</span>
+          <span class="tool-pill cond">BSL-23</span>
+          <span class="tool-pill cond">UPPS-P</span>
+        </div>
+        <div class="domain-note">UPPS-P study: 21,772 US Army soldiers — impulsivity linked to suicide risk. TIPI gates deeper personality profiling.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#7C3AED;"></div><div class="domain-title">Aggression & Safety</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill new">BPAQ</span>
+          <span class="tool-pill cond">DERS-16</span>
+          <span class="tool-pill cond">AAQ-2</span>
+          <span class="tool-pill cond">RIS</span>
+          <span class="tool-pill cond">ASRS</span>
+        </div>
+        <div class="domain-note">BPAQ fills the #1 safety gap — aggression is the leading unit risk after PTSD. No current platform covers this.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#0891B2;"></div><div class="domain-title">Social Support</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill new">Brief 2-Way SSS</span>
+          <span class="tool-pill cond">MOS-SSS</span>
+          <span class="tool-pill cond">UCLA Loneliness</span>
+        </div>
+        <div class="domain-note">Social support is the strongest PTSD buffer. Currently unmeasured at scale across any Gulf military system.</div>
+      </div>
+    </div>
+
+    <!-- VETERAN -->
+    <div id="panel-veteran" class="matrix-panel">
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1A5C36;"></div><div class="domain-title">PTSD & Complex Trauma</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PCL-5</span>
+          <span class="tool-pill cond">ITQ</span>
+          <span class="tool-pill cond">LEC-5</span>
+          <span class="tool-pill cond">SPRINT</span>
+          <span class="tool-pill cond">CTQ</span>
+        </div>
+        <div class="domain-note">ICD-11 Complex PTSD (ITQ) is especially prevalent in long-service veterans. Standard platforms miss this.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1F6E40;"></div><div class="domain-title">Mood & Wellbeing</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PHQ-9</span>
+          <span class="tool-pill cond">MDRS-22</span>
+          <span class="tool-pill new">MADRS</span>
+          <span class="tool-pill cond">GDS-15</span>
+          <span class="tool-pill cond">BDI-II</span>
+          <span class="tool-pill cond">BHS</span>
+        </div>
+        <div class="domain-note">MADRS is clinician-rated — catches depression veterans under-report on self-report tools.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#C5973A;"></div><div class="domain-title">Quality of Life</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">WHOQOL-BREF</span>
+          <span class="tool-pill cond">WHODAS 2.0</span>
+          <span class="tool-pill cond">SF-36</span>
+          <span class="tool-pill cond">EQ-5D</span>
+          <span class="tool-pill cond">SWLS</span>
+          <span class="tool-pill cond">FS</span>
+        </div>
+        <div class="domain-note">WHOQOL-BREF Arabic validated (Kuwait). VA uses it widely in PTSD veteran programs.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#9A6E1A;"></div><div class="domain-title">Chronic Pain & Physical</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">FAS</span>
+          <span class="tool-pill cond">TSK</span>
+          <span class="tool-pill cond">BPI</span>
+          <span class="tool-pill cond">PCS</span>
+          <span class="tool-pill cond">FOPQ</span>
+        </div>
+        <div class="domain-note">TSK (Tampa Kinesiophobia) validated in Gulf War veteran chronic pain trials.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#3B82F6;"></div><div class="domain-title">Distress & Disability</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">K10+</span>
+          <span class="tool-pill cond">OLBI</span>
+          <span class="tool-pill cond">DASS-21</span>
+          <span class="tool-pill cond">CFI</span>
+          <span class="tool-pill cond">RIS</span>
+        </div>
+        <div class="domain-note">K10+ adds 4 disability & health-service-use items essential for veteran support triage decisions.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#7C3AED;"></div><div class="domain-title">Safety & Aggression</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill new">BPAQ</span>
+          <span class="tool-pill cond">DERS-16</span>
+          <span class="tool-pill new">RSES</span>
+          <span class="tool-pill new">Brief 2-Way SSS</span>
+        </div>
+        <div class="domain-note">Veteran reintegration: aggression risk, low self-esteem, and social isolation are the three leading triggers of family breakdown.</div>
+      </div>
+    </div>
+
+    <!-- CIVILIAN -->
+    <div id="panel-civilian" class="matrix-panel">
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1A5C36;"></div><div class="domain-title">Burnout</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">OLBI</span>
+          <span class="tool-pill cond">MBI</span>
+          <span class="tool-pill cond">APSQ</span>
+          <span class="tool-pill cond">JSS</span>
+        </div>
+        <div class="domain-note">OLBI validated in Tunisian military civilian staff. 2 subscales: exhaustion + disengagement.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#2E8A54;"></div><div class="domain-title">General Mental Health</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PHQ-9</span>
+          <span class="tool-pill">GAD-7</span>
+          <span class="tool-pill">K10</span>
+          <span class="tool-pill cond">DASS-21</span>
+          <span class="tool-pill cond">STAI</span>
+        </div>
+        <div class="domain-note">Annual mandatory screening protocol for 40,000 civilian healthcare staff across MNGHA's 11 hospitals.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#C5973A;"></div><div class="domain-title">Wellbeing & Coping</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">BRS</span>
+          <span class="tool-pill cond">SWLS</span>
+          <span class="tool-pill cond">FS</span>
+          <span class="tool-pill cond">Brief-COPE</span>
+          <span class="tool-pill cond">LOT-R</span>
+          <span class="tool-pill new">RSES</span>
+        </div>
+        <div class="domain-note">Positive mental health tracking — not just disorder screening. Wellbeing programs attract and retain clinical staff.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#9A6E1A;"></div><div class="domain-title">Substance Use</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">AUDIT</span>
+          <span class="tool-pill cond">DUDIT</span>
+          <span class="tool-pill cond">DAST-10</span>
+        </div>
+        <div class="domain-note">Confidential screening for healthcare professionals — anonymous results, HR-blind reporting mode.</div>
+      </div>
+    </div>
+
+    <!-- FAMILY -->
+    <div id="panel-family" class="matrix-panel">
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#DB2777;"></div><div class="domain-title">Perinatal Mental Health</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">EPDS</span>
+          <span class="tool-pill cond">PDSS</span>
+          <span class="tool-pill cond">PRAQ-R2</span>
+          <span class="tool-pill cond">PDQ</span>
+          <span class="tool-pill cond">MAT-S</span>
+        </div>
+        <div class="domain-note">EPDS (Edinburgh) — gold standard postnatal depression screening. Arabic validated. Critical gap: MNGHA delivers 59K+ procedures per year including obstetrics.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#EC4899;"></div><div class="domain-title">Child Mental Health (6–12)</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">SDQ</span>
+          <span class="tool-pill cond">CDI-2</span>
+          <span class="tool-pill cond">SCARED</span>
+          <span class="tool-pill cond">PSC-17</span>
+          <span class="tool-pill cond">CBCL</span>
+          <span class="tool-pill cond">RCADS</span>
+        </div>
+        <div class="domain-note">SDQ (Strengths & Difficulties) is the most widely used Arabic child mental health screen. Available in Arabic parent and teacher versions.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#F97316;"></div><div class="domain-title">Adolescent (13–18)</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PHQ-A</span>
+          <span class="tool-pill cond">GAD-7</span>
+          <span class="tool-pill cond">RCADS</span>
+          <span class="tool-pill cond">MASC</span>
+          <span class="tool-pill cond">CRAFFT</span>
+          <span class="tool-pill cond">YSR</span>
+          <span class="tool-pill cond">Conners-3</span>
+        </div>
+        <div class="domain-note">PHQ-A (adolescent PHQ-9 version) plus separate substance screening — CRAFFT is the validated Arabic adolescent tool.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1A5C36;"></div><div class="domain-title">Adult Spouse Screening</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PHQ-9</span>
+          <span class="tool-pill">GAD-7</span>
+          <span class="tool-pill cond">PCL-5</span>
+          <span class="tool-pill cond">LEC-5</span>
+          <span class="tool-pill new">Brief 2-Way SSS</span>
+          <span class="tool-pill cond">BRS</span>
+        </div>
+        <div class="domain-note">Secondary traumatisation in military spouses is clinically equivalent to direct PTSD exposure. Spouses carry the 73% largest population share.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#C5973A;"></div><div class="domain-title">Relationships & Attachment</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">ECR-S</span>
+          <span class="tool-pill cond">DAS</span>
+          <span class="tool-pill cond">CSI-4</span>
+          <span class="tool-pill cond">IMS</span>
+          <span class="tool-pill cond">KMSS</span>
+        </div>
+        <div class="domain-note">Deployment-related relationship strain is the primary reason military families seek counselling. First platform to include this in Arabic.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#7C3AED;"></div><div class="domain-title">ADHD (Child/Adult)</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">SNAP-IV</span>
+          <span class="tool-pill cond">Conners-3</span>
+          <span class="tool-pill cond">ASRS</span>
+          <span class="tool-pill cond">Vanderbilt</span>
+          <span class="tool-pill cond">BRIEF-2</span>
+        </div>
+        <div class="domain-note">Children of military families show elevated ADHD rates associated with repeated relocations and parental deployment stress.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#0891B2;"></div><div class="domain-title">Eating & Body Image</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">EDE-Q</span>
+          <span class="tool-pill cond">EAT-26</span>
+          <span class="tool-pill cond">BEDA</span>
+          <span class="tool-pill cond">BITE</span>
+          <span class="tool-pill cond">BSQ</span>
+        </div>
+        <div class="domain-note">Adolescent girls in military families: elevated eating disorder risk during parental deployment periods.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#059669;"></div><div class="domain-title">Wellbeing & Quality of Life</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">SWLS</span>
+          <span class="tool-pill cond">FS</span>
+          <span class="tool-pill cond">WEMWBS</span>
+          <span class="tool-pill cond">WHOQOL-BREF</span>
+          <span class="tool-pill cond">PedsQL</span>
+        </div>
+        <div class="domain-note">Positive wellbeing tracking across the family unit — from young children (PedsQL) to adults (WHOQOL-BREF).</div>
+      </div>
+    </div>
+
+    <!-- ACADEMIC -->
+    <div id="panel-academic" class="matrix-panel">
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#1A5C36;"></div><div class="domain-title">Burnout & Academic Stress</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">OLBI</span>
+          <span class="tool-pill">MBI-SS</span>
+          <span class="tool-pill cond">APSQ</span>
+          <span class="tool-pill cond">DASS-21</span>
+        </div>
+        <div class="domain-note">1,945 residents and 630 fellows — medical training burnout is a clinical risk factor for patient safety.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#2E8A54;"></div><div class="domain-title">Mood & Anxiety</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill">PHQ-9</span>
+          <span class="tool-pill">GAD-7</span>
+          <span class="tool-pill">K10</span>
+          <span class="tool-pill cond">STAI</span>
+          <span class="tool-pill cond">MDQ</span>
+        </div>
+        <div class="domain-note">Medical students have 2× population rate of depression. KSAU-HS 3 campuses — systematic annual screening.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#C5973A;"></div><div class="domain-title">Wellbeing & Flourishing</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">SWLS</span>
+          <span class="tool-pill cond">FS</span>
+          <span class="tool-pill cond">WEMWBS</span>
+          <span class="tool-pill new">RSES</span>
+          <span class="tool-pill new">PANAS</span>
+        </div>
+        <div class="domain-note">Beyond disorder screening — track flourishing and self-esteem as leading indicators of student retention and performance.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#7C3AED;"></div><div class="domain-title">ADHD & Executive Function</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">ASRS</span>
+          <span class="tool-pill cond">CFI</span>
+          <span class="tool-pill cond">CPFQ</span>
+          <span class="tool-pill cond">BRIEF-A</span>
+        </div>
+        <div class="domain-note">Undiagnosed ADHD in medical students is a leading cause of academic underperformance and clinical errors.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header"><div class="domain-dot" style="background:#9A6E1A;"></div><div class="domain-title">Substance Use</div></div>
+        <div class="domain-tools">
+          <span class="tool-pill cond">AUDIT</span>
+          <span class="tool-pill cond">DUDIT</span>
+          <span class="tool-pill cond">TAPS</span>
+        </div>
+        <div class="domain-note">Anonymous confidential screening for students. Automatically separated from academic records.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE NUMBERS -->
+<section class="dark" style="background: var(--green-900);">
+  <div class="section-inner">
+    <div class="section-eyebrow" style="color: var(--gold-300);">By the numbers</div>
+    <h2 class="section-title" style="color: white; margin-bottom: 40px;">What we cover</h2>
+    <div class="coverage-grid">
+      <div class="coverage-card">
+        <span class="coverage-num">170</span>
+        <div class="coverage-label">Clinically validated assessment tools</div>
+      </div>
+      <div class="coverage-card">
+        <span class="coverage-num">18</span>
+        <div class="coverage-label">Clinical domains covered</div>
+      </div>
+      <div class="coverage-card">
+        <span class="coverage-num">5</span>
+        <div class="coverage-label">Population groups mapped</div>
+      </div>
+      <div class="coverage-card">
+        <span class="coverage-num">Arabic</span>
+        <div class="coverage-label">First language — all tools</div>
+      </div>
+      <div class="coverage-card">
+        <span class="coverage-num">HIMSS 7</span>
+        <div class="coverage-label">Compatible with MNGHA's EMR stage</div>
+      </div>
+      <div class="coverage-card">
+        <span class="coverage-num">AI</span>
+        <div class="coverage-label">Triage & scoring in seconds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAP ANALYSIS -->
+<section id="sec-gap">
+  <div class="section-inner">
+    <div class="section-eyebrow">The Clinical Gap</div>
+    <h2 class="section-title">What MNGHA's 1.3M beneficiaries don't have access to today</h2>
+    <p class="section-sub">MNGHA is HIMSS Stage 7 — the most digitally mature health system in the EMEA region. But mental health assessment remains manual, fragmented, and non-systematic.</p>
+    <div class="gap-grid">
+      <div>
+        <div class="gap-col-title before">❌ Without Falcon Mind</div>
+        <div class="gap-item"><span class="gap-icon">⚠️</span><div class="gap-text">PTSD screening for 112,000 active soldiers is not systematic — no standardised timing, no Arabic-validated tool deployed at scale<small>PCL-5 exists but is not integrated into any Gulf military digital platform</small></div></div>
+        <div class="gap-item"><span class="gap-icon">⚠️</span><div class="gap-text">950,000 family dependents have no mental health screening pathway at all<small>Secondary traumatisation in military spouses is clinically equivalent to direct trauma exposure</small></div></div>
+        <div class="gap-item"><span class="gap-icon">⚠️</span><div class="gap-text">Child mental health is assessed ad hoc — no systematic SDQ or adolescent screening across MNGHA's King Abdullah Children's Hospitals<small>Two children's hospitals (Riyadh 678 beds + Jeddah 350 beds) with no digital mental health triage</small></div></div>
+        <div class="gap-item"><span class="gap-icon">⚠️</span><div class="gap-text">Aggression risk after PTSD is unmeasured — #1 unit safety issue, no tool in any Gulf military system<small>BPAQ is used in VA and NATO systems but absent in the region</small></div></div>
+        <div class="gap-item"><span class="gap-icon">⚠️</span><div class="gap-text">Burnout of 14,000+ clinical staff tracked only via HR absence data — reactive, not predictive<small>MNGHA's medical education system has 2,575 trainees at risk</small></div></div>
+      </div>
+      <div>
+        <div class="gap-col-title after">✅ With Falcon Mind</div>
+        <div class="gap-item"><span class="gap-icon">✅</span><div class="gap-text">Systematic 3-tier monitoring for every active soldier — pulse check every 4–6 weeks, full battery every 6 months<small>AI flags, psychologist reviews, Go/Conditional/No-Go decision support</small></div></div>
+        <div class="gap-item"><span class="gap-icon">✅</span><div class="gap-text">Family mental health portal — Arabic-first, covers adult, perinatal, child (6–12), and adolescent (13–18) pathways<small>45+ tools mapped. Spouse secondary trauma tracked and triaged.</small></div></div>
+        <div class="gap-item"><span class="gap-icon">✅</span><div class="gap-text">SDQ, SCARED, CDI-2, Conners-3 integrated — paediatric mental health triage from first appointment<small>Parent-report + teacher-report versions. Arabic validated.</small></div></div>
+        <div class="gap-item"><span class="gap-icon">✅</span><div class="gap-text">BPAQ aggression screening triggered by PCL-5 score — safety risk surfaced before it becomes a unit incident<small>Clinician review required before result is acted on</small></div></div>
+        <div class="gap-item"><span class="gap-icon">✅</span><div class="gap-text">OLBI + MBI burnout monitoring for all clinical and administrative staff — annual mandatory + triggered by K10 score<small>Predictive, not reactive. Flagged to occupational health, not HR.</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KAIMRC ALIGNMENT -->
+<section id="sec-kaimrc" class="light" style="background: var(--light);">
+  <div class="section-inner">
+    <div class="kaimrc-card">
+      <div>
+        <div class="kaimrc-eyebrow">Strategic alignment</div>
+        <h2 class="kaimrc-title">Built alongside MNGHA's AI Center of Excellence</h2>
+        <p class="kaimrc-body">MNGHA was designated an AI center of excellence in stroke and cardiovascular diseases in partnership with SDAIA — the Saudi Data and Artificial Intelligence Authority. Falcon Mind is the mental health layer that completes this vision.</p>
+      </div>
+      <ul class="kaimrc-points">
+        <li class="kaimrc-point">
+          <div class="kaimrc-point-dot"></div>
+          <div class="kaimrc-point-text"><strong>KAIMRC is the bridge.</strong> King Abdullah International Medical Research Center — the largest medical research center in Saudi Arabia — sits inside MNGHA. Falcon Mind's assessment data feeds KAIMRC's research pipeline directly.</div>
+        </li>
+        <li class="kaimrc-point">
+          <div class="kaimrc-point-dot"></div>
+          <div class="kaimrc-point-text"><strong>HIMSS Stage 7 ready.</strong> MNGHA is one of the first EMEA systems to reach Stage 7 — full paperless EMR. Falcon Mind is designed for API integration with advanced EMR infrastructure.</div>
+        </li>
+        <li class="kaimrc-point">
+          <div class="kaimrc-point-dot"></div>
+          <div class="kaimrc-point-text"><strong>Saudi Biobank compatibility.</strong> KAIMRC's Saudi Biobank and mental health assessment data can be linked — enabling population-level research unique to the Saudi National Guard population.</div>
+        </li>
+        <li class="kaimrc-point">
+          <div class="kaimrc-point-dot"></div>
+          <div class="kaimrc-point-text"><strong>SDAIA alignment.</strong> AI scoring and triage built on principles consistent with SDAIA's national AI ethics framework and Vision 2030 digital health objectives.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="sec-how">
+  <div class="section-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">From beneficiary to clinical decision in minutes</h2>
+    <p class="section-sub">The platform is designed for the real constraints of a large government health system — minimal clinician time, maximum clinical signal.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 8px;">
+      <div style="background: var(--green-50); border: 1px solid var(--green-100); border-radius: 14px; padding: 20px;">
+        <div style="font-size: 24px; margin-bottom: 12px;">1</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Beneficiary opens app</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">Arabic-first. No clinical jargon. Works on any device. Framed as "health check" not "mental health screening" for military populations.</div>
+      </div>
+      <div style="background: var(--green-50); border: 1px solid var(--green-100); border-radius: 14px; padding: 20px;">
+        <div style="font-size: 24px; margin-bottom: 12px;">2</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Core battery administered</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">Population-matched core tools. Active soldier: 57 questions, 8 minutes. Family member: 16 questions, 3 minutes. Child: SDQ parent version.</div>
+      </div>
+      <div style="background: var(--gold-50); border: 1px solid var(--gold-100); border-radius: 14px; padding: 20px;">
+        <div style="font-size: 24px; margin-bottom: 12px;">3</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">AI scores and flags</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">Scores calculated instantly. AI identifies which conditional tools to add based on score thresholds. Crisis flags surface immediately to the assigned clinician.</div>
+      </div>
+      <div style="background: var(--gold-50); border: 1px solid var(--gold-100); border-radius: 14px; padding: 20px;">
+        <div style="font-size: 24px; margin-bottom: 12px;">4</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Clinician reviews</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">Dashboard shows severity bands, trend over time, triggered conditionals. Clinician makes the final decision — AI recommends, human confirms.</div>
+      </div>
+      <div style="background: var(--green-50); border: 1px solid var(--green-100); border-radius: 14px; padding: 20px;">
+        <div style="font-size: 24px; margin-bottom: 12px;">5</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Population insights</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">KAIMRC research dashboard: anonymised population-level data. Track PTSD prevalence across units, burnout trends by hospital, wellbeing across campuses.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-eyebrow" style="color: var(--gold-700); text-align: center; margin-bottom: 16px;">Let's build this together</div>
+  <h2 class="cta-title">The mental health infrastructure<br>MNGHA's 1.3M beneficiaries deserve</h2>
+  <p class="cta-sub">One platform. Five populations. 170 tools. Arabic-first. AI-powered. HIMSS Stage 7 compatible.</p>
+  <div class="cta-actions">
+    <a href="https://app.falconmind.online/library/page" class="btn-primary" target="_blank">
+      Access the Platform
+    </a>
+  </div>
+</section>
+
+<footer>
+  <strong>Falcon Mind</strong> · Military Mental Health Intelligence · Built for the Gulf region<br>
+  <span style="margin-top: 6px; display: block;">Confidential — prepared exclusively for Ministry of National Guard Health Affairs</span>
+</footer>
+
+<script>
+function switchTab(popId, btn) {
+  document.querySelectorAll('.matrix-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.matrix-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + popId).classList.add('active');
+}
+
+function selectPop(popId) {
+  document.querySelectorAll('.pop-card').forEach(c => c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  switchTab(popId, document.querySelector('.matrix-tab[onclick*="' + popId + '"]'));
+  setTimeout(() => {
+    document.querySelector('.matrix-tabs').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+function navTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('mngha-nav');
+  if (nav) nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+});
+</script>
+
+</body>
+</html>
