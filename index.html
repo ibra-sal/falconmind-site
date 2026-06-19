@@ -3,83 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Falcon Mind — Military Mental Health Intelligence</title>
+<title>Falcon Mind — Restricted Access</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; }
+  html, body { height: 100%; overflow: hidden; background: #000; }
+
   body {
-    font-family: 'Inter', sans-serif;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    font-family: 'Barlow', sans-serif;
+    display: flex; align-items: center; justify-content: center;
     height: 100vh;
+    position: relative;
   }
 
-  /* PASSWORD GATE */
-  #gate {
-    position: fixed; inset: 0; z-index: 999;
-    background: #080c10;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 0;
-    overflow: hidden;
-  }
-  #gate::before {
-    content: '';
-    position: absolute;
-    top: -30%; left: 50%; transform: translateX(-50%);
-    width: 700px; height: 700px;
-    background: radial-gradient(ellipse at center, rgba(16,56,32,0.45) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  #gate::after {
-    content: '';
+  .bg-img {
     position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: 60px 60px;
+    background: url('hero-soldier.png') center/cover no-repeat;
+    opacity: 0.12;
     pointer-events: none;
   }
-  #gate.hidden { display: none; }
-  .gate-inner {
+  .bg-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none;
+  }
+
+  .gate {
     position: relative; z-index: 2;
     display: flex; flex-direction: column; align-items: center;
+    width: 360px;
   }
-.gate-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
-    color: rgba(197,151,58,0.55); margin-bottom: 20px;
-    text-transform: uppercase;
+
+  .gate-logo {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 22px; font-weight: 900;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: #fff; margin-bottom: 2rem;
   }
+
+  .gate-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .gate-eyebrow::before, .gate-eyebrow::after {
+    content: ''; display: block;
+    width: 20px; height: 1px; background: rgba(255,255,255,0.15);
+  }
+
   .gate-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 400; color: rgba(255,255,255,0.9);
-    margin-bottom: 10px; text-align: center; line-height: 1.15;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 52px; font-weight: 900;
+    text-transform: uppercase; line-height: 0.92;
+    color: #fff; text-align: center;
+    margin-bottom: 0.5rem;
   }
+
   .gate-sub {
-    font-size: 13px; color: rgba(255,255,255,0.28);
-    margin-bottom: 48px; text-align: center; letter-spacing: 0.02em;
+    font-size: 13px; color: rgba(255,255,255,0.35);
+    text-align: center; line-height: 1.6;
+    margin-bottom: 2.5rem;
   }
+
   .gate-input-wrap {
-    position: relative; width: 320px;
+    position: relative; width: 100%; margin-bottom: 0.75rem;
   }
+
   #gate-input {
-    width: 100%; box-sizing: border-box;
+    width: 100%;
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px; padding: 15px 48px 15px 20px;
-    font-size: 14px; color: rgba(255,255,255,0.85); outline: none;
-    font-family: 'Inter', sans-serif; letter-spacing: 0.06em;
-    transition: border-color 0.25s, background 0.25s;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 14px 48px 14px 18px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
   }
-  #gate-input::placeholder { color: rgba(255,255,255,0.2); letter-spacing: 0.04em; }
+  #gate-input::placeholder {
+    color: rgba(255,255,255,0.2);
+    font-weight: 400; letter-spacing: 0.06em;
+  }
   #gate-input:focus {
-    border-color: rgba(197,151,58,0.4);
-    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.07);
   }
-  #gate-input.error { border-color: rgba(200,60,60,0.5); animation: shake 0.3s ease; }
+  #gate-input.error {
+    border-color: rgba(220,60,60,0.6);
+    animation: shake 0.3s ease;
+  }
+
   .gate-toggle {
     position: absolute; right: 14px; top: 50%;
     transform: translateY(-50%);
@@ -88,369 +106,65 @@
     display: flex; align-items: center;
     transition: color 0.2s;
   }
-  .gate-toggle:hover { color: rgba(255,255,255,0.5); }
+  .gate-toggle:hover { color: rgba(255,255,255,0.55); }
+
   .gate-error {
-    font-size: 12px; color: rgba(200,80,80,0.7);
-    margin-top: 10px; text-align: center;
-    height: 16px; letter-spacing: 0.02em;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(220,80,80,0.8);
+    height: 14px; text-align: center; margin-bottom: 0.75rem;
   }
+
   .gate-btn {
-    margin-top: 16px;
-    background: rgba(197,151,58,0.12);
-    border: 1px solid rgba(197,151,58,0.3);
-    color: rgba(197,151,58,0.85);
-    font-family: 'Inter', sans-serif;
-    font-size: 12px; font-weight: 600;
-    padding: 14px 40px; border-radius: 4px;
-    cursor: pointer; letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: background 0.25s, border-color 0.25s, color 0.25s;
-    width: 320px;
+    width: 100%;
+    background: #fff; color: #000;
+    border: none; cursor: pointer;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 18px; font-weight: 900;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 0;
+    transition: background 0.2s, color 0.2s;
   }
-  .gate-btn:hover {
-    background: rgba(197,151,58,0.2);
-    border-color: rgba(197,151,58,0.5);
-    color: rgba(197,151,58,1);
-  }
+  .gate-btn:hover { background: rgba(255,255,255,0.85); }
+
   .gate-footer {
-    position: absolute; bottom: 32px;
-    font-size: 11px; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.12); text-transform: uppercase;
-    z-index: 2;
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.12);
+    white-space: nowrap; z-index: 2;
   }
+
   @keyframes shake {
     0%,100% { transform: translateX(0); }
     25% { transform: translateX(-6px); }
     75% { transform: translateX(6px); }
   }
-
-  /* SHARED PANEL */
-  .panel {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 56px 56px 64px;
-    cursor: pointer;
-    overflow: hidden;
-    text-decoration: none;
-    transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    flex: 1;
-  }
-  .panel:hover { flex: 1.08; }
-  .panel::after {
-    content: '';
-    position: absolute; inset: 0;
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .panel:hover::after { opacity: 1; }
-
-  /* MNGHA PANEL — deep green */
-  .panel-mngha {
-    background: #0D3320;
-    border-right: 1px solid rgba(255,255,255,0.06);
-  }
-  .panel-mngha::after {
-    background: linear-gradient(135deg, rgba(197,151,58,0.08) 0%, transparent 60%);
-  }
-
-  /* ARMY PANEL — near black with warm undertone */
-  .panel-army {
-    background: #111418;
-  }
-  .panel-army::after {
-    background: linear-gradient(135deg, rgba(180,60,40,0.08) 0%, transparent 60%);
-  }
-
-  /* BACKGROUND IMAGES — subtle texture */
-  .panel-bg {
-    position: absolute; inset: 0;
-    background-size: cover;
-    background-position: center top;
-    opacity: 0.07;
-    transition: opacity 0.4s;
-    pointer-events: none;
-  }
-  .panel:hover .panel-bg { opacity: 0.13; }
-  .panel-mngha .panel-bg {
-    background-image: url('hero-image.png');
-  }
-  .panel-army .panel-bg {
-    background-image: url('hero-soldier.png');
-    transform: scaleX(-1);
-  }
-
-  /* TOP BADGE */
-  .panel-badge {
-    position: absolute;
-    top: 40px; left: 56px;
-    font-size: 10px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 5px 12px; border-radius: 20px;
-    z-index: 2;
-  }
-  .panel-mngha .panel-badge {
-    background: rgba(197,151,58,0.15);
-    border: 1px solid rgba(197,151,58,0.35);
-    color: #E8C170;
-  }
-  .panel-army .panel-badge {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.55);
-  }
-
-  /* DIVIDER LINE */
-  .panel-line {
-    width: 32px; height: 1.5px;
-    margin-bottom: 20px;
-    border-radius: 2px;
-    position: relative; z-index: 2;
-    transition: width 0.3s;
-  }
-  .panel:hover .panel-line { width: 48px; }
-  .panel-mngha .panel-line { background: #C5973A; }
-  .panel-army .panel-line { background: rgba(255,255,255,0.4); }
-
-  /* TITLE */
-  .panel-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(34px, 4vw, 52px);
-    font-weight: 500;
-    line-height: 1.1;
-    margin-bottom: 12px;
-    position: relative; z-index: 2;
-  }
-  .panel-mngha .panel-title { color: #fff; }
-  .panel-army .panel-title { color: #f0ece4; }
-
-  /* ARABIC SUBTITLE */
-  .panel-arabic {
-    text-align: left;
-    font-size: clamp(13px, 1.5vw, 16px);
-    font-weight: 300;
-    direction: rtl;
-    margin-bottom: 16px;
-    position: relative; z-index: 2;
-    letter-spacing: 0.01em;
-  }
-  .panel-mngha .panel-arabic { color: rgba(197,151,58,0.7); }
-  .panel-army .panel-arabic { color: rgba(255,255,255,0.35); }
-
-  /* DESCRIPTION */
-  .panel-desc {
-    font-size: 14px; line-height: 1.65;
-    max-width: 340px;
-    margin-bottom: 32px;
-    position: relative; z-index: 2;
-  }
-  .panel-mngha .panel-desc { color: rgba(255,255,255,0.55); }
-  .panel-army .panel-desc { color: rgba(255,255,255,0.45); }
-
-  /* STATS ROW */
-  .panel-stats {
-    display: flex; gap: 28px;
-    margin-bottom: 36px;
-    position: relative; z-index: 2;
-  }
-  .panel-stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 500;
-    display: block; line-height: 1;
-    margin-bottom: 3px;
-  }
-  .panel-mngha .panel-stat-num { color: #C5973A; }
-  .panel-army .panel-stat-num { color: rgba(255,255,255,0.75); }
-  .panel-stat-label {
-    font-size: 10px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.08em;
-  }
-  .panel-mngha .panel-stat-label { color: rgba(255,255,255,0.35); }
-  .panel-army .panel-stat-label { color: rgba(255,255,255,0.25); }
-
-  /* CTA */
-  .panel-cta {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 13px; font-weight: 600;
-    letter-spacing: 0.03em;
-    position: relative; z-index: 2;
-    transition: gap 0.25s;
-  }
-  .panel:hover .panel-cta { gap: 14px; }
-  .panel-mngha .panel-cta { color: #C5973A; }
-  .panel-army .panel-cta { color: rgba(255,255,255,0.6); }
-  .cta-arrow {
-    width: 32px; height: 32px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    transition: transform 0.25s;
-    flex-shrink: 0;
-  }
-  .panel:hover .cta-arrow { transform: translateX(3px); }
-  .panel-mngha .cta-arrow { background: rgba(197,151,58,0.15); color: #C5973A; }
-  .panel-army .cta-arrow { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
-
-  /* CENTER DIVIDER */
-  .divider {
-    position: fixed;
-    left: 50%; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0.12) 70%, transparent 100%);
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  /* LOGO — top center */
-  .logo-center {
-    position: fixed;
-    top: 32px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    pointer-events: none;
-  }
-  .logo-mark {
-    width: 36px; height: 36px; border-radius: 9px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.8);
-  }
-  .logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px; font-weight: 500;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.08em;
-    white-space: nowrap;
-  }
-
-  /* BOTTOM HINT */
-  .hint {
-    position: fixed;
-    bottom: 28px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 11px; font-weight: 500;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    z-index: 20;
-    white-space: nowrap;
-    pointer-events: none;
-  }
-
-  /* MOBILE */
-  @media (max-width: 640px) {
-    body { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; overflow: auto; }
-    html, body { height: auto; min-height: 100vh; overflow: auto; }
-    .panel { padding: 48px 32px 52px; flex: none !important; min-height: 50vh; }
-    .panel-badge { top: 28px; left: 32px; }
-    .panel-mngha { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .divider { display: none; }
-    .logo-center { display: none; }
-    .hint { display: none; }
-  }
 </style>
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div id="gate">
-  <div class="gate-inner">
+<div class="bg-img"></div>
+<div class="bg-overlay"></div>
+
+<div class="gate">
   <div class="gate-logo">Falcon Mind</div>
-  <div class="gate-title">Restricted Access</div>
-  <div class="gate-sub">This site is confidential. Enter your access code to continue.</div>
+  <div class="gate-eyebrow">Restricted Access</div>
+  <div class="gate-title">Authorised<br>Personnel<br>Only</div>
+  <p class="gate-sub">This platform is confidential.<br>Enter your access code to continue.</p>
+
   <div class="gate-input-wrap">
     <input id="gate-input" type="password" placeholder="Access code" autocomplete="off" />
-    <button class="gate-toggle" onclick="togglePw()" title="Show/hide">
+    <button class="gate-toggle" onclick="togglePw()">
       <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
   </div>
   <div class="gate-error" id="gate-error"></div>
   <button class="gate-btn" onclick="checkPassword()">Enter →</button>
-  </div>
-  <div class="gate-footer">Confidential · For authorised personnel only</div>
 </div>
 
-<!-- CENTER FALCON MIND LOGO -->
-<div class="logo-center">
-  <div class="logo-mark">F</div>
-  <div class="logo-text">Falcon Mind</div>
-</div>
-
-<!-- DIVIDER -->
-<div class="divider"></div>
-
-<!-- MNGHA PANEL -->
-<a class="panel panel-mngha" href="mngha.html">
-  <div class="panel-bg"></div>
-  <div class="panel-badge">🇸🇦 Ministry of National Guard</div>
-
-  <div class="panel-line"></div>
-
-  <h2 class="panel-title">MNGHA<br>Mental Health<br>Platform</h2>
-
-  <p class="panel-arabic">وزارة الحرس الوطني للشؤون الصحية</p>
-
-  <p class="panel-desc">Tailored for MNGHA's 1.3 million beneficiaries — active SANG personnel, veterans, families, civilian staff, and KSAU-HS academic programs.</p>
-
-  <div class="panel-stats">
-    <div>
-      <span class="panel-stat-num">1.3M</span>
-      <span class="panel-stat-label">Beneficiaries</span>
-    </div>
-    <div>
-      <span class="panel-stat-num">170</span>
-      <span class="panel-stat-label">Tools</span>
-    </div>
-    <div>
-      <span class="panel-stat-num">5</span>
-      <span class="panel-stat-label">Populations</span>
-    </div>
-  </div>
-
-  <div class="panel-cta">
-    View MNGHA proposal
-    <div class="cta-arrow">→</div>
-  </div>
-</a>
-
-<!-- ARMY PANEL -->
-<a class="panel panel-army" href="army.html">
-  <div class="panel-bg"></div>
-  <div class="panel-badge">⚔️ Armed Forces Medical Services</div>
-
-  <div class="panel-line"></div>
-
-  <h2 class="panel-title">AFMS<br>Mental Health<br>Platform</h2>
-
-  <p class="panel-arabic">الخدمات الطبية للقوات المسلحة</p>
-
-  <p class="panel-desc">Built for Gulf Armed Forces — pre-deployment screening, active duty mental health monitoring, and veteran reintegration support.</p>
-
-  <div class="panel-stats">
-    <div>
-      <span class="panel-stat-num">~300K</span>
-      <span class="panel-stat-label">Personnel</span>
-    </div>
-    <div>
-      <span class="panel-stat-num">44</span>
-      <span class="panel-stat-label">Assessments</span>
-    </div>
-    <div>
-      <span class="panel-stat-num">3</span>
-      <span class="panel-stat-label">Populations</span>
-    </div>
-  </div>
-
-  <div class="panel-cta">
-    View AFMS proposal
-    <div class="cta-arrow">→</div>
-  </div>
-</a>
-
-<div class="hint">Select your institution to continue</div>
+<div class="gate-footer">Confidential · For authorised personnel only</div>
 
 <script>
   const PW = 'Sebasaudivision2030';
@@ -461,7 +175,7 @@
     const err = document.getElementById('gate-error');
     if (input.value.trim() === PW) {
       sessionStorage.setItem(KEY, '1');
-      document.getElementById('gate').classList.add('hidden');
+      window.location.href = 'army-anduril.html';
     } else {
       input.classList.add('error');
       err.textContent = 'Incorrect access code. Try again.';
@@ -482,7 +196,7 @@
   });
 
   if (sessionStorage.getItem(KEY) === '1') {
-    document.getElementById('gate').classList.add('hidden');
+    window.location.href = 'army-anduril.html';
   }
 </script>
 
