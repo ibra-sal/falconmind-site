@@ -1,6 +1,8 @@
-/** Shared gate — index.html sets this; protected pages require it. */
+/** Gate flow: index.html (login) → falconmind-online.html (site) */
 const FM_AUTH_KEY = 'fm_auth';
 const FM_PASSWORD = 'Sebasaudivision2030';
+const FM_LOGIN_PAGE = '/index.html';
+const FM_SITE_PAGE = '/falconmind-online.html';
 
 function fmIsAuthed() {
   return sessionStorage.getItem(FM_AUTH_KEY) === '1';
@@ -14,9 +16,21 @@ function fmCheckPassword(value) {
   return value.trim() === FM_PASSWORD;
 }
 
-/** Call at the top of any protected page (e.g. falconmind-online.html). */
+function fmEnterSite() {
+  fmGrantAuth();
+  window.location.href = FM_SITE_PAGE;
+}
+
+/** Redirect to login if this page requires auth. */
 function fmRequireAuth(loginPage) {
   if (!fmIsAuthed()) {
-    window.location.replace(loginPage || 'index.html');
+    window.location.replace(loginPage || FM_LOGIN_PAGE);
+  }
+}
+
+/** Already logged in — skip the gate. */
+function fmRedirectIfAuthed() {
+  if (fmIsAuthed()) {
+    window.location.replace(FM_SITE_PAGE);
   }
 }

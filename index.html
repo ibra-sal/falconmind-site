@@ -166,14 +166,13 @@
 
 <div class="gate-footer">Confidential · For authorised personnel only</div>
 
-<script src="auth.js"></script>
+<script src="/auth.js"></script>
 <script>
   function checkPassword() {
     const input = document.getElementById('gate-input');
     const err = document.getElementById('gate-error');
     if (fmCheckPassword(input.value)) {
-      fmGrantAuth();
-      window.location.href = 'falconmind-online.html';
+      fmEnterSite();
     } else {
       input.classList.add('error');
       err.textContent = 'Incorrect access code. Try again.';
@@ -193,9 +192,7 @@
     document.getElementById('gate-error').textContent = '';
   });
 
-  if (fmIsAuthed()) {
-    window.location.href = 'falconmind-online.html';
-  }
+  fmRedirectIfAuthed();
 </script>
 
 </body>
