@@ -166,15 +166,13 @@
 
 <div class="gate-footer">Confidential · For authorised personnel only</div>
 
+<script src="auth.js"></script>
 <script>
-  const PW = 'Sebasaudivision2030';
-  const KEY = 'fm_auth';
-
   function checkPassword() {
     const input = document.getElementById('gate-input');
     const err = document.getElementById('gate-error');
-    if (input.value.trim() === PW) {
-      sessionStorage.setItem(KEY, '1');
+    if (fmCheckPassword(input.value)) {
+      fmGrantAuth();
       window.location.href = 'falconmind-online.html';
     } else {
       input.classList.add('error');
@@ -195,7 +193,7 @@
     document.getElementById('gate-error').textContent = '';
   });
 
-  if (sessionStorage.getItem(KEY) === '1') {
+  if (fmIsAuthed()) {
     window.location.href = 'falconmind-online.html';
   }
 </script>
