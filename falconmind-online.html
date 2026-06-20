@@ -73,10 +73,22 @@ body { background: var(--black); color: var(--white); font-family: 'Outfit', san
 /* NAV */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; border-bottom: 1px solid var(--border); gap: 1rem; }
 .nav-logo { display: flex; align-items: center; font-family: 'Big Shoulders Display', sans-serif; font-size: 18px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); text-decoration: none; flex-shrink: 0; }
-.nav-tabs { display: flex; align-items: center; gap: 0; position: absolute; left: 50%; transform: translateX(-50%); }
-.nav-tab { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0 1.4rem; height: 64px; display: flex; align-items: center; cursor: pointer; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+.nav-tabs { display: flex; align-items: stretch; gap: 0; position: absolute; left: 50%; transform: translateX(-50%); height: 64px; }
+.nav-item { position: relative; display: flex; align-items: stretch; }
+.nav-item:hover .nav-mega,
+.nav-item.open .nav-mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+.nav-tab { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0 1.4rem; height: 64px; display: flex; align-items: center; cursor: pointer; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
 .nav-tab:hover { color: var(--white); }
 .nav-tab.active { color: var(--white); border-bottom-color: var(--white); }
+.nav-mega { position: fixed; top: 64px; left: 0; right: 0; background: #eceae4; color: #0a0a0a; border-bottom: 1px solid rgba(0,0,0,0.08); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; z-index: 99; }
+.nav-mega-inner { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: start; }
+.nav-mega-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(0,0,0,0.38); margin-bottom: 1rem; }
+.nav-mega-desc { font-size: 14px; line-height: 1.75; color: rgba(0,0,0,0.58); max-width: 520px; }
+.nav-mega-links { display: flex; flex-direction: column; gap: 0.15rem; }
+.nav-mega-col-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(0,0,0,0.38); margin-bottom: 0.85rem; }
+.nav-mega-links a { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; color: #0a0a0a; text-decoration: none; padding: 0.35rem 0; transition: color 0.15s, transform 0.15s; }
+.nav-mega-links a:hover { color: rgba(0,0,0,0.55); transform: translateX(3px); }
+.page-section { scroll-margin-top: 88px; }
 .nav-cta { font-family: 'Big Shoulders Display', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); padding: 7px 18px; border-radius: 2px; transition: background 0.2s, color 0.2s; flex-shrink: 0; }
 .nav-cta:hover { background: var(--white); color: var(--black); }
 
@@ -312,10 +324,73 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <nav>
   <a href="index.html" class="nav-logo">Falcon Mind</a>
   <div class="nav-tabs">
-    <div class="nav-tab active" onclick="switchTab('platform', this)">Platform</div>
-    <div class="nav-tab" onclick="switchTab('military', this)">Military</div>
-    <div class="nav-tab" onclick="switchTab('mngha', this)">MNGHA</div>
-    <div class="nav-tab" onclick="switchTab('science', this)">Scientific Foundation</div>
+    <div class="nav-item" data-tab="platform">
+      <button type="button" class="nav-tab active" data-tab="platform" onclick="switchTab('platform', this)">Platform</button>
+      <div class="nav-mega">
+        <div class="nav-mega-inner">
+          <div>
+            <div class="nav-mega-eyebrow">Platform Domain</div>
+            <p class="nav-mega-desc">Clinical intelligence for Gulf healthcare — validated assessments, AI interpretation, bilingual delivery, and longitudinal tracking across every population.</p>
+          </div>
+          <div class="nav-mega-links">
+            <div class="nav-mega-col-label">Platform</div>
+            <a href="#platform/platform-overview" onclick="goToSection('platform','platform-overview');return false;">+ Overview</a>
+            <a href="#platform/platform-library" onclick="goToSection('platform','platform-library');return false;">+ Assessment Library</a>
+            <a href="https://app.falconmind.online/library/page" target="_blank" rel="noopener">+ Full Library ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item" data-tab="military">
+      <button type="button" class="nav-tab" data-tab="military" onclick="switchTab('military', this)">Military</button>
+      <div class="nav-mega">
+        <div class="nav-mega-inner">
+          <div>
+            <div class="nav-mega-eyebrow">Military Domain</div>
+            <p class="nav-mega-desc">Purpose-built for Armed Forces Medical Services — pre-entry screening, active duty monitoring, and veteran reintegration with population-specific batteries.</p>
+          </div>
+          <div class="nav-mega-links">
+            <div class="nav-mega-col-label">Military</div>
+            <a href="#military/military-overview" onclick="goToSection('military','military-overview');return false;">+ AFMS Overview</a>
+            <a href="#military/military-battery" onclick="goToSection('military','military-battery');return false;">+ Assessment Battery</a>
+            <a href="#military/military-workflow" onclick="goToSection('military','military-workflow');return false;">+ Clinical Workflow</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item" data-tab="mngha">
+      <button type="button" class="nav-tab" data-tab="mngha" onclick="switchTab('mngha', this)">MNGHA</button>
+      <div class="nav-mega">
+        <div class="nav-mega-inner">
+          <div>
+            <div class="nav-mega-eyebrow">MNGHA Domain</div>
+            <p class="nav-mega-desc">Mental health intelligence for 1.3M beneficiaries — five population groups, domain coverage across 170 tools, and gap analysis for Gulf institutional deployment.</p>
+          </div>
+          <div class="nav-mega-links">
+            <div class="nav-mega-col-label">MNGHA</div>
+            <a href="#mngha/mngha-populations" onclick="goToSection('mngha','mngha-populations');return false;">+ 5 Populations</a>
+            <a href="#mngha/mngha-domains" onclick="goToSection('mngha','mngha-domains');return false;">+ Domain Coverage</a>
+            <a href="#mngha/mngha-gap" onclick="goToSection('mngha','mngha-gap');return false;">+ Gap Analysis</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item" data-tab="science">
+      <button type="button" class="nav-tab" data-tab="science" onclick="switchTab('science', this)">Scientific Foundation</button>
+      <div class="nav-mega">
+        <div class="nav-mega-inner">
+          <div>
+            <div class="nav-mega-eyebrow">Scientific Foundation</div>
+            <p class="nav-mega-desc">Every instrument grounded in peer-reviewed military and clinical evidence — validation studies, deployment history, and documented references across NATO and Gulf populations.</p>
+          </div>
+          <div class="nav-mega-links">
+            <div class="nav-mega-col-label">Scientific Foundation</div>
+            <a href="#science/science-validation" onclick="goToSection('science','science-validation');return false;">+ Validation Studies</a>
+            <a href="#science/science-references" onclick="goToSection('science','science-references');return false;">+ References</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <a href="https://app.falconmind.online" target="_blank" class="nav-cta">Access Platform ↗</a>
 </nav>
@@ -323,7 +398,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <!-- ═══════════════════════════════ PLATFORM TAB ═══════════════════════════════ -->
 <div class="tab-panel active" id="tab-platform">
 
-  <div class="platform-hero">
+  <div class="platform-hero page-section" id="section-platform-overview">
     <div class="platform-hero-img"></div>
     <div class="platform-hero-bg"></div>
     <div class="platform-hero-inner">
@@ -398,7 +473,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 
   <!-- ASSESSMENT LIBRARY -->
-  <div class="sect-light" style="padding:4rem 2rem 5rem;">
+  <div class="sect-light page-section" id="section-platform-library" style="padding:4rem 2rem 5rem;">
     <style>
       .alib-pop-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:2rem; }
       .alib-pop-tab { font-family:'Outfit',sans-serif; font-size:12px; font-weight:500; padding:7px 16px; border-radius:999px; border:1px solid rgba(0,0,0,0.15); background:transparent; color:rgba(0,0,0,0.5); cursor:pointer; transition:all 0.15s; }
@@ -680,7 +755,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <!-- ═══════════════════════════════ MILITARY TAB ═══════════════════════════════ -->
 <div class="tab-panel" id="tab-military">
 
-  <div style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
+  <div style="display:flex;flex-direction:column;height:calc(100vh - 64px);" class="page-section" id="section-military-overview">
   <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,2vh,2rem);flex-shrink:0;">
     <div class="platform-hero-kicker">Confidential · Armed Forces Medical Services · Gulf Region</div>
     <h1 class="platform-hero-title" style="font-size:clamp(2rem,5.5vh,5rem);margin-top:0.5rem;">Military<br>Mental<br><em>Intelligence</em></h1>
@@ -688,7 +763,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 
   <!-- 3 POPULATION CARDS -->
-  <div class="pop-grid" style="flex:1;grid-template-rows:unset;min-height:0;">
+  <div class="pop-grid page-section" id="section-military-battery" style="flex:1;grid-template-rows:unset;min-height:0;">
     <div class="pop-card">
       <div class="pop-card-bg"></div>
       <div class="pop-card-texture"></div>
@@ -744,7 +819,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div><!-- /flex-viewport -->
 
   <!-- WORKFLOW -->
-  <div class="sect-light" style="padding:5rem 3rem 6rem;">
+  <div class="sect-light page-section" id="section-military-workflow" style="padding:5rem 3rem 6rem;">
     <div style="max-width:1400px;margin:0 auto;">
       <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:400;line-height:1.15;color:#1a2e1a;margin-bottom:0.75rem;letter-spacing:-0.02em;">From Assessment to Action<br>in Minutes</h2>
       <p style="font-size:15px;color:rgba(0,0,0,0.45);line-height:1.7;margin-bottom:3.5rem;max-width:520px;">A complete clinical workflow — soldier completes, AI interprets, clinician acts. No manual coordination, no paperwork.</p>
@@ -852,7 +927,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <!-- ═══════════════════════════════ MNGHA TAB ═══════════════════════════════ -->
 <div class="tab-panel" id="tab-mngha">
 
-  <div style="display:flex;flex-direction:column;height:calc(100vh - 64px);">
+  <div style="display:flex;flex-direction:column;height:calc(100vh - 64px);" class="page-section" id="section-mngha-populations">
 
   <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,1.5vh,1.5rem);flex-shrink:0;">
     <div class="platform-hero-kicker">Confidential · Ministry of National Guard Health Affairs · Saudi Arabia</div>
@@ -924,7 +999,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div><!-- /flex-viewport -->
 
   <!-- ASSESSMENT MATRIX -->
-  <div class="sect-light">
+  <div class="sect-light page-section" id="section-mngha-domains">
     <div class="sec-header">
       <div>
         <div class="sec-label">Assessment Coverage</div>
@@ -993,7 +1068,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 
   <!-- GAP ANALYSIS -->
-  <div style="background:#0d1520;padding:5rem 2rem 5rem;">
+  <div class="page-section" id="section-mngha-gap" style="background:#0d1520;padding:5rem 2rem 5rem;">
     <div style="max-width:900px;margin:0 auto;">
       <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.15;color:#fff;margin-bottom:1rem;letter-spacing:-0.02em;">What MNGHA's Beneficiaries<br>Don't Have Access to Today</h2>
       <p style="font-size:15px;color:rgba(255,255,255,0.35);line-height:1.75;max-width:540px;margin-bottom:2.5rem;">Five population groups. Zero systematic mental health infrastructure. Falcon Mind closes every gap.</p>
@@ -1136,10 +1211,8 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <!-- ═══════════════════════════════ SCIENCE TAB ═══════════════════════════════ -->
 <div class="tab-panel" id="tab-science">
 
-  <div class="sect-light" style="padding:4rem 3rem 5rem;">
+  <div class="sect-light page-section" id="section-science-validation" style="padding:4rem 3rem 5rem;">
     <div style="max-width:1100px;margin:0 auto;">
-
-      <!-- Eyebrow + heading -->
       <div style="display:inline-block;border:1px solid rgba(0,0,0,0.18);border-radius:4px;padding:5px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:1.5rem;">Scientific Foundation</div>
       <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:400;line-height:1.1;color:#1a2e1a;margin-bottom:1.25rem;letter-spacing:-0.02em;">Built on Decades of<br>Peer-Reviewed Science</h1>
       <p style="font-size:15px;color:rgba(0,0,0,0.5);line-height:1.75;max-width:640px;margin-bottom:3.5rem;">Falcon Mind's assessment library is grounded in instruments validated across decades of academic research and real-world military deployment — from the World Health Organization to the U.S. Department of Veterans Affairs.</p>
@@ -1187,7 +1260,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
       </div>
 
       <!-- Evidence table -->
-      <div style="border:1px solid rgba(0,0,0,0.1);border-radius:8px;overflow:hidden;">
+      <div class="page-section" id="section-science-references" style="border:1px solid rgba(0,0,0,0.1);border-radius:8px;overflow:hidden;">
         <div style="background:#f5f3ed;padding:1rem 1.5rem;border-bottom:1px solid rgba(0,0,0,0.08);">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.4);">Assessment Military Evidence — All 23 Documented</div>
         </div>
@@ -1233,26 +1306,26 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
     <div class="footer-cols">
       <div class="footer-col">
         <span class="footer-col-label">Platform</span>
-        <a href="#" onclick="switchTab('platform',document.querySelectorAll('.nav-tab')[0]);return false;">Overview</a>
-        <a href="#" onclick="switchTab('platform',document.querySelectorAll('.nav-tab')[0]);return false;">Assessment Library</a>
+        <a href="#platform/platform-overview" onclick="goToSection('platform','platform-overview');return false;">Overview</a>
+        <a href="#platform/platform-library" onclick="goToSection('platform','platform-library');return false;">Assessment Library</a>
         <a href="https://app.falconmind.online/library/page" target="_blank">Full Library ↗</a>
       </div>
       <div class="footer-col">
         <span class="footer-col-label">Military</span>
-        <a href="#" onclick="switchTab('military',document.querySelectorAll('.nav-tab')[1]);return false;">AFMS Overview</a>
-        <a href="#" onclick="switchTab('military',document.querySelectorAll('.nav-tab')[1]);return false;">Assessment Battery</a>
-        <a href="#" onclick="switchTab('military',document.querySelectorAll('.nav-tab')[1]);return false;">Clinical Workflow</a>
+        <a href="#military/military-overview" onclick="goToSection('military','military-overview');return false;">AFMS Overview</a>
+        <a href="#military/military-battery" onclick="goToSection('military','military-battery');return false;">Assessment Battery</a>
+        <a href="#military/military-workflow" onclick="goToSection('military','military-workflow');return false;">Clinical Workflow</a>
       </div>
       <div class="footer-col">
         <span class="footer-col-label">MNGHA</span>
-        <a href="#" onclick="switchTab('mngha',document.querySelectorAll('.nav-tab')[2]);return false;">5 Populations</a>
-        <a href="#" onclick="switchTab('mngha',document.querySelectorAll('.nav-tab')[2]);return false;">Domain Coverage</a>
-        <a href="#" onclick="switchTab('mngha',document.querySelectorAll('.nav-tab')[2]);return false;">Gap Analysis</a>
+        <a href="#mngha/mngha-populations" onclick="goToSection('mngha','mngha-populations');return false;">5 Populations</a>
+        <a href="#mngha/mngha-domains" onclick="goToSection('mngha','mngha-domains');return false;">Domain Coverage</a>
+        <a href="#mngha/mngha-gap" onclick="goToSection('mngha','mngha-gap');return false;">Gap Analysis</a>
       </div>
       <div class="footer-col">
         <span class="footer-col-label">Scientific Foundation</span>
-        <a href="#" onclick="switchTab('science',document.querySelectorAll('.nav-tab')[4]);return false;">Validation Studies</a>
-        <a href="#" onclick="switchTab('science',document.querySelectorAll('.nav-tab')[4]);return false;">References</a>
+        <a href="#science/science-validation" onclick="goToSection('science','science-validation');return false;">Validation Studies</a>
+        <a href="#science/science-references" onclick="goToSection('science','science-references');return false;">References</a>
       </div>
       <div class="footer-col">
         <span class="footer-col-label">Access</span>
@@ -1268,29 +1341,63 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 </footer>
 
 <script>
-function switchTab(tab, el) {
+const VALID_TABS = ['platform', 'military', 'mngha', 'science'];
+
+function closeMegaMenus() {
+  document.querySelectorAll('.nav-item.open').forEach(item => item.classList.remove('open'));
+}
+
+function switchTab(tab, el, opts) {
+  const options = opts || {};
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  el.classList.add('active');
-  window.scrollTo(0, 0);
-  location.hash = tab;
+  if (el) el.classList.add('active');
+  if (options.scrollTop !== false) window.scrollTo(0, 0);
+  closeMegaMenus();
 }
 
-(function() {
-  const hash = location.hash.replace('#', '');
-  const validTabs = ['platform', 'military', 'mngha', 'science'];
-  if (hash && validTabs.includes(hash)) {
-    const panel = document.getElementById('tab-' + hash);
-    const navEl = document.querySelector('.nav-tab[onclick*="' + hash + '"]');
-    if (panel && navEl) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-      panel.classList.add('active');
-      navEl.classList.add('active');
-    }
+function goToSection(tab, sectionId) {
+  const navTab = document.querySelector('.nav-tab[data-tab="' + tab + '"]');
+  switchTab(tab, navTab, { scrollTop: false });
+  location.hash = tab + '/' + sectionId;
+  requestAnimationFrame(function() {
+    const target = document.getElementById('section-' + sectionId);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function applyRouteFromHash() {
+  const raw = location.hash.replace('#', '');
+  if (!raw) return;
+  const parts = raw.split('/');
+  const tab = parts[0];
+  const sectionId = parts[1];
+  if (!VALID_TABS.includes(tab)) return;
+  const navTab = document.querySelector('.nav-tab[data-tab="' + tab + '"]');
+  switchTab(tab, navTab, { scrollTop: false });
+  if (sectionId) {
+    requestAnimationFrame(function() {
+      const target = document.getElementById('section-' + sectionId);
+      if (target) target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
   }
-})();
+}
+
+document.querySelectorAll('.nav-item').forEach(function(item) {
+  item.addEventListener('mouseenter', function() {
+    document.querySelectorAll('.nav-item.open').forEach(function(other) {
+      if (other !== item) other.classList.remove('open');
+    });
+    item.classList.add('open');
+  });
+  item.addEventListener('mouseleave', function() {
+    item.classList.remove('open');
+  });
+});
+
+window.addEventListener('hashchange', applyRouteFromHash);
+applyRouteFromHash();
 
 function switchMatrix(popId, btn) {
   document.querySelectorAll('.matrix-tab-dark').forEach(t => t.classList.remove('active'));
