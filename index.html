@@ -175,7 +175,7 @@
     const err = document.getElementById('gate-error');
     if (input.value.trim() === PW) {
       sessionStorage.setItem(KEY, '1');
-      window.location.href = 'army-anduril.html';
+      window.location.href = 'falconmind-online.html';
     } else {
       input.classList.add('error');
       err.textContent = 'Incorrect access code. Try again.';
@@ -196,7 +196,7 @@
   });
 
   if (sessionStorage.getItem(KEY) === '1') {
-    window.location.href = 'army-anduril.html';
+    window.location.href = 'falconmind-online.html';
   }
 </script>
 
