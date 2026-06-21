@@ -413,6 +413,14 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   .nav-mega { display: none !important; }
   /* hero images hidden on mobile */
   .hero-bg-img { display: none !important; }
+
+  /* platform features header — collapse to column */
+  .platform-overview-header { flex-direction: column !important; gap: 1rem !important; }
+  .platform-overview-sub { width: auto !important; flex-shrink: unset !important; }
+
+  /* platform features cards — 1 col on mobile */
+  div[style*="grid-template-columns:1fr 1fr; gap:16px"] { grid-template-columns: 1fr !important; }
+  div[style*="grid-template-columns: 1fr 1fr; gap:16px"] { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
@@ -557,9 +565,9 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   <!-- PLATFORM FEATURES -->
   <div class="sect-light" style="padding: 4rem 2rem 5rem;">
     <div class="sec-label" style="margin-bottom:1rem;">Platform Overview</div>
-    <div style="display:flex; gap:3rem; align-items:flex-start; margin-bottom:3.5rem;">
+    <div class="platform-overview-header" style="display:flex; gap:3rem; align-items:flex-start; margin-bottom:3.5rem;">
       <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2.8rem,4.5vw,4.5rem);font-weight:500;line-height:1.1;color:#0a0a0a;flex:1;letter-spacing:-0.02em;">A Clinical Intelligence Platform</h2>
-      <p style="font-size:15px; line-height:1.75; color:rgba(0,0,0,0.5); width:280px; flex-shrink:0; padding-top:0.5rem;">Mobile-first. AI-powered. Designed for organizations where early identification of psychological risk is mission-critical.</p>
+      <p class="platform-overview-sub" style="font-size:15px; line-height:1.75; color:rgba(0,0,0,0.5); width:280px; flex-shrink:0; padding-top:0.5rem;">Mobile-first. AI-powered. Designed for organizations where early identification of psychological risk is mission-critical.</p>
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
       <div style="background:#fff; border-radius:12px; padding:2rem 2rem 2.5rem;">
@@ -1093,7 +1101,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,1.5vh,1.5rem);position:relative;z-index:2;">
     <div class="platform-hero-kicker">Confidential · Ministry of National Guard Health Affairs · Saudi Arabia</div>
     <h1 class="platform-hero-title" style="font-size:clamp(2rem,5vh,4.5rem);margin-top:0.5rem;">Mental Health<br>Intelligence for<br><em>1.3M Beneficiaries</em></h1>
-    <p class="platform-hero-sub" style="margin-top:0.75rem;font-size:12px;">170 clinically validated Arabic-first assessment tools. AI-powered triage. Built for the unique population structure of SANG personnel, their families, civilian staff, and academic communities.</p>
+    <p class="platform-hero-sub" style="margin-top:0.75rem;font-size:12px;">73+ clinically validated Arabic-first assessment tools. AI-powered triage. Built for the unique population structure of SANG personnel, their families, civilian staff, and academic communities.</p>
   </div>
   </div><!-- /hero-text-wrapper -->
 
@@ -1153,7 +1161,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   <!-- MNGHA STAT STRIP -->
   <div class="stat-strip stat-strip-5" style="flex-shrink:0;">
     <div class="stat-cell"><span class="stat-num">1.3M</span><span class="stat-label">MNGHA<br>Beneficiaries</span></div>
-    <div class="stat-cell"><span class="stat-num">170</span><span class="stat-label">Validated<br>Tools</span></div>
+    <div class="stat-cell"><span class="stat-num">73+</span><span class="stat-label">Validated<br>Tools</span></div>
     <div class="stat-cell"><span class="stat-num">5</span><span class="stat-label">Population<br>Groups</span></div>
     <div class="stat-cell"><span class="stat-num">HIMSS7</span><span class="stat-label">EMR<br>Compatible</span></div>
     <div class="stat-cell"><span class="stat-num">KAIMRC</span><span class="stat-label">Research<br>Pipeline</span></div>
@@ -1168,7 +1176,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
         <div class="sec-title">The Right Tool for<br>Every Clinical Need</div>
       </div>
     </div>
-    <p class="sec-sub">170 validated tools organised by population. Select a group to see the full clinical domain coverage.</p>
+    <p class="sec-sub">73+ validated tools organised by population. Select a group to see the full clinical domain coverage.</p>
 
     <div class="matrix-tabs-dark">
       <button class="matrix-tab-dark active" onclick="switchMatrix('military', this)">Active Military</button>
@@ -1375,7 +1383,6 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 
   <div class="sect-light page-section" id="section-science-validation" style="padding:4rem 3rem 5rem;">
     <div style="max-width:1100px;margin:0 auto;">
-      <div style="display:inline-block;border:1px solid rgba(0,0,0,0.18);border-radius:4px;padding:5px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:1.5rem;">Scientific Foundation</div>
       <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:400;line-height:1.1;color:#1a2e1a;margin-bottom:1.25rem;letter-spacing:-0.02em;">Built on Decades of<br>Peer-Reviewed Science</h1>
       <p style="font-size:15px;color:rgba(0,0,0,0.5);line-height:1.75;max-width:640px;margin-bottom:3.5rem;">Falcon Mind's assessment library is grounded in instruments validated across decades of academic research and real-world military deployment — from the World Health Organization to the U.S. Department of Veterans Affairs.</p>
 
