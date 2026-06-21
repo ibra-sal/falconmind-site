@@ -73,10 +73,9 @@ body { background: var(--black); color: var(--white); font-family: 'Outfit', san
 /* NAV */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; border-bottom: 1px solid var(--border); gap: 1rem; }
 .nav-logo { display: flex; align-items: center; font-family: 'Big Shoulders Display', sans-serif; font-size: 18px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); text-decoration: none; flex-shrink: 0; }
-.nav-tabs { display: flex; align-items: stretch; gap: 0; position: absolute; left: 50%; transform: translateX(-50%); height: 64px; }
+.nav-tabs { display: flex; align-items: stretch; gap: 0; margin: 0 auto; height: 64px; }
 .nav-item { position: relative; display: flex; align-items: stretch; }
-.nav-item:hover .nav-mega,
-.nav-item.open .nav-mega { clip-path: inset(0 0 0% 0); pointer-events: auto; visibility: visible; }
+.nav-mega.open { clip-path: inset(0 0 0% 0); pointer-events: auto; visibility: visible; }
 .nav-tab { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0 1.4rem; height: 64px; display: flex; align-items: center; cursor: pointer; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
 .nav-tab:hover { color: var(--white); }
 .nav-tab.active { color: var(--white); border-bottom-color: var(--white); }
@@ -402,72 +401,17 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <nav>
   <a href="index.html" class="nav-logo">Falcon Mind</a>
   <div class="nav-tabs">
-    <div class="nav-item" data-tab="platform">
+    <div class="nav-item" data-tab="platform" onmouseenter="showMega('platform')" onmouseleave="hideMega('platform')">
       <button type="button" class="nav-tab active" data-tab="platform" onclick="switchTab('platform', this)">Platform</button>
-      <div class="nav-mega">
-        <div class="nav-mega-inner">
-          <div>
-            <div class="nav-mega-eyebrow">Platform Domain</div>
-            <p class="nav-mega-desc">Clinical intelligence for Gulf healthcare — validated assessments, AI interpretation, bilingual delivery, and longitudinal tracking across every population.</p>
-          </div>
-          <div class="nav-mega-links">
-            <div class="nav-mega-col-label">Platform</div>
-            <a href="#platform/platform-overview" onclick="goToSection('platform','platform-overview');return false;">+ Overview</a>
-            <a href="#platform/platform-library" onclick="goToSection('platform','platform-library');return false;">+ Assessment Library</a>
-            <a href="https://app.falconmind.online/library/page" target="_blank" rel="noopener">+ Full Library ↗</a>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="nav-item" data-tab="military">
+    <div class="nav-item" data-tab="military" onmouseenter="showMega('military')" onmouseleave="hideMega('military')">
       <button type="button" class="nav-tab" data-tab="military" onclick="switchTab('military', this)">Military</button>
-      <div class="nav-mega">
-        <div class="nav-mega-inner">
-          <div>
-            <div class="nav-mega-eyebrow">Military Domain</div>
-            <p class="nav-mega-desc">Purpose-built for Armed Forces Medical Services — pre-entry screening, active duty monitoring, and veteran reintegration with population-specific batteries.</p>
-          </div>
-          <div class="nav-mega-links">
-            <div class="nav-mega-col-label">Military</div>
-            <a href="#military/military-overview" onclick="goToSection('military','military-overview');return false;">+ AFMS Overview</a>
-            <a href="#military/military-battery" onclick="goToSection('military','military-battery');return false;">+ Assessment Battery</a>
-            <a href="#military/military-workflow" onclick="goToSection('military','military-workflow');return false;">+ Clinical Workflow</a>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="nav-item" data-tab="mngha">
+    <div class="nav-item" data-tab="mngha" onmouseenter="showMega('mngha')" onmouseleave="hideMega('mngha')">
       <button type="button" class="nav-tab" data-tab="mngha" onclick="switchTab('mngha', this)">MNGHA</button>
-      <div class="nav-mega">
-        <div class="nav-mega-inner">
-          <div>
-            <div class="nav-mega-eyebrow">MNGHA Domain</div>
-            <p class="nav-mega-desc">Mental health intelligence for 1.3M beneficiaries — five population groups, domain coverage across 170 tools, and gap analysis for Gulf institutional deployment.</p>
-          </div>
-          <div class="nav-mega-links">
-            <div class="nav-mega-col-label">MNGHA</div>
-            <a href="#mngha/mngha-populations" onclick="goToSection('mngha','mngha-populations');return false;">+ 5 Populations</a>
-            <a href="#mngha/mngha-domains" onclick="goToSection('mngha','mngha-domains');return false;">+ Domain Coverage</a>
-            <a href="#mngha/mngha-gap" onclick="goToSection('mngha','mngha-gap');return false;">+ Gap Analysis</a>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="nav-item" data-tab="science">
+    <div class="nav-item" data-tab="science" onmouseenter="showMega('science')" onmouseleave="hideMega('science')">
       <button type="button" class="nav-tab" data-tab="science" onclick="switchTab('science', this)">Scientific Foundation</button>
-      <div class="nav-mega">
-        <div class="nav-mega-inner">
-          <div>
-            <div class="nav-mega-eyebrow">Scientific Foundation</div>
-            <p class="nav-mega-desc">Every instrument grounded in peer-reviewed military and clinical evidence — validation studies, deployment history, and documented references across NATO and Gulf populations.</p>
-          </div>
-          <div class="nav-mega-links">
-            <div class="nav-mega-col-label">Scientific Foundation</div>
-            <a href="#science/science-validation" onclick="goToSection('science','science-validation');return false;">+ Validation Studies</a>
-            <a href="#science/science-references" onclick="goToSection('science','science-references');return false;">+ References</a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <a href="https://app.falconmind.online" target="_blank" class="nav-cta">Access Platform ↗</a>
@@ -475,6 +419,63 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- MEGA MENUS (outside nav to avoid transform containing-block bug) -->
+<div class="nav-mega" id="mega-platform" onmouseenter="showMega('platform')" onmouseleave="hideMega('platform')">
+  <div class="nav-mega-inner">
+    <div>
+      <div class="nav-mega-eyebrow">Platform Domain</div>
+      <p class="nav-mega-desc">Clinical intelligence for Gulf healthcare — validated assessments, AI interpretation, bilingual delivery, and longitudinal tracking across every population.</p>
+    </div>
+    <div class="nav-mega-links">
+      <div class="nav-mega-col-label">Platform</div>
+      <a href="#platform/platform-overview" onclick="goToSection('platform','platform-overview');return false;">+ Overview</a>
+      <a href="#platform/platform-library" onclick="goToSection('platform','platform-library');return false;">+ Assessment Library</a>
+      <a href="https://app.falconmind.online/library/page" target="_blank" rel="noopener">+ Full Library ↗</a>
+    </div>
+  </div>
+</div>
+<div class="nav-mega" id="mega-military" onmouseenter="showMega('military')" onmouseleave="hideMega('military')">
+  <div class="nav-mega-inner">
+    <div>
+      <div class="nav-mega-eyebrow">Military Domain</div>
+      <p class="nav-mega-desc">Purpose-built for Armed Forces Medical Services — pre-entry screening, active duty monitoring, and veteran reintegration with population-specific batteries.</p>
+    </div>
+    <div class="nav-mega-links">
+      <div class="nav-mega-col-label">Military</div>
+      <a href="#military/military-overview" onclick="goToSection('military','military-overview');return false;">+ AFMS Overview</a>
+      <a href="#military/military-battery" onclick="goToSection('military','military-battery');return false;">+ Assessment Battery</a>
+      <a href="#military/military-workflow" onclick="goToSection('military','military-workflow');return false;">+ Clinical Workflow</a>
+    </div>
+  </div>
+</div>
+<div class="nav-mega" id="mega-mngha" onmouseenter="showMega('mngha')" onmouseleave="hideMega('mngha')">
+  <div class="nav-mega-inner">
+    <div>
+      <div class="nav-mega-eyebrow">MNGHA Domain</div>
+      <p class="nav-mega-desc">Mental health intelligence for 1.3M beneficiaries — five population groups, domain coverage across 170 tools, and gap analysis for Gulf institutional deployment.</p>
+    </div>
+    <div class="nav-mega-links">
+      <div class="nav-mega-col-label">MNGHA</div>
+      <a href="#mngha/mngha-populations" onclick="goToSection('mngha','mngha-populations');return false;">+ 5 Populations</a>
+      <a href="#mngha/mngha-domains" onclick="goToSection('mngha','mngha-domains');return false;">+ Domain Coverage</a>
+      <a href="#mngha/mngha-gap" onclick="goToSection('mngha','mngha-gap');return false;">+ Gap Analysis</a>
+    </div>
+  </div>
+</div>
+<div class="nav-mega" id="mega-science" onmouseenter="showMega('science')" onmouseleave="hideMega('science')">
+  <div class="nav-mega-inner">
+    <div>
+      <div class="nav-mega-eyebrow">Scientific Foundation</div>
+      <p class="nav-mega-desc">Every instrument grounded in peer-reviewed military and clinical evidence — validation studies, deployment history, and documented references across NATO and Gulf populations.</p>
+    </div>
+    <div class="nav-mega-links">
+      <div class="nav-mega-col-label">Scientific Foundation</div>
+      <a href="#science/science-validation" onclick="goToSection('science','science-validation');return false;">+ Validation Studies</a>
+      <a href="#science/science-references" onclick="goToSection('science','science-references');return false;">+ References</a>
+    </div>
+  </div>
+</div>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
@@ -1458,6 +1459,19 @@ const VALID_TABS = ['platform', 'military', 'mngha', 'science'];
 
 function closeMegaMenus() {
   document.querySelectorAll('.nav-item.open').forEach(item => item.classList.remove('open'));
+}
+
+let megaTimer = {};
+function showMega(tab) {
+  clearTimeout(megaTimer[tab]);
+  document.querySelectorAll('.nav-mega').forEach(m => { if (m.id !== 'mega-' + tab) m.classList.remove('open'); });
+  document.getElementById('mega-' + tab).classList.add('open');
+}
+function hideMega(tab) {
+  megaTimer[tab] = setTimeout(() => {
+    const el = document.getElementById('mega-' + tab);
+    if (el) el.classList.remove('open');
+  }, 120);
 }
 
 function toggleMobileMenu() {
