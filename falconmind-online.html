@@ -114,7 +114,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000
 .platform-hero-title { font-family: 'Big Shoulders Display', sans-serif; font-size: clamp(3rem, 11vh, 9rem); font-weight: 900; line-height: 0.92; letter-spacing: -0.01em; text-transform: uppercase; color: var(--white); }
 .platform-hero-title em { font-style: italic; color: rgba(255,255,255,0.35); }
 .platform-hero-sub-row { margin-top: 1.5rem; display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
-.platform-hero-sub { font-size: 13px; line-height: 1.7; color: var(--muted); max-width: 360px; }
+.platform-hero-sub { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.85); max-width: 360px; }
 .platform-hero-stats { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgba(255,255,255,0.12); }
 .platform-hero-stat { padding: 1.25rem 1rem; border-right: 1px solid rgba(255,255,255,0.08); text-align: center; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); }
 .platform-hero-stat:last-child { border-right: none; }
@@ -125,8 +125,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000
 .stat-strip-4 { grid-template-columns: repeat(4, 1fr); }
 .stat-cell { padding: 2rem 1.5rem; border-right: 1px solid rgba(255,255,255,0.06); text-align: center; }
 .stat-cell:last-child { border-right: none; }
-.stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -0.02em; display: block; margin-bottom: 6px; }
-.stat-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sub); line-height: 1.4; }
+.stat-num { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -0.01em; display: block; margin-bottom: 6px; }
+.stat-label { font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sub); line-height: 1.4; }
 
 /* PLATFORM FEATURE GRID */
 .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); }
@@ -299,10 +299,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000
 .closing { padding: 6rem 2rem; border-top: 1px solid var(--border); }
 .closing-kicker { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sub); margin-bottom: 1.5rem; }
 .closing-title { font-family: 'Big Shoulders Display', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem; }
-.closing-sub { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 500px; margin-bottom: 3rem; }
+.closing-sub { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.7; max-width: 500px; margin-bottom: 3rem; }
 .closing-stats { display: flex; gap: 3rem; margin-bottom: 3rem; }
-.closing-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--white); line-height: 1; display: block; }
-.closing-stat-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sub); margin-top: 4px; display: block; }
+.closing-stat-num { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1; display: block; letter-spacing: -0.01em; }
+.closing-stat-label { font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 4px; display: block; }
 .hero-cta { display: inline-flex; align-items: center; gap: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); padding: 10px 22px; border-radius: 2px; transition: background 0.2s, color 0.2s; }
 .hero-cta:hover { background: var(--white); color: var(--black); }
 
@@ -411,6 +411,8 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 
   /* nav mega hidden on mobile */
   .nav-mega { display: none !important; }
+  /* hero images hidden on mobile */
+  .hero-bg-img { display: none !important; }
 }
 </style>
 </head>
@@ -605,6 +607,8 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
     </div>
   </div>
 
+  <div class="sect-sep light"><div class="sect-sep-line"></div><div class="sect-sep-label">Assessment Library</div><div class="sect-sep-line"></div></div>
+
   <!-- ASSESSMENT LIBRARY -->
   <div class="sect-light page-section" id="section-platform-library" style="padding:4rem 2rem 5rem;">
     <style>
@@ -629,6 +633,18 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
       .alib-card-pop.muted { color:rgba(0,0,0,0.35); }
       .alib-hidden { }
       .alib-extra { display: none !important; }
+      .sect-sep { display:flex; align-items:center; gap:16px; padding:0 2rem; }
+      .sect-sep-line { flex:1; height:1px; }
+      .sect-sep-label { font-family:'Barlow Condensed',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.28em; text-transform:uppercase; white-space:nowrap; }
+      .sect-sep.dark { background:#0a0a0a; }
+      .sect-sep.dark .sect-sep-line { background:rgba(255,255,255,0.1); }
+      .sect-sep.dark .sect-sep-label { color:rgba(255,255,255,0.2); }
+      .sect-sep.light { background:#f5f4f0; }
+      .sect-sep.light .sect-sep-line { background:rgba(0,0,0,0.1); }
+      .sect-sep.light .sect-sep-label { color:rgba(0,0,0,0.25); }
+      .sect-sep.cream { background:#f2f0ea; }
+      .sect-sep.cream .sect-sep-line { background:rgba(0,0,0,0.1); }
+      .sect-sep.cream .sect-sep-label { color:rgba(0,0,0,0.25); }
       .alib-extra.shown { display: flex !important; }
       .alib-toggle-wrap { margin-top:1.5rem; }
       .alib-toggle { width:100%; padding:16px; background:#0d1520; color:#fff; border:none; border-radius:8px; font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.04em; cursor:pointer; transition:background 0.2s; }
@@ -839,37 +855,41 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 
   </div>
 
+  <div class="sect-sep cream"><div class="sect-sep-line"></div><div class="sect-sep-label">AI Engine</div><div class="sect-sep-line"></div></div>
+
   <!-- AI COMPARISON -->
-  <div class="sect-navy" style="padding:5rem 2rem 5rem;">
-    <div style="max-width:900px;margin:0 auto;">
-      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.15;color:#fff;margin-bottom:1rem;letter-spacing:-0.02em;">AI Clinical Analysis —<br>Beyond Basic Scoring</h2>
-      <p style="font-size:15px;color:rgba(255,255,255,0.4);line-height:1.75;max-width:540px;margin-bottom:2.5rem;">The AI reads every score together, detects patterns, and writes a full clinical narrative — not just a number and a label.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:1.75rem;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;">Traditional Platforms</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.3);line-height:1.5;">× Static score + one-line descriptor</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.3);line-height:1.5;">× No cross-assessment correlation</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.3);line-height:1.5;">× No longitudinal pattern detection</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.3);line-height:1.5;">× Generic text — same for every patient</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.3);line-height:1.5;">× No military or operational context</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.3);line-height:1.5;">× No safety flag intelligence</div>
+  <div style="background:#f2f0ea;padding:5rem 3rem;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;line-height:1.15;color:#0a0a0a;margin-bottom:0.75rem;letter-spacing:-0.02em;">AI Clinical Analysis —<br>Beyond Basic Scoring</h2>
+      <p style="font-size:14px;color:rgba(0,0,0,0.5);line-height:1.75;max-width:520px;margin-bottom:2.5rem;">The AI reads every score together, detects patterns, and writes a full clinical narrative — not just a number and a label.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(0,0,0,0.12);">
+        <div style="padding:2rem 2rem 0 0;border-right:1px solid rgba(0,0,0,0.1);">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(0,0,0,0.3);margin-bottom:1.25rem;">Traditional Platforms</div>
+          <div style="display:flex;flex-direction:column;">
+            <div style="font-size:13.5px;color:rgba(0,0,0,0.4);line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">× Static score + one-line descriptor</div>
+            <div style="font-size:13.5px;color:rgba(0,0,0,0.4);line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">× No cross-assessment correlation</div>
+            <div style="font-size:13.5px;color:rgba(0,0,0,0.4);line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">× No longitudinal pattern detection</div>
+            <div style="font-size:13.5px;color:rgba(0,0,0,0.4);line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">× Generic text — same for every patient</div>
+            <div style="font-size:13.5px;color:rgba(0,0,0,0.4);line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">× No military or operational context</div>
+            <div style="font-size:13.5px;color:rgba(0,0,0,0.4);line-height:1.5;padding:8px 0;">× No safety flag intelligence</div>
           </div>
         </div>
-        <div style="background:rgba(255,255,255,0.09);border-radius:10px;padding:1.75rem;border:1px solid rgba(255,255,255,0.1);">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:1.25rem;">Falcon Mind AI</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.5;">✓ Full narrative clinical interpretation</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.5;">✓ Cross-references all completed assessments</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.5;">✓ Flags symptom trajectory &amp; pattern changes</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.5;">✓ Military &amp; operational context built-in</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.5;">✓ Psychopathy &amp; high-risk pattern detection</div>
-            <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.5;">✓ Clinician-controlled — save when ready</div>
+        <div style="padding:2rem 0 0 2rem;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#0a4f3c;margin-bottom:1.25rem;">Falcon Mind AI</div>
+          <div style="display:flex;flex-direction:column;">
+            <div style="font-size:13.5px;color:#0a0a0a;line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">✓ Full narrative clinical interpretation</div>
+            <div style="font-size:13.5px;color:#0a0a0a;line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">✓ Cross-references all completed assessments</div>
+            <div style="font-size:13.5px;color:#0a0a0a;line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">✓ Flags symptom trajectory &amp; pattern changes</div>
+            <div style="font-size:13.5px;color:#0a0a0a;line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">✓ Military &amp; operational context built-in</div>
+            <div style="font-size:13.5px;color:#0a0a0a;line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.08);">✓ Psychopathy &amp; high-risk pattern detection</div>
+            <div style="font-size:13.5px;color:#0a0a0a;line-height:1.5;padding:8px 0;">✓ Clinician-controlled — save when ready</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="sect-sep dark"><div class="sect-sep-line"></div><div class="sect-sep-label">Access</div><div class="sect-sep-line"></div></div>
 
   <!-- CLOSING -->
   <div class="closing">
@@ -891,11 +911,15 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <div class="tab-panel" id="tab-military">
 
   <div style="display:flex;flex-direction:column;height:calc(100vh - 64px);" class="page-section" id="section-military-overview">
-  <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,2vh,2rem);flex-shrink:0;">
+  <div style="flex-shrink:0;position:relative;overflow:hidden;">
+    <div class="hero-bg-img" style="position:absolute;inset:0;background:url('military-heroimage.png') center/cover no-repeat;opacity:0.5;pointer-events:none;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.45) 60%,rgba(0,0,0,0.15) 100%);pointer-events:none;"></div>
+  <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,2vh,2rem);position:relative;z-index:2;">
     <div class="platform-hero-kicker">Confidential · Armed Forces Medical Services · Gulf Region</div>
     <h1 class="platform-hero-title" style="font-size:clamp(2rem,5.5vh,5rem);margin-top:0.5rem;">Military<br>Mental<br><em>Intelligence</em></h1>
     <p class="platform-hero-sub" style="margin-top:0.75rem;font-size:12px;">44 validated psychometric instruments. AI-powered clinical triage. Purpose-built for Gulf Armed Forces — pre-entry through veteran reintegration.</p>
   </div>
+  </div><!-- /hero-text-wrapper -->
 
   <!-- 3 POPULATION CARDS -->
   <div class="pop-grid page-section" id="section-military-battery" style="flex:1;grid-template-rows:unset;min-height:0;">
@@ -1063,15 +1087,18 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <div class="tab-panel" id="tab-mngha">
 
   <div style="display:flex;flex-direction:column;height:calc(100vh - 64px);" class="page-section" id="section-mngha-populations">
-
-  <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,1.5vh,1.5rem);flex-shrink:0;">
+  <div style="flex-shrink:0;position:relative;overflow:hidden;">
+    <div class="hero-bg-img" style="position:absolute;inset:0;background:url('mngha-heroimge.png') center/cover no-repeat;opacity:0.5;pointer-events:none;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.45) 60%,rgba(0,0,0,0.15) 100%);pointer-events:none;"></div>
+  <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,1.5vh,1.5rem);position:relative;z-index:2;">
     <div class="platform-hero-kicker">Confidential · Ministry of National Guard Health Affairs · Saudi Arabia</div>
     <h1 class="platform-hero-title" style="font-size:clamp(2rem,5vh,4.5rem);margin-top:0.5rem;">Mental Health<br>Intelligence for<br><em>1.3M Beneficiaries</em></h1>
     <p class="platform-hero-sub" style="margin-top:0.75rem;font-size:12px;">170 clinically validated Arabic-first assessment tools. AI-powered triage. Built for the unique population structure of SANG personnel, their families, civilian staff, and academic communities.</p>
   </div>
+  </div><!-- /hero-text-wrapper -->
 
   <!-- 5 POPULATION CARDS -->
-  <div class="mngha-pop-grid" style="grid-template-rows:clamp(220px,38vh,320px);border-top:1px solid var(--border);">
+  <div class="mngha-pop-grid" style="flex:1;min-height:0;grid-template-rows:1fr;border-top:1px solid var(--border);">
       <div class="mngha-pop-card">
         <div class="mngha-pop-card-bg"></div>
         <div class="mngha-pop-card-texture"></div>
