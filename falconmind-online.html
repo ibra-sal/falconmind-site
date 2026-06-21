@@ -373,8 +373,27 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   .closing { padding: 3rem 1rem; }
   .closing-stats { flex-wrap: wrap; gap: 1.5rem; }
 
-  /* alib tabs wrap */
-  .alib-pop-tabs { gap: 4px; }
+  /* alib tabs */
+  .alib-pop-tabs { gap: 4px; overflow-x: auto; flex-wrap: nowrap !important; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .alib-pop-tab { white-space: nowrap; flex-shrink: 0; }
+  .alib-tab-group-label { display: none; }
+
+  /* inline padding overrides */
+  div[style*="padding:4rem 3rem"] { padding: 2rem 1rem !important; }
+  div[style*="padding:5rem 3rem"] { padding: 2.5rem 1rem !important; }
+  div[style*="padding:5rem 2rem"] { padding: 2.5rem 1rem !important; }
+  div[style*="padding:4rem 2rem"] { padding: 2rem 1rem !important; }
+
+  /* science ref table */
+  div[style*="grid-template-columns:120px 1fr 140px 80px"] { grid-template-columns: 1fr auto !important; gap: 4px; }
+  div[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; }
+
+  /* matrix cards */
+  .matrix-panel-dark { grid-template-columns: 1fr !important; }
+
+  /* platform grid 1-col on mobile */
+  .platform-grid { grid-template-columns: 1fr !important; }
+  .lib-grid { grid-template-columns: 1fr !important; }
 
   /* footer */
   .footer-inner { flex-direction: column; gap: 2rem; }
@@ -609,6 +628,8 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
       .alib-card-pop.gold { color:#b07d2b; }
       .alib-card-pop.muted { color:rgba(0,0,0,0.35); }
       .alib-hidden { }
+      .alib-extra { display: none !important; }
+      .alib-extra.shown { display: flex !important; }
       .alib-toggle-wrap { margin-top:1.5rem; }
       .alib-toggle { width:100%; padding:16px; background:#0d1520; color:#fff; border:none; border-radius:8px; font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.04em; cursor:pointer; transition:background 0.2s; }
       .alib-toggle:hover { background:#162240; }
@@ -1507,6 +1528,7 @@ function switchTab(tab, el, opts) {
   document.getElementById('tab-' + tab).classList.add('active');
   if (el) el.classList.add('active');
   if (options.scrollTop !== false) window.scrollTo(0, 0);
+  sessionStorage.setItem('activeTab', tab);
   closeMegaMenus();
 }
 
@@ -1566,31 +1588,66 @@ function toggleSciTable(btn) {
   btn.textContent = hidden ? 'Hide ↑' : 'View all 23 assessments ↓';
 }
 
+function initAlibCards() {
+  ['preentry','activeduty','veterans','sang','civilian','spouses','students'].forEach(pop => {
+    const grid = document.getElementById('grid-' + pop);
+    if (!grid) return;
+    [...grid.querySelectorAll('.alib-card')].forEach((c, i) => { if (i >= 6) c.classList.add('alib-extra'); });
+  });
+}
+
 function switchAlib(pop, btn) {
   document.querySelectorAll('.alib-pop-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.alib-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('alib-' + pop).classList.add('active');
+  sessionStorage.setItem('alibPop', pop);
 }
 
 function toggleAlibPanel(pop, btn) {
   const grid = document.getElementById('grid-' + pop);
-  const hidden = [...grid.querySelectorAll('.alib-card.alib-hidden')];
+  const extras = [...grid.querySelectorAll('.alib-extra')];
   const expanded = btn.dataset.expanded === '1';
   if (expanded) {
-    hidden.forEach(c => c.classList.add('alib-hidden'));
-    grid.querySelectorAll('.alib-card').forEach(c => { if (c.dataset.wasHidden) c.classList.add('alib-hidden'); });
+    extras.forEach(c => c.classList.remove('shown'));
     btn.dataset.expanded = '0';
     btn.textContent = btn.dataset.showLabel;
   } else {
-    grid.querySelectorAll('.alib-card').forEach(c => {
-      if (c.classList.contains('alib-hidden')) { c.dataset.wasHidden = '1'; c.classList.remove('alib-hidden'); }
-    });
+    extras.forEach(c => c.classList.add('shown'));
     btn.dataset.showLabel = btn.textContent;
     btn.dataset.expanded = '1';
-    btn.textContent = 'Hide extended assessments ↑';
+    btn.textContent = 'Show fewer ↑';
   }
 }
+
+// Scroll + state persistence
+window.addEventListener('beforeunload', () => {
+  sessionStorage.setItem('savedScrollY', window.scrollY);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  initAlibCards();
+
+  // Restore active tab
+  const savedTab = sessionStorage.getItem('activeTab');
+  if (savedTab) {
+    const navTab = document.querySelector('.nav-tab[data-tab="' + savedTab + '"]');
+    if (navTab) switchTab(savedTab, navTab, { scrollTop: false });
+  }
+
+  // Restore alib population tab
+  const savedPop = sessionStorage.getItem('alibPop');
+  if (savedPop) {
+    const popBtn = document.querySelector('.alib-pop-tab[onclick*="' + savedPop + '"]');
+    if (popBtn) switchAlib(savedPop, popBtn);
+  }
+
+  // Restore scroll position
+  const savedScroll = sessionStorage.getItem('savedScrollY');
+  if (savedScroll) {
+    requestAnimationFrame(() => window.scrollTo(0, +savedScroll));
+  }
+});
 </script>
 
 </body>
