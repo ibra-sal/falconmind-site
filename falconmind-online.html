@@ -2384,9 +2384,9 @@ var alibMeta = {
 };
 
 function switchAlib(pop, btn) {
-  document.querySelectorAll('.alib-seba-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#section-platform-library .alib-seba-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.alib-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#section-platform-library .alib-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('alib-' + pop).classList.add('active');
   var m = alibMeta[pop];
   if (m) {
