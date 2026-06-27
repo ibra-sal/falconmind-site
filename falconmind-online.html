@@ -914,8 +914,36 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
       <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.15;color:#0a0a0a;margin-bottom:0.75rem;letter-spacing:-0.02em;">What the Clinician Sees</h2>
       <p style="font-size:15px;color:rgba(0,0,0,0.45);line-height:1.7;margin-bottom:3.5rem;max-width:520px;">Every result, every pattern, every risk flag — in one screen. No chasing paperwork, no manual scoring.</p>
 
-      <!-- CLINICIAN HOME DASHBOARD MOCKUP -->
-      <div style="margin-bottom:3.5rem;">
+      <!-- INTERACTIVE DEMO WRAPPER -->
+      <div id="clinician-demo" style="margin-bottom:3.5rem;">
+
+        <!-- Step indicator -->
+        <div id="demo-steps" style="display:flex;align-items:center;gap:0;margin-bottom:1.25rem;font-family:'Inter',sans-serif;">
+          <div id="step-dot-1" style="display:flex;align-items:center;gap:6px;">
+            <div style="width:22px;height:22px;border-radius:50%;background:#9a9d78;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">1</div>
+            <span style="font-size:11px;font-weight:600;color:#9a9d78;">Dashboard</span>
+          </div>
+          <div style="width:32px;height:1px;background:#d8dbbf;margin:0 6px;"></div>
+          <div id="step-dot-2" style="display:flex;align-items:center;gap:6px;opacity:0.35;">
+            <div style="width:22px;height:22px;border-radius:50%;background:#9a9d78;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">2</div>
+            <span style="font-size:11px;font-weight:600;color:#9a9d78;">Patient Profile</span>
+          </div>
+          <div style="width:32px;height:1px;background:#d8dbbf;margin:0 6px;"></div>
+          <div id="step-dot-3" style="display:flex;align-items:center;gap:6px;opacity:0.35;">
+            <div style="width:22px;height:22px;border-radius:50%;background:#9a9d78;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">3</div>
+            <span style="font-size:11px;font-weight:600;color:#9a9d78;">Assessment Result</span>
+          </div>
+          <div id="demo-reset-btn" onclick="demoGoTo(1)" style="margin-left:auto;font-size:11px;color:rgba(0,0,0,0.35);cursor:pointer;display:none;padding:4px 10px;border:0.5px solid #d8dbbf;border-radius:6px;">↺ Reset</div>
+        </div>
+
+        <!-- Hint -->
+        <div id="demo-hint" style="font-family:'Inter',sans-serif;font-size:12px;color:#9a9d78;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+          <span style="font-size:14px;">👆</span>
+          <span id="demo-hint-text">Click <strong>Mohamed Zaki</strong> in Priority Alerts to open his profile</span>
+        </div>
+
+      <!-- STEP 1: CLINICIAN HOME DASHBOARD MOCKUP -->
+      <div id="demo-screen-1" style="">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.35);margin-bottom:1rem;">Clinician Dashboard</div>
         <div style="width:100%;background:#f5f5f0;border-radius:14px;border:1px solid #d8dbbf;box-shadow:0 4px 24px rgba(0,0,0,0.07);overflow:hidden;">
           <!-- app header -->
@@ -974,8 +1002,8 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
                 </div>
                 <span style="font-size:16px;color:rgba(0,0,0,0.25);">›</span>
               </div>
-              <!-- alert: high 1 -->
-              <div style="padding:12px 18px;border-bottom:0.5px solid #f0ede6;background:#fff;border-left:3px solid #e8913a;display:flex;align-items:center;justify-content:space-between;">
+              <!-- alert: high 1 — CLICKABLE -->
+              <div onclick="demoGoTo(2)" style="padding:12px 18px;border-bottom:0.5px solid #f0ede6;background:#fff;border-left:3px solid #e8913a;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='#fffbf7'" onmouseout="this.style.background='#fff'">
                 <div>
                   <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
                     <span style="background:#e8913a;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;">HIGH</span>
@@ -984,7 +1012,7 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
                   <div style="font-size:13px;font-weight:600;color:#0a0a0a;">Mohamed Zaki</div>
                   <div style="font-size:11px;color:rgba(0,0,0,0.45);margin-top:1px;">Extremely Severe</div>
                 </div>
-                <span style="font-size:16px;color:rgba(0,0,0,0.25);">›</span>
+                <span style="font-size:16px;color:#9a9d78;">›</span>
               </div>
               <!-- alert: high 2 -->
               <div style="padding:12px 18px;border-bottom:0.5px solid #e8e3da;background:#fff;border-left:3px solid #e8913a;display:flex;align-items:center;justify-content:space-between;">
@@ -1086,8 +1114,10 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
         </div>
       </div>
 
-      <!-- PATIENT PROFILE MOCKUP -->
-      <div style="margin-bottom:3.5rem;">
+      </div><!-- /demo-screen-1 -->
+
+      <!-- STEP 2: PATIENT PROFILE MOCKUP -->
+      <div id="demo-screen-2" style="display:none;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.35);margin-bottom:1rem;">Patient Profile View</div>
         <div style="width:100%;background:#F5F4F0;border-radius:14px;border:1px solid #d8dbbf;box-shadow:0 4px 24px rgba(0,0,0,0.07);overflow:hidden;">
           <!-- app header -->
@@ -1145,12 +1175,15 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
               <div style="font-size:10px;color:rgba(0,0,0,0.4);line-height:1.4;">12 Jun<br>10:02 am</div>
               <div style="font-size:14px;color:rgba(0,0,0,0.3);text-align:center;">···</div>
             </div>
-            <!-- GAD-7 none-minimal -->
-            <div style="display:grid;grid-template-columns:1fr 2fr 110px 28px;align-items:center;padding:12px 20px;border-bottom:0.5px solid #f0ede6;">
+            <!-- GAD-7 none-minimal — 3rd row, clickable ··· -->
+            <div style="display:grid;grid-template-columns:1fr 2fr 110px 28px;align-items:center;padding:12px 20px;border-bottom:0.5px solid #f0ede6;position:relative;">
               <div style="font-size:12px;font-weight:500;color:#0a0a0a;">GAD-7</div>
               <div><div style="font-size:11px;font-weight:600;color:#0f6e56;">None-Minimal</div><div style="font-size:10px;color:#0f6e56;margin-top:1px;">↘ −5 pts</div></div>
               <div style="font-size:10px;color:rgba(0,0,0,0.4);line-height:1.4;">7 Mar<br>03:02 pm</div>
-              <div style="font-size:14px;color:rgba(0,0,0,0.3);text-align:center;">···</div>
+              <div id="demo-dots" onclick="document.getElementById('demo-dropdown').style.display=document.getElementById('demo-dropdown').style.display==='block'?'none':'block'" style="font-size:14px;color:#9a9d78;text-align:center;cursor:pointer;font-weight:700;">···</div>
+              <div id="demo-dropdown" style="display:none;position:absolute;right:16px;top:38px;background:#fff;border:0.5px solid #d8dbbf;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:10;min-width:130px;">
+                <div onclick="demoGoTo(3)" style="padding:10px 14px;font-size:12px;font-weight:600;color:#9a9d78;cursor:pointer;border-radius:8px;" onmouseover="this.style.background='#f5f5f0'" onmouseout="this.style.background='#fff'">View Results →</div>
+              </div>
             </div>
             <!-- PHQ-9 mild -->
             <div style="display:grid;grid-template-columns:1fr 2fr 110px 28px;align-items:center;padding:12px 20px;border-bottom:0.5px solid #f0ede6;">
@@ -1194,6 +1227,10 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
         </div>
       </div>
 
+      </div><!-- /demo-screen-2 -->
+
+      <!-- STEP 3: ASSESSMENT RESULT + AI SUMMARY -->
+      <div id="demo-screen-3" style="display:none;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;">
 
         <!-- LEFT: Assessment Result View -->
@@ -1312,9 +1349,33 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
           </div>
         </div>
 
-      </div>
+      </div><!-- /grid -->
+      </div><!-- /demo-screen-3 -->
+
+      </div><!-- /clinician-demo -->
+
     </div>
   </div>
+
+  <script>
+  function demoGoTo(step) {
+    [1,2,3].forEach(function(n){
+      var s = document.getElementById('demo-screen-'+n);
+      if (s) s.style.display = n===step ? '' : 'none';
+      var d = document.getElementById('step-dot-'+n);
+      if (d) d.style.opacity = n<=step ? '1' : '0.35';
+    });
+    var dd = document.getElementById('demo-dropdown');
+    if (dd) dd.style.display = 'none';
+    var reset = document.getElementById('demo-reset-btn');
+    if (reset) reset.style.display = step>1 ? 'flex' : 'none';
+    var hint = document.getElementById('demo-hint');
+    var hintText = document.getElementById('demo-hint-text');
+    if (step===1) { hintText.innerHTML = 'Click <strong>Mohamed Zaki</strong> in Priority Alerts to open his profile'; hint.style.display='flex'; }
+    else if (step===2) { hintText.innerHTML = 'Click <strong>···</strong> on the 3rd GAD-7 row, then select <strong>View Results</strong>'; hint.style.display='flex'; }
+    else { hint.style.display='none'; }
+  }
+  </script>
 
   <!-- ASSESSMENT LIBRARY -->
   <div class="sect-light page-section" id="section-platform-library" style="padding:4rem 2rem 5rem;background:#f5f5f0;">
