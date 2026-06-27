@@ -846,19 +846,50 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
           <div style="font-family:'Inter',sans-serif;font-size:17px;color:#0a0a0a;line-height:1.6;">✓ Clinician-controlled — save when ready</div>
         </div>
       </div>
-      <div style="background:#6b7050;padding:3rem 2.5rem;display:flex;flex-direction:column;gap:16px;justify-content:center;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.5rem 1.75rem;">
-          <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;">AI Narrative</div>
-          <div style="font-family:'Inter',sans-serif;font-size:14px;color:#fff;line-height:1.6;">Moderate depression with elevated PTSD markers. Pattern consistent with operational stress exposure. Recommend immediate clinical review.</div>
+      <div style="background:#6b7050;padding:2rem 2rem;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+
+        <!-- Score rows -->
+        <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:2px;">Assessment Scores · Session 3 of 3</div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#fff;min-width:60px;">PHQ-9</span>
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);flex:1;">18 / 27</span>
+          <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#ef4444;background:rgba(239,68,68,0.15);padding:2px 8px;border-radius:4px;">Severe</span>
+          <span style="font-size:13px;color:#ef4444;" title="Worsening">↑</span>
         </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.5rem 1.75rem;">
-          <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;">Risk Flag</div>
-          <div style="font-family:'Inter',sans-serif;font-size:1.1rem;color:#fff;font-weight:500;">HIGH — Trajectory worsening</div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#fff;min-width:60px;">PCL-5</span>
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);flex:1;">52 / 80</span>
+          <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#ef4444;background:rgba(239,68,68,0.15);padding:2px 8px;border-radius:4px;">Probable PTSD</span>
+          <span style="font-size:13px;color:#ef4444;">↑</span>
         </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.5rem 1.75rem;">
-          <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;">Population Context</div>
-          <div style="font-family:'Inter',sans-serif;font-size:1.1rem;color:#fff;font-weight:500;">Active Duty · Combat Deployment</div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#fff;min-width:60px;">DAR-5</span>
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);flex:1;">14 / 25</span>
+          <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#f59e0b;background:rgba(245,158,11,0.15);padding:2px 8px;border-radius:4px;">Elevated</span>
+          <span style="font-size:13px;color:#22c55e;">↓</span>
         </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#fff;min-width:60px;">OLBI</span>
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);flex:1;">38 / 64</span>
+          <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#f59e0b;background:rgba(245,158,11,0.15);padding:2px 8px;border-radius:4px;">Burnout risk</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.3);">→</span>
+        </div>
+
+        <!-- AI Narrative -->
+        <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:1rem 1.1rem;border-left:3px solid rgba(255,255,255,0.35);">
+          <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">AI Narrative</div>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;color:#fff;line-height:1.65;">Severe depression with probable PTSD — PHQ-9 and PCL-5 worsening across 3 sessions. Anger trajectory improving but burnout stable. Pattern consistent with untreated operational trauma. Cross-assessment clustering indicates high clinical urgency.</div>
+        </div>
+
+        <!-- Suggestion -->
+        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.85rem 1.1rem;display:flex;align-items:flex-start;gap:10px;">
+          <span style="font-size:15px;flex-shrink:0;">💡</span>
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px;">AI Suggestion</div>
+            <div style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.55;">Refer for trauma-focused CBT. Schedule follow-up within 7 days. Consider MDRS-22 extended assessment.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
