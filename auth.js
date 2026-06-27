@@ -1,8 +1,8 @@
-/** Gate flow: index.html (login) → home-page.html (site) */
+/** Gate flow: index.html (login) → falconmind-online.html (site) */
 const FM_AUTH_KEY = 'fm_auth';
 const FM_PASSWORD = 'Sebasaudivision2030';
 const FM_LOGIN_PAGE = '/index.html';
-const FM_SITE_PAGE = '/home-page.html';
+const FM_SITE_PAGE = '/falconmind-online.html';
 
 function fmIsAuthed() {
   return sessionStorage.getItem(FM_AUTH_KEY) === '1';
