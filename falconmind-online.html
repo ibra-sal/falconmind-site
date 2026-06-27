@@ -914,6 +914,178 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
       <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.15;color:#0a0a0a;margin-bottom:0.75rem;letter-spacing:-0.02em;">What the Clinician Sees</h2>
       <p style="font-size:15px;color:rgba(0,0,0,0.45);line-height:1.7;margin-bottom:3.5rem;max-width:520px;">Every result, every pattern, every risk flag — in one screen. No chasing paperwork, no manual scoring.</p>
 
+      <!-- CLINICIAN HOME DASHBOARD MOCKUP -->
+      <div style="margin-bottom:3.5rem;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.35);margin-bottom:1rem;">Clinician Dashboard</div>
+        <div style="width:100%;background:#f5f5f0;border-radius:14px;border:1px solid #d8dbbf;box-shadow:0 4px 24px rgba(0,0,0,0.07);overflow:hidden;">
+          <!-- app header -->
+          <div style="background:#2c3020;padding:10px 18px;display:flex;align-items:center;gap:8px;">
+            <div style="background:#9a9d78;color:#fff;font-size:10px;font-weight:700;width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;">F</div>
+            <span style="color:#fff;font-size:12px;font-weight:600;letter-spacing:0.04em;"><span style="color:#9a9d78;">FALCON</span> MIND</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+              <div style="position:relative;"><span style="font-size:16px;color:rgba(255,255,255,0.6);">🔔</span><span style="position:absolute;top:-3px;right:-4px;background:#c01515;color:#fff;font-size:7px;font-weight:700;border-radius:8px;padding:0 3px;">9+</span></div>
+              <div style="width:26px;height:26px;border-radius:50%;background:#9a9d78;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;">DA</div>
+            </div>
+          </div>
+          <!-- greeting bar -->
+          <div style="background:#fff;padding:14px 20px 12px;border-bottom:0.5px solid #e8e3da;display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="font-size:17px;font-weight:600;color:#0a0a0a;">Good afternoon, Dr. Ahmed</div>
+              <div style="font-size:11px;color:rgba(0,0,0,0.4);margin-top:2px;">Here's your overview for today</div>
+            </div>
+            <div style="font-size:11px;color:rgba(0,0,0,0.35);padding-top:4px;">Sat, 27 June</div>
+          </div>
+          <!-- stat chips -->
+          <div style="background:#fff;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:0.5px solid #e8e3da;">
+            <div style="padding:16px 20px;display:flex;align-items:center;gap:12px;border-right:0.5px solid #e8e3da;">
+              <span style="font-size:20px;color:rgba(0,0,0,0.25);">👥</span>
+              <div><div style="font-size:22px;font-weight:600;color:#0a0a0a;">4</div><div style="font-size:11px;color:rgba(0,0,0,0.4);">Total Patients</div></div>
+            </div>
+            <div style="padding:16px 20px;display:flex;align-items:center;gap:12px;border-right:0.5px solid #e8e3da;">
+              <span style="font-size:20px;color:rgba(0,0,0,0.25);">✅</span>
+              <div><div style="font-size:22px;font-weight:600;color:#0a0a0a;">0</div><div style="font-size:11px;color:rgba(0,0,0,0.4);">Completed Today</div></div>
+            </div>
+            <div style="padding:16px 20px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:20px;color:rgba(0,0,0,0.25);">🕐</span>
+              <div><div style="font-size:22px;font-weight:600;color:#0a0a0a;">56</div><div style="font-size:11px;color:rgba(0,0,0,0.4);">Pending Requests</div></div>
+            </div>
+          </div>
+          <!-- two col layout -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+            <!-- LEFT: alerts + recent -->
+            <div style="border-right:0.5px solid #e8e3da;">
+              <!-- priority alerts header -->
+              <div style="padding:12px 18px 10px;background:#fff;border-bottom:0.5px solid #e8e3da;display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0a0a0a;">Priority Alerts</span>
+                  <span style="background:#c01515;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;">3</span>
+                </div>
+                <span style="font-size:14px;color:rgba(0,0,0,0.3);">⤢</span>
+              </div>
+              <!-- alert: critical -->
+              <div style="padding:12px 18px;border-bottom:0.5px solid #f0ede6;background:#fff;border-left:3px solid #c01515;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                    <span style="background:#c01515;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;">CRITICAL</span>
+                    <span style="font-size:10px;color:rgba(0,0,0,0.35);">108d ago</span>
+                  </div>
+                  <div style="font-size:13px;font-weight:600;color:#0a0a0a;">Abdelrahman</div>
+                  <div style="font-size:11px;color:rgba(0,0,0,0.45);margin-top:1px;">Suicidality risk — immediate review required</div>
+                </div>
+                <span style="font-size:16px;color:rgba(0,0,0,0.25);">›</span>
+              </div>
+              <!-- alert: high 1 -->
+              <div style="padding:12px 18px;border-bottom:0.5px solid #f0ede6;background:#fff;border-left:3px solid #e8913a;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                    <span style="background:#e8913a;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;">HIGH</span>
+                    <span style="font-size:10px;color:rgba(0,0,0,0.35);">15d ago</span>
+                  </div>
+                  <div style="font-size:13px;font-weight:600;color:#0a0a0a;">Mohamed Zaki</div>
+                  <div style="font-size:11px;color:rgba(0,0,0,0.45);margin-top:1px;">Extremely Severe</div>
+                </div>
+                <span style="font-size:16px;color:rgba(0,0,0,0.25);">›</span>
+              </div>
+              <!-- alert: high 2 -->
+              <div style="padding:12px 18px;border-bottom:0.5px solid #e8e3da;background:#fff;border-left:3px solid #e8913a;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                    <span style="background:#e8913a;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;">HIGH</span>
+                    <span style="font-size:10px;color:rgba(0,0,0,0.35);">85d ago</span>
+                  </div>
+                  <div style="font-size:13px;font-weight:600;color:#0a0a0a;">Tarek Fahmy</div>
+                  <div style="font-size:11px;color:rgba(0,0,0,0.45);margin-top:1px;">Severe</div>
+                </div>
+                <span style="font-size:16px;color:rgba(0,0,0,0.25);">›</span>
+              </div>
+              <!-- recent activity header -->
+              <div style="padding:12px 18px 10px;background:#f8f7f3;border-bottom:0.5px solid #e8e3da;border-top:0.5px solid #e8e3da;display:flex;justify-content:space-between;">
+                <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0a0a0a;">Recent Activity</span>
+                <span style="font-size:14px;color:rgba(0,0,0,0.3);">⤢</span>
+              </div>
+              <!-- activity rows -->
+              <div style="background:#fff;">
+                <div style="padding:10px 18px;border-bottom:0.5px solid #f0ede6;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#0f6e56;flex-shrink:0;"></div>
+                  <div style="font-size:12px;color:#0a0a0a;flex:1;"><strong>Mohamed Zaki</strong> completed <strong>GAD-7</strong><br><span style="font-size:10px;color:#b07a00;">Mild</span> <span style="font-size:10px;color:rgba(0,0,0,0.35);">· 15d ago</span></div>
+                </div>
+                <div style="padding:10px 18px;border-bottom:0.5px solid #f0ede6;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#c01515;flex-shrink:0;"></div>
+                  <div style="font-size:12px;color:#0a0a0a;flex:1;"><strong>Tarek Fahmy</strong> completed <strong>DASS-21</strong><br><span style="font-size:10px;color:#c01515;">Severe</span> <span style="font-size:10px;color:rgba(0,0,0,0.35);">· 85d ago</span></div>
+                </div>
+                <div style="padding:10px 18px;border-bottom:0.5px solid #f0ede6;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#0f6e56;flex-shrink:0;"></div>
+                  <div style="font-size:12px;color:#0a0a0a;flex:1;"><strong>Tarek Fahmy</strong> completed <strong>DAR-5</strong><br><span style="font-size:10px;color:#0f6e56;">Normal Range</span> <span style="font-size:10px;color:rgba(0,0,0,0.35);">· 85d ago</span></div>
+                </div>
+                <div style="padding:10px 18px;border-bottom:0.5px solid #f0ede6;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#0f6e56;flex-shrink:0;"></div>
+                  <div style="font-size:12px;color:#0a0a0a;flex:1;"><strong>Tarek Fahmy</strong> completed <strong>DAR-5</strong><br><span style="font-size:10px;color:#0f6e56;">Normal Range</span> <span style="font-size:10px;color:rgba(0,0,0,0.35);">· 85d ago</span></div>
+                </div>
+                <div style="padding:10px 18px;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#e8913a;flex-shrink:0;"></div>
+                  <div style="font-size:12px;color:#0a0a0a;flex:1;"><strong>Abdelrahman</strong> completed <strong>PHQ-9</strong><br><span style="font-size:10px;color:#b07a00;">Moderate</span> <span style="font-size:10px;color:rgba(0,0,0,0.35);">· 108d ago</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT: pending deadlines -->
+            <div style="background:#fff;">
+              <div style="padding:12px 18px 10px;border-bottom:0.5px solid #e8e3da;display:flex;justify-content:space-between;">
+                <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0a0a0a;">Pending Deadlines</span>
+                <span style="font-size:14px;color:rgba(0,0,0,0.3);">⤢</span>
+              </div>
+              <!-- deadline rows -->
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Abdelrahman</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">GAD-7</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 110d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Haitham</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">GAD-7</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 109d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Haitham</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">DAR-5</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 104d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Haitham</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">PID-5-SF</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 104d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Tarek Fahmy</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">PCL-5</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 104d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Haitham</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">PHQ-9</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 104d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Haitham</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">WHODAS 2.0</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 104d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Haitham</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">AUDIT</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 99d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:0.5px solid #f0ede6;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Mohamed Zaki</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">DAR-5</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 97d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;">
+                <div><div style="font-size:13px;font-weight:500;color:#0a0a0a;">Abdelrahman</div><div style="font-size:10px;color:rgba(0,0,0,0.4);">PCL-5</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:#c01515;font-weight:500;">Overdue 97d</span><span style="font-size:10px;border:0.5px solid #d8dbbf;padding:3px 10px;border-radius:5px;color:#0a0a0a;cursor:pointer;">Remind</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- bottom nav -->
+          <div style="background:#fff;border-top:0.5px solid #e8e3da;display:flex;justify-content:space-around;padding:8px 0 4px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;color:#9a9d78;font-weight:600;">🏠<span>Home</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;color:rgba(0,0,0,0.35);">👥<span>Clients</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;color:rgba(0,0,0,0.35);">📚<span>Library</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;color:rgba(0,0,0,0.35);">👤<span>Profile</span></div>
+          </div>
+        </div>
+      </div>
+
       <!-- PATIENT PROFILE MOCKUP -->
       <div style="margin-bottom:3.5rem;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.35);margin-bottom:1rem;">Patient Profile View</div>
