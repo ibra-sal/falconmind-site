@@ -2,7 +2,7 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/falconmind-online.html", "permanent": false }
+    { "source": "/", "destination": "/index.html", "permanent": false }
   ],
   "headers": [
     {
