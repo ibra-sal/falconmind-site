@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Falcon Mind — Restricted Access</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; overflow: hidden; background: #000; }
 
   body {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     display: flex; align-items: center; justify-content: center;
     height: 100vh;
     position: relative;
@@ -20,14 +20,53 @@
   .bg-img {
     position: absolute; inset: 0;
     background: url('hero-soldier.png') center/cover no-repeat;
-    opacity: 0.12;
+    opacity: 0.16;
     pointer-events: none;
+    filter: saturate(0.85) contrast(1.08);
   }
   .bg-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%);
     pointer-events: none;
   }
+
+  .bg-tactical { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .bg-tactical::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse at 78% 30%, black 0%, transparent 65%);
+  }
+  .radar { position: absolute; top: 20%; right: 6%; width: 340px; height: 340px; border: 1px solid rgba(255,255,255,0.06); border-radius: 50%; opacity: 0.6; }
+  .radar::before { content: ''; position: absolute; inset: 25%; border: 1px solid rgba(255,255,255,0.05); border-radius: 50%; }
+  .radar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(154,157,120,0.18) 0deg, transparent 70deg); animation: radar-sweep 6s linear infinite; }
+  @keyframes radar-sweep { to { transform: rotate(360deg); } }
+  @media(max-width:900px){ .radar { display: none; } }
+
+  .gate-scan {
+    position: absolute; left: 0; right: 0; height: 70px; top: -70px;
+    background: linear-gradient(to bottom, transparent, rgba(154,157,120,0.05) 70%, rgba(154,157,120,0.14) 99%, rgba(190,195,150,0.3) 100%);
+    animation: gate-scan-sweep 8s cubic-bezier(0.4,0,0.6,1) infinite;
+    pointer-events: none;
+  }
+  @keyframes gate-scan-sweep {
+    0% { transform: translateY(0); opacity: 0; }
+    8% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(calc(100vh + 70px)); opacity: 0; }
+  }
+
+  .status-ticker {
+    display: flex; align-items: center; gap: 9px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1.5rem;
+  }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s ease infinite; flex-shrink: 0; }
+  @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); } 50% { box-shadow: 0 0 0 6px rgba(74,222,128,0); } }
 
   .gate {
     position: relative; z-index: 2;
@@ -43,7 +82,7 @@
   }
 
   .gate-eyebrow {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 10px; font-weight: 500;
     letter-spacing: 0.35em; text-transform: uppercase;
     color: rgba(255,255,255,0.25);
@@ -56,9 +95,10 @@
   }
 
   .gate-title {
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 52px; font-weight: 900;
-    text-transform: uppercase; line-height: 0.92;
+    font-family: 'Archivo', sans-serif;
+    font-size: 52px; font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase; line-height: 0.94;
     color: #fff; text-align: center;
     margin-bottom: 0.5rem;
   }
@@ -78,8 +118,8 @@
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.12);
     color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 15px; font-weight: 500;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; font-weight: 500;
     letter-spacing: 0.1em;
     padding: 14px 48px 14px 18px;
     outline: none;
@@ -109,8 +149,8 @@
   .gate-toggle:hover { color: rgba(255,255,255,0.55); }
 
   .gate-error {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
     color: rgba(220,80,80,0.8);
     height: 14px; text-align: center; margin-bottom: 0.75rem;
   }
@@ -119,9 +159,9 @@
     width: 100%;
     background: #fff; color: #000;
     border: none; cursor: pointer;
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 18px; font-weight: 900;
-    letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: 'Archivo', sans-serif;
+    font-size: 15px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
     padding: 14px 0;
     transition: background 0.2s, color 0.2s;
   }
@@ -130,9 +170,9 @@
   .gate-footer {
     position: fixed; bottom: 28px; left: 50%;
     transform: translateX(-50%);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: rgba(255,255,255,0.12);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
     white-space: nowrap; z-index: 2;
   }
 
@@ -147,14 +187,19 @@
 
 <div class="bg-img"></div>
 <div class="bg-overlay"></div>
+<div class="bg-tactical">
+  <div class="radar"></div>
+  <div class="gate-scan"></div>
+</div>
 
 <div class="gate">
   <div class="gate-logo" style="display:flex;align-items:center;gap:10px;">
     <div style="width:36px;height:36px;background:#9a9d78;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-      <span style="font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:0;">F</span>
+      <span style="font-family:'Archivo',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:0;">F</span>
     </div>
-    <span style="font-family:'Inter',sans-serif;font-size:19px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;"><span style="color:#fff;">FALCON</span> <span style="color:#9a9d78;">MIND</span></span>
+    <span style="font-family:'Archivo',sans-serif;font-size:19px;font-weight:800;letter-spacing:0.03em;text-transform:uppercase;"><span style="color:#fff;">FALCON</span> <span style="color:#9a9d78;">MIND</span></span>
   </div>
+  <div class="status-ticker"><span class="status-dot"></span>System Operational</div>
   <div class="gate-eyebrow">Restricted Access</div>
   <div class="gate-title">Authorised<br>Personnel<br>Only</div>
   <p class="gate-sub">This platform is confidential.<br>Enter your access code to continue.</p>

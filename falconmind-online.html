@@ -8,6 +8,7 @@
 <title>Falcon Mind — Intelligence Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Big+Shoulders+Display:wght@700;800;900&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -20,6 +21,51 @@
   --sub: rgba(255,255,255,0.28);
 }
 body { background: var(--black); color: var(--white); font-family: 'Outfit', sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* HERO PHOTOS — restored, tactical overlays sit on top */
+.platform-hero-img, .hero-bg-img { opacity: 0.4 !important; }
+
+/* TACTICAL GRID + RADAR SWEEP on black heroes */
+.hero-tactical { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-tactical::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at 75% 35%, black 0%, transparent 65%); }
+.radar { position: absolute; top: 50%; right: 8%; width: 420px; height: 420px; transform: translateY(-55%); border: 1px solid rgba(255,255,255,0.07); border-radius: 50%; opacity: 0.7; }
+.radar::before { content: ''; position: absolute; inset: 25%; border: 1px solid rgba(255,255,255,0.06); border-radius: 50%; }
+.radar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(74,222,128,0.16) 0deg, transparent 70deg); animation: radar-sweep 5s linear infinite; }
+.radar-blip { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: rgba(74,222,128,0.8); animation: blip-fade 5s ease infinite; }
+@keyframes radar-sweep { to { transform: rotate(360deg); } }
+@keyframes blip-fade { 0%,15% { opacity: 0; } 20%,45% { opacity: 1; } 70%,100% { opacity: 0; } }
+@media(max-width:900px){ .radar { display: none; } }
+
+/* OPS CLOCK */
+.ops-clock { display: flex; gap: 2rem; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 1.25rem; }
+.ops-clock span b { color: rgba(255,255,255,0.7); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* HERO TITLE LINE REVEAL */
+.platform-hero-title { position: relative; z-index: 2; }
+
+/* MAGNETIC CTA */
+.hero-cta, .nav-cta, .closing-cta { will-change: transform; }
+
+/* SCROLL PROGRESS */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: #fff; width: 0%; z-index: 300; transition: width 0.1s linear; }
+
+/* STATUS TICKER */
+.status-ticker { display: flex; align-items: center; gap: 9px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 1rem; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s ease infinite; flex-shrink: 0; }
+@keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); } 50% { box-shadow: 0 0 0 6px rgba(74,222,128,0); } }
+
+/* SCROLL REVEAL */
+.js-reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.js-reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* TRUST STRIP */
+.trust-strip { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); background: #000; }
+.trust-item { padding: 1.75rem 1.5rem; border-right: 1px solid var(--border); text-align: center; transition: background 0.25s; }
+.trust-item:last-child { border-right: none; }
+.trust-item:hover { background: rgba(255,255,255,0.03); }
+.trust-item-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 0.45rem; }
+.trust-item-body { font-size: 12px; color: var(--muted); line-height: 1.6; }
+@media(max-width:768px){ .trust-strip { grid-template-columns: 1fr 1fr; } .trust-item { border-bottom: 1px solid var(--border); } }
 
 .sect-navy {
   background: #0d1520;
@@ -640,6 +686,8 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
 </head>
 <body>
 
+<div class="scroll-progress" id="scroll-progress"></div>
+
 <!-- NAV -->
 <nav>
   <a href="#" onclick="switchTab('platform',document.querySelector('[data-tab=platform].nav-tab'));window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
@@ -767,12 +815,20 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
   <div class="platform-hero page-section" id="section-platform-overview">
     <div class="platform-hero-img"></div>
     <div class="platform-hero-bg"></div>
+    <div class="hero-tactical">
+      <div class="radar">
+        <div class="radar-blip" style="top:30%;left:60%"></div>
+        <div class="radar-blip" style="top:55%;left:35%;animation-delay:1.2s"></div>
+        <div class="radar-blip" style="top:70%;left:65%;animation-delay:2.6s"></div>
+      </div>
+    </div>
     <div class="platform-hero-inner">
+      <div class="status-ticker"><span class="status-dot"></span>System Operational · Restricted Access</div>
       <div class="platform-hero-kicker">Falcon Mind · Clinical Intelligence Platform · Gulf Region</div>
-      <h1 class="platform-hero-title">Mental Health<br><em>Intelligence</em><br>Platform</h1>
+      <h1 class="platform-hero-title" data-scramble>Mental Health<br><em>Intelligence</em><br>Platform</h1>
       <div class="platform-hero-sub-row">
         <p class="platform-hero-sub">73 clinically validated assessment tools across all populations. Arabic-first. AI-powered triage. Purpose-built for Gulf institutional healthcare.</p>
-        <a href="https://app.falconmind.online" target="_blank" class="hero-cta">Access Platform ↗</a>
+        <a href="https://app.falconmind.online" target="_blank" class="hero-cta" data-magnetic>Access Platform ↗</a>
       </div>
     </div>
     <!-- STAT STRIP inside hero -->
@@ -782,6 +838,26 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
       <div class="platform-hero-stat"><span class="stat-num">AI</span><span class="stat-label">Clinical<br>Intelligence</span></div>
       <div class="platform-hero-stat"><span class="stat-num">NCA</span><span class="stat-label">Saudi Data<br>Compliant</span></div>
       <div class="platform-hero-stat"><span class="stat-num">HIMSS7</span><span class="stat-label">EMR<br>Compatible</span></div>
+    </div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="trust-item js-reveal">
+      <div class="trust-item-title">Peer-Reviewed</div>
+      <div class="trust-item-body">Every instrument validated in published clinical literature</div>
+    </div>
+    <div class="trust-item js-reveal">
+      <div class="trust-item-title">NATO-Deployed Evidence</div>
+      <div class="trust-item-body">Core batteries used by US, UK, and allied armed forces</div>
+    </div>
+    <div class="trust-item js-reveal">
+      <div class="trust-item-title">Gulf-Validated Arabic</div>
+      <div class="trust-item-body">Culturally adapted translations tested with regional populations</div>
+    </div>
+    <div class="trust-item js-reveal">
+      <div class="trust-item-title">NCA-Compliant</div>
+      <div class="trust-item-body">Saudi data sovereignty and national security standards</div>
     </div>
   </div>
 
@@ -1833,11 +1909,11 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
 
   <!-- CLOSING -->
   <div style="background:linear-gradient(135deg,#e8e5c8 0%,#d8dbbf 30%,#c8cba8 60%,#b8bb90 100%);padding:8rem 2rem;text-align:center;position:relative;overflow:hidden;">
-    <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;color:rgba(10,10,40,0.5);margin-bottom:2rem;">Authorised Access Only</div>
-    <h2 style="font-family:'Inter',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:600;color:#0a0a28;line-height:0.92;letter-spacing:-0.03em;margin-bottom:2rem;">YOUR CLINICAL<br>READINESS<br>STARTS HERE.</h2>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.35em;text-transform:uppercase;color:rgba(10,10,40,0.5);margin-bottom:2rem;">Authorised Access Only</div>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:700;color:#0a0a28;line-height:0.92;letter-spacing:-0.03em;margin-bottom:2rem;text-transform:uppercase;">YOUR CLINICAL<br>READINESS<br>STARTS HERE.</h2>
     <p style="font-family:'Inter',sans-serif;font-size:16px;color:rgba(10,10,40,0.6);max-width:480px;margin:0 auto 3rem;line-height:1.7;">Falcon Mind serves a select number of military and healthcare institutions — purpose-built for organisations where psychological readiness is mission-critical.</p>
-    <a href="https://app.falconmind.online" target="_blank" style="display:inline-block;background:#0a0a28;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;padding:18px 40px;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">Access Platform →</a>
-    <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(10,10,40,0.4);margin-top:1.5rem;">Confidential · For authorised personnel only</div>
+    <a href="https://app.falconmind.online" target="_blank" style="display:inline-block;background:#0a0a28;color:#fff;font-family:'Archivo',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:18px 40px;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">Access Platform →</a>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;color:rgba(10,10,40,0.4);margin-top:1.5rem;">Confidential · For authorised personnel only</div>
   </div>
 
 </div><!-- /tab-platform -->
@@ -1849,9 +1925,16 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
   <div style="flex-shrink:0;position:relative;overflow:hidden;">
     <div class="hero-bg-img" style="position:absolute;inset:0;background:url('military-heroimage.png') center/cover no-repeat;opacity:0.5;pointer-events:none;"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.45) 60%,rgba(0,0,0,0.15) 100%);pointer-events:none;"></div>
+    <div class="hero-tactical">
+      <div class="radar" style="width:300px;height:300px;">
+        <div class="radar-blip" style="top:40%;left:55%"></div>
+        <div class="radar-blip" style="top:62%;left:38%;animation-delay:1.8s"></div>
+      </div>
+    </div>
   <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,2vh,2rem);position:relative;z-index:2;">
+    <div class="status-ticker"><span class="status-dot"></span>Classified · AFMS Deployment Ready</div>
     <div class="platform-hero-kicker">Confidential · Armed Forces Medical Services · Gulf Region</div>
-    <h1 class="platform-hero-title" style="font-size:clamp(2rem,5.5vh,5rem);margin-top:0.5rem;">Military<br>Mental<br><em>Intelligence</em></h1>
+    <h1 class="platform-hero-title" data-scramble style="font-size:clamp(2rem,5.5vh,5rem);margin-top:0.5rem;">Military<br>Mental<br><em>Intelligence</em></h1>
     <p class="platform-hero-sub" style="margin-top:0.75rem;font-size:12px;">41 validated psychometric instruments. AI-powered clinical triage. Purpose-built for Gulf Armed Forces — pre-entry through veteran reintegration.</p>
   </div>
   </div><!-- /hero-text-wrapper -->
@@ -2149,9 +2232,16 @@ div,p,span,h1,h2,h3,h4,li,a:not(.nav-cta):not(.hero-cta):not(.mobile-menu-cta):n
   <div style="flex-shrink:0;position:relative;overflow:hidden;">
     <div class="hero-bg-img" style="position:absolute;inset:0;background:url('mngha-heroimge.png') center/cover no-repeat;opacity:0.5;pointer-events:none;"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.45) 60%,rgba(0,0,0,0.15) 100%);pointer-events:none;"></div>
+    <div class="hero-tactical">
+      <div class="radar" style="width:300px;height:300px;">
+        <div class="radar-blip" style="top:35%;left:58%"></div>
+        <div class="radar-blip" style="top:60%;left:40%;animation-delay:2.2s"></div>
+      </div>
+    </div>
   <div style="padding:clamp(1rem,2.5vh,2.5rem) 2rem clamp(0.75rem,1.5vh,1.5rem);position:relative;z-index:2;">
+    <div class="status-ticker"><span class="status-dot"></span>Confidential · MNGHA Proposal</div>
     <div class="platform-hero-kicker">Confidential · Ministry of National Guard Health Affairs · Saudi Arabia</div>
-    <h1 class="platform-hero-title" style="font-size:clamp(2rem,5vh,4.5rem);margin-top:0.5rem;">Mental Health<br>Intelligence for<br><em>1.3M Beneficiaries</em></h1>
+    <h1 class="platform-hero-title" data-scramble style="font-size:clamp(2rem,5vh,4.5rem);margin-top:0.5rem;">Mental Health<br>Intelligence for<br><em>1.3M Beneficiaries</em></h1>
     <p class="platform-hero-sub" style="margin-top:0.75rem;font-size:12px;">73+ clinically validated Arabic-first assessment tools. AI-powered triage. Built for the unique population structure of SANG personnel, their families, civilian staff, and academic communities.</p>
   </div>
   </div><!-- /hero-text-wrapper -->
@@ -3115,6 +3205,89 @@ window.addEventListener('scroll', () => {
 }
 </style>
 
+<style>
+/* ══ $100M TYPOGRAPHY SYSTEM ══════════════════════════════════ */
+/* Headlines: Archivo grotesk. Labels/ops: IBM Plex Mono.        */
+
+.platform-hero-title {
+  font-family: 'Archivo', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 0.98 !important;
+  font-size: clamp(2.8rem, 8.5vh, 6.5rem) !important;
+  text-transform: uppercase;
+}
+.platform-hero-title em { font-style: normal !important; color: rgba(255,255,255,0.32); }
+
+.sec-title, .closing-title {
+  font-family: 'Archivo', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+}
+.nav-logo { font-family: 'Archivo', sans-serif !important; font-weight: 800 !important; letter-spacing: -0.01em !important; }
+.nav-cta, .hero-cta, .closing-cta { font-family: 'Archivo', sans-serif !important; font-weight: 600 !important; letter-spacing: 0.04em !important; }
+
+/* Ops labels → mono */
+.platform-hero-kicker, .sec-label, .status-ticker, .ops-clock,
+.stat-label, .pop-card-kicker, .pop-card-stat, .fm-ticker-item,
+.trust-item-title, .nav-mega-eyebrow, .nav-mega-col-label, .sec-link {
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+}
+.nav-tab { font-family: 'IBM Plex Mono', monospace !important; font-size: 11.5px !important; font-weight: 500 !important; letter-spacing: 0.14em !important; }
+.stat-num, .sci-stat-num, .closing-stat-num, .mngha-pop-card-num {
+  font-family: 'Archivo', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+.pop-card-name, .mngha-pop-card-name { font-family: 'Archivo', sans-serif !important; font-weight: 600 !important; letter-spacing: -0.015em !important; }
+
+/* ══ DESIGNED HERO BACKGROUND ═════════════════════════════════ */
+.hero-tactical::before {
+  background:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 72% 42%, black 0%, transparent 68%);
+}
+.hero-tactical::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-radial-gradient(circle at 78% 42%, transparent 0 92px, rgba(255,255,255,0.05) 92px 93px),
+    radial-gradient(700px 500px at 78% 42%, rgba(90,130,180,0.07), transparent 70%),
+    radial-gradient(900px 600px at 10% 100%, rgba(60,110,80,0.05), transparent 70%);
+}
+.hero-scan {
+  position: absolute; left: 0; right: 0; height: 90px; top: -90px;
+  background: linear-gradient(to bottom, transparent, rgba(120,200,150,0.045) 70%, rgba(120,200,150,0.12) 99%, rgba(160,255,190,0.35) 100%);
+  animation: hero-scan-sweep 7s cubic-bezier(0.4,0,0.6,1) infinite;
+  pointer-events: none;
+}
+@keyframes hero-scan-sweep {
+  0% { transform: translateY(0); opacity: 0; }
+  8% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(calc(100vh + 90px)); opacity: 0; }
+}
+.hero-frame { position: absolute; inset: 16px; pointer-events: none; }
+.hero-frame span { position: absolute; width: 26px; height: 26px; border-color: rgba(255,255,255,0.22); border-style: solid; border-width: 0; }
+.hero-frame span:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.hero-frame span:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.hero-frame span:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.hero-frame span:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.hero-meta-tag {
+  position: absolute; top: 26px; right: 34px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.28);
+  text-align: right; line-height: 2;
+  pointer-events: none;
+}
+@media(max-width:900px){ .hero-meta-tag { display: none; } }
+</style>
+
 <script>
 (function(){
 
@@ -3128,11 +3301,6 @@ if(heroSection){
   ticker.innerHTML = '<div class="fm-ticker-inner">' + doubled.map(function(t){ return '<span class="fm-ticker-item">'+t+'</span>'; }).join('') + '</div>';
   heroSection.insertAdjacentElement('afterend', ticker);
 }
-
-
-
-
-});
 
 // ── SCROLL REVEAL ──────────────────────────────────────────────
 var sel = ['.platform-cell','.lib-cell','.stat-cell','.sci-stat','.sci-proof','.compare-item','.workflow-step','.gap-item-dark','.kaimrc-point-dark','.domain-card-dark','.sec-title','.sec-sub','.closing-title','.closing-sub'].join(',');
@@ -3235,6 +3403,116 @@ document.querySelectorAll('.fm-ov-card').forEach(function(card){
     card.style.background='#0d1520';
   });
 });
+
+// ── HERO TACTICAL LAYERS (scan beam, frame, meta tag) ─────────
+var heroMeta = ['FM-01 // PLATFORM CORE', 'FM-02 // AFMS DIVISION', 'FM-03 // MNGHA DIVISION'];
+document.querySelectorAll('.hero-tactical').forEach(function(t, i){
+  var scan = document.createElement('div'); scan.className = 'hero-scan'; t.appendChild(scan);
+  var frame = document.createElement('div'); frame.className = 'hero-frame';
+  for(var k = 0; k < 4; k++) frame.appendChild(document.createElement('span'));
+  t.appendChild(frame);
+  var meta = document.createElement('div'); meta.className = 'hero-meta-tag';
+  meta.innerHTML = (heroMeta[i] || 'FM // UNIT') + '<br>SEC-LEVEL 4 · EYES ONLY';
+  t.appendChild(meta);
+});
+
+// ── OPS CLOCK ──────────────────────────────────────────────────
+function padc(n){ return n < 10 ? '0'+n : n; }
+setInterval(function(){
+  var now = new Date();
+  var u = document.getElementById('clock-utc');
+  var a = document.getElementById('clock-ast');
+  if(u) u.textContent = padc(now.getUTCHours())+':'+padc(now.getUTCMinutes())+':'+padc(now.getUTCSeconds());
+  if(a) a.textContent = padc((now.getUTCHours()+3)%24)+':'+padc(now.getUTCMinutes())+':'+padc(now.getUTCSeconds());
+},1000);
+
+// ── TEXT DECRYPT SCRAMBLE ──────────────────────────────────────
+var SCRAMBLE_CHARS = '█▓▒░ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+function scrambleEl(el){
+  if(el.dataset.scrambling) return;
+  el.dataset.scrambling = '1';
+  var nodes = [];
+  (function collect(n){
+    n.childNodes.forEach(function(c){
+      if(c.nodeType === 3 && c.textContent.trim()) nodes.push({node:c, final:c.textContent});
+      else if(c.nodeType === 1) collect(c);
+    });
+  })(el);
+  var t0 = null, DUR = 900;
+  function frame(ts){
+    if(!t0) t0 = ts;
+    var p = Math.min((ts - t0) / DUR, 1);
+    nodes.forEach(function(o){
+      var reveal = Math.floor(o.final.length * p);
+      var out = o.final.slice(0, reveal);
+      for(var i = reveal; i < o.final.length; i++){
+        out += o.final[i] === ' ' ? ' ' : SCRAMBLE_CHARS[Math.floor(Math.random()*SCRAMBLE_CHARS.length)];
+      }
+      o.node.textContent = out;
+    });
+    if(p < 1) requestAnimationFrame(frame);
+    else delete el.dataset.scrambling;
+  }
+  requestAnimationFrame(frame);
+}
+var scrambleObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ scrambleEl(e.target); scrambleObs.unobserve(e.target); }
+  });
+},{threshold:0.3});
+document.querySelectorAll('[data-scramble]').forEach(function(el){ scrambleObs.observe(el); });
+var _origSwitchTab = window.switchTab;
+window.switchTab = function(tab, btn){
+  _origSwitchTab(tab, btn);
+  var panel = document.getElementById('tab-'+tab);
+  if(panel){ var h = panel.querySelector('[data-scramble]'); if(h) scrambleEl(h); }
+};
+
+// ── MAGNETIC CTA ───────────────────────────────────────────────
+document.querySelectorAll('[data-magnetic]').forEach(function(btn){
+  btn.addEventListener('mousemove',function(e){
+    var r = btn.getBoundingClientRect();
+    var x = (e.clientX - r.left - r.width/2) * 0.25;
+    var y = (e.clientY - r.top - r.height/2) * 0.35;
+    btn.style.transform = 'translate('+x+'px,'+y+'px)';
+    btn.style.transition = 'transform 0.1s';
+  });
+  btn.addEventListener('mouseleave',function(){
+    btn.style.transform = '';
+    btn.style.transition = 'transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+  });
+});
+
+// ── AUTO SECTION REVEAL ────────────────────────────────────────
+document.querySelectorAll('.sec-header,.sec-sub,.trust-item').forEach(function(el){
+  el.classList.add('js-reveal');
+});
+
+// ── KEYBOARD TAB NAV (1-4) ─────────────────────────────────────
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+  var map = {'1':'platform','2':'military','3':'mngha','4':'science'};
+  if(map[e.key]){
+    window.switchTab(map[e.key], document.querySelector('[data-tab='+map[e.key]+'].nav-tab'));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+});
+
+// ── SCROLL PROGRESS BAR ────────────────────────────────────────
+window.addEventListener('scroll',function(){
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  var bar = document.getElementById('scroll-progress');
+  if(bar && max > 0) bar.style.width = (h.scrollTop / max * 100) + '%';
+},{passive:true});
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.js-reveal').forEach(function(el){ revealObs.observe(el); });
 
 // ── NAV BLUR ON SCROLL ─────────────────────────────────────────
 window.addEventListener('scroll',function(){
